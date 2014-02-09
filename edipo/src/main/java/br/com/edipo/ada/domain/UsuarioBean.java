@@ -1,14 +1,26 @@
 package br.com.edipo.ada.domain;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
+import br.com.edipo.ada.model.entity.Usuario;
 import br.com.edipo.ada.model.persistence.UsuarioDAO;
 
-@ManagedBean
-@RequestScoped
-public class UsuarioBean {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
-	public UsuarioBean() {
-		// TODO Auto-generated constructor stub
+import java.util.List;
+
+@ManagedBean
+@ViewScoped
+public class UsuarioBean {
+	@Inject
+	private UsuarioDAO dao;
+
+	private List<Usuario> usuarios;
+
+	public List<Usuario> listaUsuario() {
+		if (usuarios == null) {
+			usuarios = dao.lista();
+		}
+		return usuarios;
 	}
 }

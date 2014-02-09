@@ -1,18 +1,19 @@
 package br.com.edipo.ada.model.persistence;
 
-import java.util.List;
-import javax.ejb.Stateless;
 import br.com.edipo.ada.model.entity.Usuario;
+
+import javax.ejb.Stateless;
+
+import java.util.List;
 
 @Stateless
 public class UsuarioDAO {
-	public List<Usuario> listaUsuario() {
+	public List<Usuario> lista() {
 		List<Usuario> u = Usuario.findAll();
 		return u;
 	}
 
-	public void criaUsuario() {
-		Usuario u = new Usuario();
+	public void cria(Usuario u) {
 		u.set("dsIdentificador", "denysbrag@gmail.com");
 		u.set("dsSenha", "nononon");
 		u.set("dsSal", "nononon");
@@ -21,7 +22,7 @@ public class UsuarioDAO {
 		u.saveIt();
 	}
 
-	public void atualizaUsuario(Usuario u) {
+	public void atualiza(Usuario u) {
 		u.set("dsIdentificador", "denysbrag@gmail.com");
 		u.set("dsSenha", "nononon");
 		u.set("dsSal", "nononon");
@@ -30,17 +31,17 @@ public class UsuarioDAO {
 		u.saveIt();
 	}
 
-	public void apagaUsuario(Usuario u) {
+	public void apaga(Usuario u) {
 		u.delete();
 	}
 
-	public boolean existeUsuarioPorIdentificador(String identificador) {
-		Usuario u = obtemUsuarioPorIdentificador(identificador);
+	public boolean existePorIdentificador(String identificador) {
+		Usuario u = obtemPorIdentificador(identificador);
 
 		return (u.exists() ? true : false);
 	}
 
-	public Usuario obtemUsuarioPorIdentificador(String identificador) {
+	public Usuario obtemPorIdentificador(String identificador) {
 		Usuario u = Usuario.findFirst("dsIdentificador = ?", identificador);
 		return u;
 	}
