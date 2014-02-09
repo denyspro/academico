@@ -2,12 +2,21 @@ package br.com.edipo.ada.model.persistence;
 
 import br.com.edipo.ada.model.entity.Usuario;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+
+import org.javalite.activejdbc.Base;
 
 import java.util.List;
 
 @Stateless
 public class UsuarioDAO {
+	@PostConstruct
+	public void init() {
+		if (!Base.hasConnection())
+			Base.open("java:jboss/datasources/edipo");
+	}
+
 	public List<Usuario> lista() {
 		List<Usuario> u = Usuario.findAll();
 		return u;

@@ -11,8 +11,9 @@
 <body>
 INDEX
 <%
+/*
 Base.open("java:jboss/datasources/edipo");
-//Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/edipo", "root", "leaf");
+Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/edipo", "root", "leaf");
 
 Usuario u = new Usuario();
 u.set("idUsuario", 1);
@@ -22,6 +23,7 @@ u.set("dsSal", "non");
 u.set("dsNome", "Denys");
 u.set("dtNascimento", "2014-10-12");
 u.saveIt();
-%>
+ */
+ %>
 </body>
 </html>
