@@ -5,20 +5,21 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Cadastro de Usuário</title>
+	<title>Listagem de Usuário</title>
 </h:head>
 <h:body>
 	<h:form>
-		<h:dataTable value="#{usuarioBean.listaUsuario()}" var="usuario">
+		<h:dataTable value="#{usuarioBean.usuarios}" var="usuarios" border="1">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-				#{usuario.get("idUsuario")}
+				#{usuarios.get("idUsuario")}
 			</h:column>
 			<h:column>
 				<f:facet name="header">Email</f:facet>
-				#{usuario.get("dsIdentificador")}
+				#{usuarios.get("dsIdentificador")}
 			</h:column>
 		</h:dataTable>
+		<h:inputText value="" />
 	</h:form>
 </h:body>
 </html>
