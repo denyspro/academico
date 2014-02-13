@@ -16,20 +16,6 @@
 		<filter-name>ShiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<filter>
-		<filter-name>activeJdbcFilter</filter-name>
-		<filter-class>org.javalite.activejdbc.web.ActiveJdbcFilter</filter-class>
-		<init-param>
-			<param-name>jndiName</param-name>
-			<param-value>java:jboss/datasources/edipo</param-value>
-		</init-param>
-	</filter>
-    <filter-mapping> 
-        <filter-name>activeJdbcFilter</filter-name> 
-        <servlet-name>Faces Servlet</servlet-name> 
-        <dispatcher>REQUEST</dispatcher> 
-        <dispatcher>FORWARD</dispatcher> 
-    </filter-mapping> 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

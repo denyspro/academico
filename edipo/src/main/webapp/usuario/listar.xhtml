@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:shi="http://shiro.apache.org/tags">
+
+<h:head>
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:dataTable value="#{usuarioBean.usuarios}" var="usuario" border="1">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{usuario.idUsuario}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				#{usuario.dsIdentificador}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Senha</f:facet>
+				#{usuario.dsSenha}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Sal</f:facet>
+				#{usuario.dsSal}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{usuario.dsNome}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data Nascimento</f:facet>
+				#{usuario.dtNascimento}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:commandLink value="Editar"
+					action="editar?faces-redirect=true&amp;includeViewParams=true">
+					<f:setPropertyActionListener target="#{usuarioBean.usuario}"
+						value="#{usuario}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
