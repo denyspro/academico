@@ -41,6 +41,11 @@ public class UsuarioBean {
 		this.usuario = usuario;
 	}
 
+	public String editar(Usuario u) {
+		this.setUsuario(usuario);
+		return "editar";
+	}
+
 	public String salvar(Usuario u) {
 		em.persist(usuario);
 		return "listar";

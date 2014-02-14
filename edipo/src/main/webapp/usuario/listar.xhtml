@@ -7,7 +7,7 @@
 	xmlns:shi="http://shiro.apache.org/tags">
 
 <h:head>
-	<title>Cadastro de Usuário</title>
+	<title>Cadastro de usuários</title>
 </h:head>
 <h:body>
 	<h:form>
@@ -37,7 +37,6 @@
 				#{usuario.dtNascimento}
 			</h:column>
 			<h:column>
-				<f:facet name="header">Ações</f:facet>
 				<h:commandLink value="Editar"
 					action="editar?faces-redirect=true&amp;includeViewParams=true">
 					<f:setPropertyActionListener target="#{usuarioBean.usuario}"
