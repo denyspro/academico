@@ -8,9 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import br.com.edipo.ada.model.entity.Usuario;
 
@@ -31,14 +29,9 @@ public class UsuarioBean {
 
 		if (!params.isEmpty()) {
 			try {
-				Query q = em
-						.createQuery(
-								"select u from Usuario u where u.idUsuario = :idUsuario",
-								Usuario.class);
-				q.setParameter("idUsuario",
+				usuario = em.find(Usuario.class,
 						Integer.parseInt(params.get("idUsuario")));
-				usuario = (Usuario) q.getSingleResult();
-			} catch (NoResultException e) {}
+			} catch (NumberFormatException e) {}
 		}
 
 		if (usuario == null) {
