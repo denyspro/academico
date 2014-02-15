@@ -1,12 +1,16 @@
 package br.com.edipo.ada.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import br.com.edipo.ada.model.entity.Usuario;
 
@@ -22,7 +26,24 @@ public class UsuarioBean {
 
 	@PostConstruct
 	public void init() {
-		usuario = new Usuario();
+		Map<String, String> params = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap();
+
+		if (!params.isEmpty()) {
+			try {
+				Query q = em
+						.createQuery(
+								"select u from Usuario u where u.idUsuario = :idUsuario",
+								Usuario.class);
+				q.setParameter("idUsuario",
+						Integer.parseInt(params.get("idUsuario")));
+				usuario = (Usuario) q.getSingleResult();
+			} catch (NoResultException e) {}
+		}
+
+		if (usuario == null) {
+			usuario = new Usuario();
+		}
 	}
 
 	public List<Usuario> getUsuarios() {

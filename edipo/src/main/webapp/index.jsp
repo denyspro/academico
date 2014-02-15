@@ -10,20 +10,7 @@
 </head>
 <body>
 INDEX
-<%
-/*
-Base.open("java:jboss/datasources/edipo");
-Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/edipo", "root", "leaf");
-
-Usuario u = new Usuario();
-u.set("idUsuario", 1);
-u.set("dsIdentificador", "denys@braga.com");
-u.set("dsSenha", "nononon");
-u.set("dsSal", "non");
-u.set("dsNome", "Denys");
-u.set("dtNascimento", "2014-10-12");
-u.saveIt();
- */
- %>
+&nbsp;
+<a href="usuario/listar.xhtml">Usuários</a>
 </body>
 </html>

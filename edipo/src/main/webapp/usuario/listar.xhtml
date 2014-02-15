@@ -37,11 +37,16 @@
 				#{usuario.dtNascimento}
 			</h:column>
 			<h:column>
-				<h:commandLink value="Editar"
-					action="editar?faces-redirect=true&amp;includeViewParams=true">
-					<f:setPropertyActionListener target="#{usuarioBean.usuario}"
-						value="#{usuario}" />
+				<f:facet name="header">Opções</f:facet>
+				<h:commandLink value="editar" action="editar?faces-redirect=true&amp;includeViewParams=true">
+					<f:setPropertyActionListener target="#{usuarioBean.usuario.idUsuario}" value="#{usuario.idUsuario}"/>
 				</h:commandLink>
+			<!--
+				<h:commandLink value="Editar" action="editar?faces-redirect=true"
+					includeViewParams="true">
+					<f:param name="idUsuario" value="#{usuario.idUsuario}" />
+				</h:commandLink>
+			 -->
 			</h:column>
 		</h:dataTable>
 	</h:form>
