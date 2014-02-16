@@ -8,16 +8,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import br.com.edipo.ada.model.entity.Usuario;
+import br.com.edipo.ada.entity.Usuario;
+import br.com.edipo.ada.persistence.JpaUtil;
 
 @ViewScoped
 @ManagedBean
-public class UsuarioBean {
-
-	@PersistenceContext
-	private EntityManager em;
+public class UsuarioMB {
 
 	private Usuario usuario;
 	private List<Usuario> usuarios;
@@ -29,9 +26,10 @@ public class UsuarioBean {
 
 		if (!params.isEmpty()) {
 			try {
-				usuario = em.find(Usuario.class,
+				usuario = JpaUtil.getEntityManager().find(Usuario.class,
 						Integer.parseInt(params.get("idUsuario")));
-			} catch (NumberFormatException e) {}
+			} catch (NumberFormatException e) {
+			}
 		}
 
 		if (usuario == null) {
@@ -41,7 +39,8 @@ public class UsuarioBean {
 
 	public List<Usuario> getUsuarios() {
 		if (usuarios == null) {
-			usuarios = em.createQuery("select u from Usuario u", Usuario.class)
+			usuarios = JpaUtil.getEntityManager()
+					.createQuery("select u from Usuario u", Usuario.class)
 					.getResultList();
 		}
 		return usuarios;
@@ -55,13 +54,11 @@ public class UsuarioBean {
 		this.usuario = usuario;
 	}
 
-	public String editar(Usuario u) {
-		this.setUsuario(usuario);
-		return "editar";
-	}
-
 	public String salvar(Usuario u) {
-		em.persist(usuario);
-		return "listar";
+		EntityManager em = JpaUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(u);
+		em.getTransaction().commit();
+		return "listar?faces-redirect=true";
 	}
 }

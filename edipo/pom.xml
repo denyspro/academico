@@ -12,7 +12,7 @@
 		<version.javaee.web>2.0.0.Final</version.javaee.web>
 		<version.mysql>5.1.25</version.mysql>
 		<version.shiro>1.2.2</version.shiro>
-		<version.activejdbc>1.4.9</version.activejdbc>
+		<version.hibernate>4.3.0.Final</version.hibernate>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -10,12 +10,9 @@
 	<title>Cadastro de usuários</title>
 </h:head>
 <h:body>
-	<c:set var="usuario" value="#{usuarioBean.usuario}" />
+	<c:set var="usuario" value="#{usuarioMB.usuario}" />
 	<f:metadata>
-	<!--
-		<f:viewParam name="usuario" value="#{usuarioBean.usuario}" />
-	 -->
-		<f:viewParam name="idUsuario" value="#{usuarioBean.usuario.idUsuario}" />
+		<f:viewParam name="idUsuario" value="#{usuarioMB.usuario.idUsuario}" />
 	</f:metadata>
 	<h:form>
 		<h:panelGrid columns="2">
@@ -28,10 +25,12 @@
 				Sal
 				<h:inputText value="#{usuario.dsSal}" />
 				Data Nascimento
-				<h:inputText value="#{usuario.dtNascimento}" />
+				<h:inputText value="#{usuario.dtNascimento}" required="true" requiredMessage="Campo obrigatório">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:inputText>
 		</h:panelGrid>
 		<h:commandButton value="Salvar"
-			action="#{usuarioBean.salvar(usuario)}" />
+			action="#{usuarioMB.salvar(usuario)}" />
 	</h:form>
 </h:body>
 </html>
