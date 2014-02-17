@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:shi="http://shiro.apache.org/tags">
+
+<h:head></h:head>
+<h:body>
+	<h:form id="viewForm">
+		<h1></h1>
+
+		<h:panelGrid columns="3">
+			Email:
+			<h:inputText id="dsIdentificador" label="Email" required="true"
+				requiredMessage="Campo obrigatório."
+				value="#{autenticacaoMB.dsIdentificador}" />
+			<h:message for="dsIdentificador" />
+
+			Senha:
+			<h:inputSecret id="dsSenha" label="Senha" required="true"
+				requiredMessage="Campo obrigatório."
+				value="#{autenticacaoMB.dsSenha}" />
+			<h:message for="dsSenha" />
+
+			Lembrar:
+			<h:selectBooleanCheckbox id="blManterAutenticado" label="Lembrar"
+				value="#{autenticacaoMB.blManterAutenticado}" required="false" />
+			<h:message for="blManterAutenticado" />
+
+			<h:commandButton action="#{autenticacaoMB.entrar()}" value="Entrar" />
+		</h:panelGrid>
+
+		<br />
+
+		<h:messages globalOnly="true" layout="table" />
+	</h:form>
+</h:body>
+</html>
