@@ -7,7 +7,7 @@
 	xmlns:shi="http://shiro.apache.org/tags">
 
 <h:head>
-	<title>Cadastro de usuários</title>
+	<title></title>
 </h:head>
 <h:body>
 	<c:set var="usuario" value="#{usuarioMB.usuario}" />
@@ -15,22 +15,35 @@
 		<f:viewParam name="idUsuario" value="#{usuarioMB.usuario.idUsuario}" />
 	</f:metadata>
 	<h:form>
-		<h:panelGrid columns="2">
-				ID
-				<h:inputText value="#{usuario.idUsuario}" />
-				Email
-				<h:inputText value="#{usuario.dsIdentificador}" />
-				Senha
-				<h:inputText value="#{usuario.dsSenha}" />
-				Sal
-				<h:inputText value="#{usuario.dsSal}" />
-				Data Nascimento
-				<h:inputText value="#{usuario.dtNascimento}" required="true" requiredMessage="Campo obrigatório">
-					<f:convertDateTime pattern="yyyy-MM-dd" />
-				</h:inputText>
+		<h1></h1>
+		<h:panelGrid columns="3">
+			<h:outputLabel for="idUsuario" value="Id" />
+			<h:inputText value="#{usuario.idUsuario}" />
+			<h:message for="idUsuario" />
+
+			<h:outputLabel for="dsIdentificador" value="Email" />
+			<h:inputText value="#{usuario.dsIdentificador}" />
+			<h:message for="dsIdentificador" />
+
+			<h:outputLabel for="dsSenha" value="Senha" />
+			<h:inputText value="#{usuario.dsSenha}" />
+			<h:message for="dsSenha" />
+
+			<h:outputLabel for="dsSal" value="Sal" />
+			<h:inputText value="#{usuario.dsSal}" />
+			<h:message for="dsSal" />
+
+			<h:outputLabel for="dsNome" value="Nome" />
+			<h:inputText value="#{usuario.dsNome}" />
+			<h:message for="dsNome" />
+
+			<h:outputLabel for="dtNascimento" value="Data Nascimento" />
+			<h:inputText value="#{usuario.dtNascimento}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:inputText>
+			<h:message for="dtNascimento" />
 		</h:panelGrid>
-		<h:commandButton value="Salvar"
-			action="#{usuarioMB.salvar(usuario)}" />
+		<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" />
 	</h:form>
 </h:body>
 </html>

@@ -7,39 +7,45 @@
 	xmlns:shi="http://shiro.apache.org/tags">
 
 <h:head>
-	<title>Cadastro de usuários</title>
+	<title></title>
 </h:head>
 <h:body>
 	<h:form>
+		<h1></h1>
 		<h:dataTable value="#{usuarioMB.usuarios}" var="usuario" border="1">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-				#{usuario.idUsuario}
+				<h:outputText value="#{usuario.idUsuario}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Email</f:facet>
-				#{usuario.dsIdentificador}
+				<h:outputText value="#{usuario.dsIdentificador}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Senha</f:facet>
-				#{usuario.dsSenha}
+				<h:outputText value="#{usuario.dsSenha}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Sal</f:facet>
-				#{usuario.dsSal}
+				<h:outputText value="#{usuario.dsSal}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
-				#{usuario.dsNome}
+				<h:outputText value="#{usuario.dsNome}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Data Nascimento</f:facet>
-				#{usuario.dtNascimento}
+				<h:outputText value="#{usuario.dtNascimento}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Opções</f:facet>
-				<h:commandLink value="editar" action="editar?faces-redirect=true&amp;includeViewParams=true">
-					<f:setPropertyActionListener target="#{usuarioMB.usuario.idUsuario}" value="#{usuario.idUsuario}"/>
+				<h:commandLink value="editar"
+					action="editar?faces-redirect=true&amp;includeViewParams=true">
+					<f:setPropertyActionListener
+						target="#{usuarioMB.usuario.idUsuario}"
+						value="#{usuario.idUsuario}" />
 				</h:commandLink>
 			</h:column>
 		</h:dataTable>

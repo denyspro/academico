@@ -2,6 +2,7 @@ package br.com.edipo.ada.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +16,9 @@ import br.com.edipo.ada.persistence.JpaUtil;
 @ViewScoped
 @ManagedBean
 public class UsuarioMB {
+
+	private static final Logger log = Logger.getLogger(UsuarioMB.class
+			.getName());
 
 	private Usuario usuario;
 	private List<Usuario> usuarios;
@@ -55,10 +59,23 @@ public class UsuarioMB {
 	}
 
 	public String salvar(Usuario u) {
+
 		EntityManager em = JpaUtil.getEntityManager();
-		em.getTransaction().begin();
-		em.persist(u);
-		em.getTransaction().commit();
+
+		if (em.getTransaction().isActive()
+				&& em.getTransaction().getRollbackOnly()) {
+			em.getTransaction().rollback();
+		}
+
+		try {
+			em.getTransaction().begin();
+			em.persist(u);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			log.severe(e.toString());
+			return "";
+		}
+
 		return "listar?faces-redirect=true";
 	}
 }
