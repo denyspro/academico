@@ -47,8 +47,14 @@
 						target="#{usuarioMB.usuario.idUsuario}"
 						value="#{usuario.idUsuario}" />
 				</h:commandLink>
+				&nbsp;|&nbsp;
+				<h:commandLink value="excluir"
+					action="#{usuarioMB.excluir(usuario)}">
+				</h:commandLink>
 			</h:column>
 		</h:dataTable>
+		<br />
+		<h:messages globalOnly="true" layout="table" />
 	</h:form>
 </h:body>
 </html>

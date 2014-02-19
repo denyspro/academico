@@ -27,12 +27,10 @@
 			<h:selectBooleanCheckbox id="blManterAutenticado" label="Lembrar"
 				value="#{autenticacaoMB.blManterAutenticado}" required="false" />
 			<h:message for="blManterAutenticado" />
-
-			<h:commandButton action="#{autenticacaoMB.entrar()}" value="Entrar" />
 		</h:panelGrid>
-
 		<br />
-
+		<h:commandButton action="#{autenticacaoMB.entrar()}" value="Entrar" />
+		<br />
 		<h:messages globalOnly="true" layout="table" />
 	</h:form>
 </h:body>

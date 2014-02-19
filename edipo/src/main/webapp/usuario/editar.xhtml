@@ -17,33 +17,42 @@
 	<h:form>
 		<h1></h1>
 		<h:panelGrid columns="3">
-			<h:outputLabel for="idUsuario" value="Id" />
-			<h:inputText value="#{usuario.idUsuario}" />
+			idUsuario
+			<h:inputText id="idUsuario" value="#{usuario.idUsuario}"
+				disabled="true" />
 			<h:message for="idUsuario" />
 
-			<h:outputLabel for="dsIdentificador" value="Email" />
-			<h:inputText value="#{usuario.dsIdentificador}" />
+			dsIdentificador
+			<h:inputText id="dsIdentificador" value="#{usuario.dsIdentificador}"
+				required="true" requiredMessage="Campo obrigatório." />
 			<h:message for="dsIdentificador" />
 
-			<h:outputLabel for="dsSenha" value="Senha" />
-			<h:inputText value="#{usuario.dsSenha}" />
+			dsSenha
+			<h:inputText id="dsSenha" value="#{usuario.dsSenha}" required="true"
+				requiredMessage="Campo obrigatório." />
 			<h:message for="dsSenha" />
 
-			<h:outputLabel for="dsSal" value="Sal" />
-			<h:inputText value="#{usuario.dsSal}" />
+			dsSal
+			<h:inputText id="dsSal" value="#{usuario.dsSal}" required="true"
+				requiredMessage="Campo obrigatório." />
 			<h:message for="dsSal" />
 
-			<h:outputLabel for="dsNome" value="Nome" />
-			<h:inputText value="#{usuario.dsNome}" />
+			dsNome
+			<h:inputText id="dsNome" value="#{usuario.dsNome}" required="true"
+				requiredMessage="Campo obrigatório." />
 			<h:message for="dsNome" />
 
-			<h:outputLabel for="dtNascimento" value="Data Nascimento" />
-			<h:inputText value="#{usuario.dtNascimento}">
+			dtNascimento
+			<h:inputText id="dtNascimento" value="#{usuario.dtNascimento}"
+				required="true" requiredMessage="Campo obrigatório.">
 				<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:inputText>
 			<h:message for="dtNascimento" />
 		</h:panelGrid>
+		<br />
 		<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" />
+		<br />
+		<h:messages globalOnly="true" layout="table" />
 	</h:form>
 </h:body>
 </html>

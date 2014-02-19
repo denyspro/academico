@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import br.com.edipo.ada.entity.Usuario;
 import br.com.edipo.ada.persistence.JpaUtil;
@@ -25,6 +26,7 @@ public class UsuarioMB {
 
 	@PostConstruct
 	public void init() {
+
 		Map<String, String> params = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap();
 
@@ -32,7 +34,8 @@ public class UsuarioMB {
 			try {
 				usuario = JpaUtil.getEntityManager().find(Usuario.class,
 						Integer.parseInt(params.get("idUsuario")));
-			} catch (NumberFormatException e) {
+			} catch (Exception e) {
+				log.severe(e.toString());
 			}
 		}
 
@@ -58,24 +61,57 @@ public class UsuarioMB {
 		this.usuario = usuario;
 	}
 
-	public String salvar(Usuario u) {
+	public String excluir(Usuario u) {
+
+		String navRule = "";
 
 		EntityManager em = JpaUtil.getEntityManager();
-
-		if (em.getTransaction().isActive()
-				&& em.getTransaction().getRollbackOnly()) {
-			em.getTransaction().rollback();
-		}
+		EntityTransaction tx = em.getTransaction();
 
 		try {
-			em.getTransaction().begin();
-			em.persist(u);
-			em.getTransaction().commit();
+			tx.begin();
+			em.remove(u);
+			tx.commit();
+
+			navRule = "listar?faces-redirect=true";
 		} catch (Exception e) {
 			log.severe(e.toString());
-			return "";
+
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			JpaUtil.closeEntityManager();
 		}
 
-		return "listar?faces-redirect=true";
+		//devolver mensagem de exclusão
+		return navRule;
+	}
+
+	public String salvar(Usuario u) {
+
+		String navRule = "";
+
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+
+		try {
+			tx.begin();
+			em.persist(u);
+			tx.commit();
+
+			navRule = "listar?faces-redirect=true";
+		} catch (Exception e) {
+			log.severe(e.toString());
+
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+		} finally {
+			JpaUtil.closeEntityManager();
+		}
+
+		//devolver mensagem de atualização
+		return navRule;
 	}
 }
