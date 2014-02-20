@@ -1,7 +1,6 @@
 package br.com.edipo.ada.domain;
 
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -27,13 +26,13 @@ public class UsuarioMB {
 	@PostConstruct
 	public void init() {
 
-		Map<String, String> params = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap();
+		String id = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("idUsuario");
 
-		if (!params.isEmpty()) {
+		if (id != null) {
 			try {
 				usuario = JpaUtil.getEntityManager().find(Usuario.class,
-						Integer.parseInt(params.get("idUsuario")));
+						Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
