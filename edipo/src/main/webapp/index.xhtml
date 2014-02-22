@@ -1,12 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:shi="http://shiro.apache.org/tags"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:shi="http://shiro.apache.org/tags">
 
-<h:head></h:head> 
-<body> 
-<a href="usuario/listar.xhtml">Usuários</a>
-</body> 
+<h:head></h:head>
+<body>
+	<h:link value="Usuário - Listar" outcome="usuario/listar" />
+	&nbsp;&nbsp;
+	<h:link value="Usuário - Editar" outcome="usuario/editar">
+		<f:param name="idUsuario" value="19" />
+	</h:link>
+	&nbsp;&nbsp;
+	<h:link value="Sair" outcome="login" />
+</body>
 </html>
