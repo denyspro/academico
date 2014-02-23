@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import br.com.edipo.ada.entity.Usuario;
-import br.com.edipo.ada.persistence.JpaUtil;
+import br.com.edipo.ada.persistence.UsuarioSB;
+import br.com.edipo.ada.util.ViewUtil;
 
 @ViewScoped
 @ManagedBean
@@ -26,13 +25,11 @@ public class UsuarioMB {
 	@PostConstruct
 	public void init() {
 
-		String id = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap().get("idUsuario");
+		String id = ViewUtil.getViewParam("idUsuario");
 
 		if (id != null) {
 			try {
-				usuario = JpaUtil.getEntityManager().find(Usuario.class,
-						Integer.parseInt(id));
+				usuario = UsuarioSB.getById(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
@@ -43,11 +40,14 @@ public class UsuarioMB {
 		}
 	}
 
+	@PreDestroy
+	public void release() {
+		log.info("PreDestroy");
+	}
+
 	public List<Usuario> getUsuarios() {
 		if (usuarios == null) {
-			usuarios = JpaUtil.getEntityManager()
-					.createQuery("select u from Usuario u", Usuario.class)
-					.getResultList();
+			usuarios = UsuarioSB.getAll();
 		}
 		return usuarios;
 	}
@@ -63,54 +63,27 @@ public class UsuarioMB {
 	public String excluir(Usuario u) {
 
 		String navRule = "";
+		String m = String
+				.format("Usuário %s excluído.", u.getDsIdentificador());
 
-		EntityManager em = JpaUtil.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-
-		try {
-			tx.begin();
-			em.remove(u);
-			tx.commit();
-
-			navRule = "listar?faces-redirect=true";
-		} catch (Exception e) {
-			log.severe(e.toString());
-
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			JpaUtil.closeEntityManager();
+		if (UsuarioSB.delete(u)) {
+			navRule = "listar";
+			ViewUtil.setMessage(m);
 		}
 
-		//devolver mensagem de exclusão
 		return navRule;
 	}
 
 	public String salvar(Usuario u) {
 
 		String navRule = "";
+		String m = String.format("Usuário %s criado.", u.getDsIdentificador());
 
-		EntityManager em = JpaUtil.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-
-		try {
-			tx.begin();
-			em.persist(u);
-			tx.commit();
-
-			navRule = "listar?faces-redirect=true";
-		} catch (Exception e) {
-			log.severe(e.toString());
-
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-		} finally {
-			JpaUtil.closeEntityManager();
+		if (UsuarioSB.save(u)) {
+			navRule = "listar";
+			ViewUtil.setMessage(m);
 		}
 
-		//devolver mensagem de atualização
 		return navRule;
 	}
 }

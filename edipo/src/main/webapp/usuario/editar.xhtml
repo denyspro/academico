@@ -3,8 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:shi="http://shiro.apache.org/tags">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<title></title>
@@ -53,6 +52,7 @@
 		<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" />
 		&nbsp;&nbsp;
 		<h:button value="Cancelar" outcome="listar?faces-redirect=true" />
+		<br />
 		<br />
 		<h:messages globalOnly="true" layout="table" />
 	</h:form>
