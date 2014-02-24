@@ -11,7 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import br.com.edipo.ada.persistence.UsuarioSB;
+import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
 @ManagedBean

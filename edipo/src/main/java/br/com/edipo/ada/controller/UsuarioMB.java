@@ -1,4 +1,4 @@
-package br.com.edipo.ada.domain;
+package br.com.edipo.ada.controller;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.edipo.ada.entity.Usuario;
-import br.com.edipo.ada.persistence.UsuarioSB;
+import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
 @ViewScoped

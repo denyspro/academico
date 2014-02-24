@@ -1,4 +1,4 @@
-package br.com.edipo.ada.persistence;
+package br.com.edipo.ada.model;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -8,9 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.edipo.ada.domain.UsuarioMB;
+import br.com.edipo.ada.controller.UsuarioMB;
 import br.com.edipo.ada.entity.Usuario;
-import br.com.edipo.ada.util.ModelUtil;
+import br.com.edipo.ada.util.PersistenceUtil;
 
 @Stateless
 public class UsuarioSB {
@@ -21,12 +21,12 @@ public class UsuarioSB {
 	public static List<Usuario> getAll() {
 		String jpql = "select u from Usuario u";
 
-		return ModelUtil.getEntityManager().createQuery(jpql, Usuario.class)
+		return PersistenceUtil.getEntityManager().createQuery(jpql, Usuario.class)
 				.getResultList();
 	}
 
 	public static Usuario getById(Integer id) {
-		return ModelUtil.getEntityManager().find(Usuario.class, id);
+		return PersistenceUtil.getEntityManager().find(Usuario.class, id);
 	}
 
 	public static Integer getBySurrogate(String id) {
@@ -34,7 +34,7 @@ public class UsuarioSB {
 		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
 		Integer idUsuario = null;
 
-		Query query = ModelUtil.getEntityManager().createQuery(jpql,
+		Query query = PersistenceUtil.getEntityManager().createQuery(jpql,
 				Usuario.class);
 		query.setParameter("dsIdentificador", id);
 
@@ -44,7 +44,7 @@ public class UsuarioSB {
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
-			ModelUtil.closeEntityManager();
+			PersistenceUtil.closeEntityManager();
 		}
 
 		return idUsuario;
@@ -54,7 +54,7 @@ public class UsuarioSB {
 
 		boolean r = false;
 
-		EntityManager em = ModelUtil.getEntityManager();
+		EntityManager em = PersistenceUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		try {
@@ -70,7 +70,7 @@ public class UsuarioSB {
 				tx.rollback();
 			}
 		} finally {
-			ModelUtil.closeEntityManager();
+			PersistenceUtil.closeEntityManager();
 		}
 
 		return r;
@@ -80,7 +80,7 @@ public class UsuarioSB {
 
 		boolean r = false;
 
-		EntityManager em = ModelUtil.getEntityManager();
+		EntityManager em = PersistenceUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		try {
@@ -96,7 +96,7 @@ public class UsuarioSB {
 				tx.rollback();
 			}
 		} finally {
-			ModelUtil.closeEntityManager();
+			PersistenceUtil.closeEntityManager();
 		}
 
 		return r;

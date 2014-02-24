@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class ModelUtil {
+public class PersistenceUtil {
 
 	private static final String PERSISTENCE_UNIT_NAME = "default";
 
@@ -13,7 +13,7 @@ public class ModelUtil {
 
 	private static EntityManagerFactory factory;
 
-	private ModelUtil() {
+	private PersistenceUtil() {
 	}
 
 	public static boolean isEntityManagerOpen(){

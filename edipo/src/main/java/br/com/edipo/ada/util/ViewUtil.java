@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import br.com.edipo.ada.domain.UsuarioMB;
+import br.com.edipo.ada.controller.UsuarioMB;
 
 /**
  * Agrupa os métodos de manipulação de view para efeito de reaproveitamento de
