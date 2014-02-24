@@ -14,6 +14,11 @@ import org.apache.shiro.subject.Subject;
 import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
+/***
+ * <i>Backing bean</i> que faz o papel de controlador para o domínio de autotização.
+ * 
+ * @author Denys
+ */
 @ManagedBean
 @RequestScoped
 public class AutenticacaoMB {

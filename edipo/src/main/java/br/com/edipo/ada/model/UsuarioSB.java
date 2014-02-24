@@ -12,6 +12,11 @@ import br.com.edipo.ada.controller.UsuarioMB;
 import br.com.edipo.ada.entity.Usuario;
 import br.com.edipo.ada.util.PersistenceUtil;
 
+/***
+ * <i>Stateless bean</i> que faz o papel de modelo para o dom’nio de usu‡rios.
+ * 
+ * @author Denys
+ */
 @Stateless
 public class UsuarioSB {
 

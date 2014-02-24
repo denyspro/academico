@@ -12,6 +12,11 @@ import br.com.edipo.ada.entity.Usuario;
 import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
+/***
+ * <i>Backing bean</i> que faz o papel de controlador para o dom’nio de usu‡rios.
+ * 
+ * @author Denys
+ */
 @ViewScoped
 @ManagedBean
 public class UsuarioMB {
