@@ -13,13 +13,21 @@
 <h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
 
 <h:body>
-	<div id="menu"></div>
-
-	<div id="body">
-		<ui:insert name="body" />
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/template/cabecalho.xhtml" />
+		</ui:insert>
 	</div>
 
-	<div id="footer"></div>
+	<div id="corpo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/resources/template/rodape.xhtml" />
+		</ui:insert>
+	</div>
 </h:body>
 
 <h:outputScript library="js" name="main.js" />
