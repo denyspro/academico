@@ -82,7 +82,7 @@ public class UsuarioMB {
 	public String salvar(Usuario u) {
 
 		String navRule = "";
-		String m = String.format("Usu‡rio %s criado.", u.getDsIdentificador());
+		String m = String.format("Usu‡rio %s salvo.", u.getDsIdentificador());
 
 		if (UsuarioSB.save(u)) {
 			navRule = "listar";

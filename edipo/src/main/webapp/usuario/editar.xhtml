@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<ui:composition template="/resources/template/leiaute.xhtml">
+<ui:composition template="/resources/ui/leiaute.xhtml">
 	<ui:define name="corpo">
 		<h:body>
 			<c:set var="usuario" value="#{usuarioMB.usuario}" />
@@ -13,30 +13,30 @@
 				<f:viewParam name="idUsuario" value="#{usuarioMB.usuario.idUsuario}" />
 			</f:metadata>
 			<h:form>
-				<h1></h1>
+				<legend>Usuário</legend>
 				<h:panelGrid columns="3">
-					idUsuario
+					Código
 					<h:inputText id="idUsuario" value="#{usuario.idUsuario}"
 						disabled="true" />
 					<h:message for="idUsuario" />
-					dsIdentificador
+					Email
 					<h:inputText id="dsIdentificador"
 						value="#{usuario.dsIdentificador}" required="true"
 						requiredMessage="Campo obrigatório." />
 					<h:message for="dsIdentificador" />
-					dsSenha
+					Senha
 					<h:inputText id="dsSenha" value="#{usuario.dsSenha}"
 						required="true" requiredMessage="Campo obrigatório." />
 					<h:message for="dsSenha" />
-					dsSal
+					Sal
 					<h:inputText id="dsSal" value="#{usuario.dsSal}" required="true"
 						requiredMessage="Campo obrigatório." />
 					<h:message for="dsSal" />	
-					dsNome
+					Nome
 					<h:inputText id="dsNome" value="#{usuario.dsNome}" required="true"
 						requiredMessage="Campo obrigatório." />
 					<h:message for="dsNome" />
-					dtNascimento
+					Data de Nascimento
 					<h:inputText id="dtNascimento" value="#{usuario.dtNascimento}"
 						required="true" requiredMessage="Campo obrigatório.">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -44,10 +44,9 @@
 					<h:message for="dtNascimento" />
 				</h:panelGrid>
 				<br />
-				<h:commandButton value="Salvar"
-					action="#{usuarioMB.salvar(usuario)}" />
+				<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" styleClass="btn btn-success" />
 				&nbsp;&nbsp;
-				<h:button value="Cancelar" outcome="listar?faces-redirect=true" />
+				<h:button value="Cancelar" outcome="listar?faces-redirect=true" styleClass="btn btn-danger" />
 				<br />
 				<br />
 				<h:messages globalOnly="true" layout="table" />
