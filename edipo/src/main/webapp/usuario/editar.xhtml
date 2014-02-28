@@ -7,51 +7,54 @@
 
 <ui:composition template="/resources/ui/leiaute.xhtml">
 	<ui:define name="corpo">
-		<h:body>
 			<c:set var="usuario" value="#{usuarioMB.usuario}" />
 			<f:metadata>
 				<f:viewParam name="idUsuario" value="#{usuarioMB.usuario.idUsuario}" />
+				<f:viewParam name="fromView" value="#{usuarioMB.fromView}" />
 			</f:metadata>
-			<h:form>
+			<h:form styleClass="form-horizontal">
 				<legend>Usuário</legend>
 				<h:panelGrid columns="3">
-					Código
+					<h:outputLabel styleClass="control-label">Código&nbsp;</h:outputLabel>
 					<h:inputText id="idUsuario" value="#{usuario.idUsuario}"
-						disabled="true" />
+						disabled="true" styleClass="input-sm" />
 					<h:message for="idUsuario" />
-					Email
+					<h:outputLabel styleClass="control-label">Email&nbsp;</h:outputLabel>
 					<h:inputText id="dsIdentificador"
 						value="#{usuario.dsIdentificador}" required="true"
-						requiredMessage="Campo obrigatório." />
+						requiredMessage="Campo obrigatório." styleClass="input-sm" />
 					<h:message for="dsIdentificador" />
-					Senha
+					<h:outputLabel styleClass="control-label">Senha&nbsp;</h:outputLabel>
 					<h:inputText id="dsSenha" value="#{usuario.dsSenha}"
-						required="true" requiredMessage="Campo obrigatório." />
+						required="true" requiredMessage="Campo obrigatório."
+						styleClass="input-sm" />
 					<h:message for="dsSenha" />
-					Sal
+					<h:outputLabel styleClass="control-label">Sal&nbsp;</h:outputLabel>
 					<h:inputText id="dsSal" value="#{usuario.dsSal}" required="true"
-						requiredMessage="Campo obrigatório." />
+						requiredMessage="Campo obrigatório." styleClass="input-sm" />
 					<h:message for="dsSal" />	
-					Nome
+					<h:outputLabel styleClass="control-label">Nome&nbsp;</h:outputLabel>
 					<h:inputText id="dsNome" value="#{usuario.dsNome}" required="true"
-						requiredMessage="Campo obrigatório." />
+						requiredMessage="Campo obrigatório." styleClass="input-sm" />
 					<h:message for="dsNome" />
-					Data de Nascimento
+					<h:outputLabel styleClass="control-label">Data de Nascimento&nbsp;</h:outputLabel>
 					<h:inputText id="dtNascimento" value="#{usuario.dtNascimento}"
-						required="true" requiredMessage="Campo obrigatório.">
+						required="true" requiredMessage="Campo obrigatório."
+						styleClass="input-sm">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:inputText>
 					<h:message for="dtNascimento" />
 				</h:panelGrid>
 				<br />
-				<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" styleClass="btn btn-success" />
+				<h:commandButton value="Salvar"
+					action="#{usuarioMB.salvar(usuario)}" styleClass="btn btn-success" />
 				&nbsp;&nbsp;
-				<h:button value="Cancelar" outcome="listar?faces-redirect=true" styleClass="btn btn-danger" />
+				<h:button value="Cancelar" outcome="#{usuarioMB.fromView}"
+					styleClass="btn btn-danger" />
 				<br />
 				<br />
 				<h:messages globalOnly="true" layout="table" />
 			</h:form>
-		</h:body>
 	</ui:define>
 </ui:composition>
 </html>

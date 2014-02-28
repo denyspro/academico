@@ -23,7 +23,9 @@
 					<li><h:link value="Conta"
 							outcome="/usuario/editar">
 							<f:param name="idUsuario" value="${autenticacaoMB.idUsuario}" />
-						</h:link></li>
+							<f:param name="fromView" value="/index" />
+						</h:link>
+					</li>
 					<li><h:link value="Usuários"
 							outcome="/usuario/listar" /></li>
 					<li><h:link value="Avaliações" outcome="/index" /></li>

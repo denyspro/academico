@@ -27,6 +27,8 @@ public class UsuarioMB {
 	private Usuario usuario;
 	private List<Usuario> usuarios;
 
+	private String fromView = "listar?faces-redirect=true";
+
 	@PostConstruct
 	public void init() {
 
@@ -65,30 +67,38 @@ public class UsuarioMB {
 		this.usuario = usuario;
 	}
 
+	public String getFromView() {
+		return fromView;
+	}
+
+	public void setFromView(String fromView) {
+		this.fromView = fromView;
+	}
+
 	public String excluir(Usuario u) {
 
-		String navRule = "";
 		String m = String
 				.format("Usu‡rio %s exclu’do.", u.getDsIdentificador());
 
 		if (UsuarioSB.delete(u)) {
-			navRule = "listar";
 			ViewUtil.setMessage(m);
+		} else {
+			fromView = "";
 		}
 
-		return navRule;
+		return fromView;
 	}
 
 	public String salvar(Usuario u) {
 
-		String navRule = "";
 		String m = String.format("Usu‡rio %s salvo.", u.getDsIdentificador());
 
 		if (UsuarioSB.save(u)) {
-			navRule = "listar";
 			ViewUtil.setMessage(m);
+		} else {
+			fromView = "";
 		}
 
-		return navRule;
+		return fromView;
 	}
 }
