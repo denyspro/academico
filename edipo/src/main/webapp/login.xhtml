@@ -7,51 +7,51 @@
 
 <ui:composition template="/resources/ui/leiaute.xhtml">
 	<ui:define name="topo">
+		<div class="page-header col-sm-4 col-sm-offset-4">
+			<h1>
+				Édipo
+			</h1>
+			<h4>
+				Avaliação de desempenho acadêmico
+			</h4>
+		</div>
 	</ui:define>
 	<ui:define name="corpo">
 		<f:metadata>
 			<f:event type="preRenderView" listener="#{autenticacaoMB.sair()}" />
 		</f:metadata>
-		<h:form id="viewForm" styleClass="form-horizontal">
-		<div class="page-header">
-			<h1>Édipo&nbsp;<small>Avaliação de desempenho acadêmico</small></h1>
-		</div>
-			<div class="jumbotron">
-				<div class="container">
-					<h:panelGrid columns="3">
-						<h:outputLabel styleClass="control-label">Email&nbsp;
+		<div class="jumbotron col-sm-4 col-sm-offset-4">
+			<div class="container">
+				<h:form>
+					<h:outputLabel styleClass="control-label">Email:
 						</h:outputLabel>
-						<h:inputText id="dsIdentificador" label="Email" required="true"
-							requiredMessage="Campo obrigatório." styleClass="input-lg"
-							value="#{autenticacaoMB.dsIdentificador}" />
-						<h:message for="dsIdentificador" styleClass="text-danger" />
-		
-						<h:outputLabel styleClass="control-label">Senha&nbsp;
+					<h:inputText id="dsIdentificador" label="Email" required="true"
+						requiredMessage="Campo obrigatório." styleClass="form-control"
+						value="#{autenticacaoMB.dsIdentificador}" />
+					<h:message for="dsIdentificador" styleClass="text-danger" />
+					<br />
+
+					<h:outputLabel styleClass="control-label">Senha:
 						</h:outputLabel>
-						<h:inputSecret id="dsSenha" label="Senha" required="true"
-							requiredMessage="Campo obrigatório." styleClass="input-lg"
-							value="#{autenticacaoMB.dsSenha}" />
-						<h:message for="dsSenha" styleClass="text-danger" />
-<!--
-								<h:outputLabel>Lembrar?</h:outputLabel>
-								<h:selectBooleanCheckbox id="blManterAutenticado" label="Lembrar"
-									value="#{autenticacaoMB.blManterAutenticado}" required="false" />
-								<h:message for="blManterAutenticado" styleClass="text-danger" />
--->
-						<h:panelGroup>
-							<h:commandButton value="Entrar" action="#{autenticacaoMB.entrar()}"
-								styleClass="btn btn-lg btn-success btn-block" />
-							<h:button value="Nova conta"
-								outcome="usuario/editar?faces-redirect=true&amp;includeViewParams=true"
-								styleClass="btn btn-lg btn-primary btn-block">
-								<f:param name="fromView" value="/login" />
-							</h:button>
-						</h:panelGroup>
-					</h:panelGrid>
-				</div>
+					<h:inputSecret id="dsSenha" label="Senha" required="true"
+						requiredMessage="Campo obrigatório." styleClass="form-control"
+						value="#{autenticacaoMB.dsSenha}" />
+					<h:message for="dsSenha" styleClass="text-danger" />
+					<br />
+
+					<h:commandButton value="Entrar" action="#{autenticacaoMB.entrar()}"
+						styleClass="btn btn-lg btn-success btn-block" />
+					<h:button value="Nova conta"
+						outcome="usuario/editar?faces-redirect=true&amp;includeViewParams=true"
+						styleClass="btn btn-lg btn-primary btn-block">
+						<f:param name="fromView" value="/login" />
+					</h:button>
+
+					<h:messages globalOnly="true" layout="table"
+						styleClass="text-danger" />
+				</h:form>
 			</div>
-			<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
-		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 </html>

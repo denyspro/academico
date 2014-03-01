@@ -3,10 +3,15 @@ package br.com.edipo.ada.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+
+/**
+ * The persistent class for the Usuario database table.
+ * 
+ */
 @Entity
 public class Usuario implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,6 +28,19 @@ public class Usuario implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtNascimento;
+
+	//bi-directional many-to-many association to Perfil
+	@ManyToMany
+	@JoinTable(
+		name="UsuarioPerfil"
+		, joinColumns={
+			@JoinColumn(name="idUsuario")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="idPerfil")
+			}
+		)
+	private List<Perfil> perfis;
 
 	public Usuario() {
 	}
@@ -75,17 +93,12 @@ public class Usuario implements Serializable {
 		this.dtNascimento = dtNascimento;
 	}
 
-	@Override
-	public int hashCode() {
-		return getIdUsuario();
+	public List<Perfil> getPerfis() {
+		return this.perfis;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Usuario) {
-			Usuario usuario = (Usuario) obj;
-			return usuario.getIdUsuario() == getIdUsuario();
-		}
-		return false;
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
+
 }
