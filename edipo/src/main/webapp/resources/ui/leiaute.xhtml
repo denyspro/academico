@@ -10,10 +10,12 @@
 </h:head>
 
 <h:outputStylesheet library="css" name="bootstrap.css" />
+<h:outputStylesheet library="css" name="main.css" />
 
 <h:body>
 	<div id="base">
 		<ui:insert name="topo">
+			<h:outputStylesheet library="css" name="menu.css" />
 			<ui:include src="/resources/ui/menu.xhtml" />
 		</ui:insert>
 	</div>
