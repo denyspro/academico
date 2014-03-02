@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -13,20 +13,20 @@
 <h:outputStylesheet library="css" name="main.css" />
 
 <h:body>
-	<div id="base">
+	<h:panelGroup layout="block" id="topo">
 		<ui:insert name="topo">
 			<h:outputStylesheet library="css" name="menu.css" />
 			<ui:include src="/resources/ui/menu.xhtml" />
 		</ui:insert>
-	</div>
+	</h:panelGroup>
 
-	<div id="corpo">
+	<h:panelGroup layout="block" id="corpo">
 		<ui:insert name="corpo" />
-	</div>
+	</h:panelGroup>
 
-	<div id="base">
+	<h:panelGroup layout="block" id="base">
 		<ui:insert name="base" />
-	</div>
+	</h:panelGroup>
 </h:body>
 
 <h:outputScript library="js" name="vendor/jquery-1.10.1.min.js" />

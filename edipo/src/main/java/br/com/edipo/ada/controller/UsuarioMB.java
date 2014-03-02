@@ -13,7 +13,7 @@ import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
 /***
- * <i>Backing bean</i> que faz o papel de controlador para o dom’nio de usu‡rios.
+ * <i>Backing bean</i> de escopo por vis‹o que faz o papel de controlador para o dom’nio de usu‡rios.
  * 
  * @author Denys
  */
@@ -21,13 +21,12 @@ import br.com.edipo.ada.util.ViewUtil;
 @ManagedBean
 public class UsuarioMB {
 
-	private static final Logger log = Logger.getLogger(UsuarioMB.class
-			.getName());
+	private static final Logger log = Logger.getLogger(UsuarioMB.class.getName());
 
 	private Usuario usuario;
 	private List<Usuario> usuarios;
 
-	private String fromView = "listar?faces-redirect=true";
+	private String visaoOrigem = "lista?faces-redirect=true";
 
 	@PostConstruct
 	public void init() {
@@ -49,7 +48,7 @@ public class UsuarioMB {
 
 	@PreDestroy
 	public void release() {
-		log.info("PreDestroy");
+		log.info("Liberando recursos...");
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -67,38 +66,37 @@ public class UsuarioMB {
 		this.usuario = usuario;
 	}
 
-	public String getFromView() {
-		return fromView;
+	public String getVisaoOrigem() {
+		return visaoOrigem;
 	}
 
-	public void setFromView(String fromView) {
-		this.fromView = fromView;
+	public void setVisaoOrigem(String origem) {
+		this.visaoOrigem = origem;
 	}
 
-	public String excluir(Usuario u) {
+	public String excluir(Usuario usuario) {
 
-		String m = String
-				.format("Usu‡rio %s exclu’do.", u.getDsIdentificador());
+		String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
 
-		if (UsuarioSB.delete(u)) {
-			ViewUtil.setMessage(m);
+		if (UsuarioSB.delete(usuario)) {
+			ViewUtil.setMessage(mensagem);
 		} else {
-			fromView = "";
+			visaoOrigem = "";
 		}
 
-		return fromView;
+		return visaoOrigem;
 	}
 
-	public String salvar(Usuario u) {
+	public String salvar(Usuario usuario) {
 
-		String m = String.format("Usu‡rio %s salvo.", u.getDsIdentificador());
+		String mensagem = String.format("Usu‡rio %s salvo.", usuario.getDsIdentificador());
 
-		if (UsuarioSB.save(u)) {
-			ViewUtil.setMessage(m);
+		if (UsuarioSB.save(usuario)) {
+			ViewUtil.setMessage(mensagem);
 		} else {
-			fromView = "";
+			visaoOrigem = "";
 		}
 
-		return fromView;
+		return visaoOrigem;
 	}
 }

@@ -34,25 +34,24 @@ public class UsuarioSB {
 		return PersistenceUtil.getEntityManager().find(Usuario.class, id);
 	}
 
-	public static Integer getBySurrogate(String id) {
+	public static Usuario getBySurrogate(String id) {
 
 		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
-		Integer idUsuario = null;
+		Usuario u = null;
 
 		Query query = PersistenceUtil.getEntityManager().createQuery(jpql,
 				Usuario.class);
 		query.setParameter("dsIdentificador", id);
 
 		try {
-			Usuario u = (Usuario) query.getSingleResult();
-			idUsuario = u.getIdUsuario();
+			u = (Usuario) query.getSingleResult();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenceUtil.closeEntityManager();
 		}
 
-		return idUsuario;
+		return u;
 	}
 
 	public static boolean save(Usuario u) {

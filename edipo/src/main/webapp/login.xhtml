@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -7,21 +7,17 @@
 
 <ui:composition template="/resources/ui/leiaute.xhtml">
 	<ui:define name="topo">
-		<div class="page-header col-sm-4 col-sm-offset-4">
-			<h1>
-				Édipo
-			</h1>
-			<h4>
-				Avaliação de desempenho acadêmico
-			</h4>
-		</div>
+		<h:panelGroup layout="block" class="page-header col-sm-4 col-sm-offset-4">
+			<h1>Édipo</h1>
+			<h4>Avaliação de desempenho acadêmico</h4>
+		</h:panelGroup>
 	</ui:define>
 	<ui:define name="corpo">
 		<f:metadata>
 			<f:event type="preRenderView" listener="#{autenticacaoMB.sair()}" />
 		</f:metadata>
-		<div class="jumbotron col-sm-4 col-sm-offset-4">
-			<div class="container">
+		<h:panelGroup layout="block" class="jumbotron col-sm-4 col-sm-offset-4">
+			<h:panelGroup layout="block" class="container">
 				<h:form>
 					<h:outputLabel styleClass="control-label">Email:
 						</h:outputLabel>
@@ -39,19 +35,18 @@
 					<h:message for="dsSenha" styleClass="text-danger" />
 					<br />
 
-					<h:commandButton value="Entrar" action="#{autenticacaoMB.entrar()}"
-						styleClass="btn btn-lg btn-success btn-block" />
-					<h:button value="Nova conta"
-						outcome="usuario/editar?faces-redirect=true&amp;includeViewParams=true"
-						styleClass="btn btn-lg btn-primary btn-block">
-						<f:param name="fromView" value="/login" />
+					<h:commandButton value="Entrar" action="#{autenticacaoMB.entrar()}" styleClass="btn btn-lg btn-success btn-block" />
+					<h:button value="Nova conta" outcome="usuario/detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-lg btn-primary btn-block">
+						<f:param name="visaoOrigem" value="/login" />
 					</h:button>
+					<br />
 
-					<h:messages globalOnly="true" layout="table"
-						styleClass="text-danger" />
+					<h:panelGroup layout="block">
+						<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+					</h:panelGroup>
 				</h:form>
-			</div>
-		</div>
+			</h:panelGroup>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

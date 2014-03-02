@@ -2,20 +2,21 @@ package br.com.edipo.ada.security;
 
 import java.util.logging.Logger;
 
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.util.ViewUtil;
 
 /***
- * <i>Backing bean</i> que faz o papel de controlador para o domínio de autotização.
+ * <i>Backing bean</i> de escopo por solicitação com papel de controlador da
+ * autenticação no sistema. Usado para iniciar e encerrar sessões.
  * 
  * @author Denys
  */
@@ -23,13 +24,16 @@ import br.com.edipo.ada.util.ViewUtil;
 @RequestScoped
 public class AutenticacaoMB {
 
-	private static final Logger log = Logger.getLogger(AutenticacaoMB.class
-			.getName());
+	private static final Logger log = Logger.getLogger(AutenticacaoMB.class.getName());
 
 	String dsIdentificador;
 	String dsSenha;
-	Integer idUsuario;
 	boolean blManterAutenticado = false;
+
+	@PreDestroy
+	public void release() {
+		log.info("Liberando recursos...");
+	}
 
 	public String entrar() {
 		UsernamePasswordToken ficha = new UsernamePasswordToken(
@@ -54,9 +58,8 @@ public class AutenticacaoMB {
 		}
 		log.info("Acesso concedido!");
 
-		Session session = usuarioAtual.getSession(true);
-		session.setAttribute("idUsuario",
-				UsuarioSB.getBySurrogate(dsIdentificador));
+		AutorizacaoSB.setAtributo("idUsuario", Integer.toString(UsuarioSB.getBySurrogate(dsIdentificador).getIdUsuario()));
+		AutorizacaoSB.setAtributo("dsNome", UsuarioSB.getBySurrogate(dsIdentificador).getDsNome());
 
 		return "index?faces-redirect=true";
 	}
@@ -98,16 +101,5 @@ public class AutenticacaoMB {
 
 	public void setBlManterAutenticado(boolean blManterAutenticado) {
 		this.blManterAutenticado = blManterAutenticado;
-	}
-
-	public Integer getIdUsuario() {
-		try {
-			idUsuario = (Integer) SecurityUtils.getSubject().getSession()
-					.getAttribute("idUsuario");
-		} catch (Exception e) {
-			log.severe(e.toString());
-		}
-
-		return idUsuario;
 	}
 }

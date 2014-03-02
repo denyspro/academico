@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,7 +6,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<h:panelGroup styleClass="navbar navbar-inverse navbar-fixed-top" layout="block" rendered="#{autorizacaoMB.usuarioAutenticado}">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">ÉDIPO</a>
@@ -18,22 +18,34 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><h:link value="Início" outcome="/index" /></li>
-					<li><h:link value="Conta"
-							outcome="/usuario/editar">
-							<f:param name="fromView" value="/index" />
-							<f:param name="idUsuario" value="${autenticacaoMB.idUsuario}" />
+					<li><h:link value="Painel" outcome="/index" /></li>
+					<li>
+						<h:link value="Conta" outcome="/usuario/detalhe">
+							<f:param name="visaoOrigem" value="/index" />
+							<f:param name="idUsuario" value="${autorizacaoMB.idUsuario}" />
 						</h:link>
 					</li>
-					<li><h:link value="Usuários" outcome="/usuario/listar" /></li>
-					<li><h:link value="Avaliações" outcome="/index" /></li>
-					<li><h:link value="Questões" outcome="/index" /></li>
-					<li><h:link value="Resoluções" outcome="/index" /></li>
-					<li><h:link value="Resultados" outcome="/index" /></li>
-					<li><h:link value="Sair" outcome="/login" /></li>
+					<li>
+						<h:link value="Usuários" outcome="/usuario/lista" />
+					</li>
+					<li>
+						<h:link value="Avaliações" outcome="/login" />
+					</li>
+					<li>
+						<h:link value="Questões" outcome="/login" />
+					</li>
+					<li>
+						<h:link value="Resoluções" outcome="/login" />
+					</li>
+					<li>
+						<h:link value="Resultados" outcome="/login" />
+					</li>
+					<li>
+						<h:link value="Sair" outcome="/login" />
+					</li>
 				</ul>
 			</div>
 		</div>
-	</div>
+	</h:panelGroup>
 </ui:composition>
 </html>

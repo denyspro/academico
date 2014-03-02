@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -9,41 +9,43 @@
 	<ui:define name="corpo">
 		<c:set var="usuario" value="#{usuarioMB.usuario}" />
 		<f:metadata>
+			<f:viewParam name="visaoOrigem" value="#{usuarioMB.visaoOrigem}" />
 			<f:viewParam name="idUsuario" value="#{usuarioMB.usuario.idUsuario}" />
-			<f:viewParam name="fromView" value="#{usuarioMB.fromView}" />
 		</f:metadata>
-		<div class="col-sm-4 col-sm-offset-4">
+		<h:panelGroup layout="block" class="page-header col-sm-4 col-sm-offset-4">
+			<h4>Usuário</h4>
+		</h:panelGroup>
+		<h:panelGroup layout="block" class="col-sm-4 col-sm-offset-4">
 			<h:form styleClass="form-horizontal">
-				<legend>Usuário</legend>
 				<h:panelGrid columns="3">
-					<h:outputLabel styleClass="control-label">Código&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">ID </h:outputLabel>
 					<h:inputText id="idUsuario" value="#{usuario.idUsuario}"
 						disabled="true" styleClass="form-control" />
 					<h:message for="idUsuario" styleClass="text-danger" />
 
-					<h:outputLabel styleClass="control-label">Email&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">Email </h:outputLabel>
 					<h:inputText id="dsIdentificador"
 						value="#{usuario.dsIdentificador}" required="true"
 						requiredMessage="Campo obrigatório." styleClass="form-control" />
 					<h:message for="dsIdentificador" styleClass="text-danger" />
 
-					<h:outputLabel styleClass="control-label">Senha&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">Senha </h:outputLabel>
 					<h:inputText id="dsSenha" value="#{usuario.dsSenha}"
 						required="true" requiredMessage="Campo obrigatório."
 						styleClass="form-control" />
 					<h:message for="dsSenha" styleClass="text-danger" />
 
-					<h:outputLabel styleClass="control-label">Sal&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">Sal </h:outputLabel>
 					<h:inputText id="dsSal" value="#{usuario.dsSal}" required="true"
 						requiredMessage="Campo obrigatório." styleClass="form-control" />
 					<h:message for="dsSal" styleClass="text-danger" />
 
-					<h:outputLabel styleClass="control-label">Nome&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">Nome </h:outputLabel>
 					<h:inputText id="dsNome" value="#{usuario.dsNome}" required="true"
 						requiredMessage="Campo obrigatório." styleClass="form-control" />
 					<h:message for="dsNome" styleClass="text-danger" />
 
-					<h:outputLabel styleClass="control-label">Data de Nascimento&nbsp;</h:outputLabel>
+					<h:outputLabel styleClass="control-label">Data de Nascimento </h:outputLabel>
 					<h:inputText id="dtNascimento" value="#{usuario.dtNascimento}"
 						required="true" requiredMessage="Campo obrigatório."
 						styleClass="form-control">
@@ -52,16 +54,20 @@
 					<h:message for="dtNascimento" styleClass="text-danger" />
 				</h:panelGrid>
 				<br />
-				<h:commandButton value="Salvar"
-					action="#{usuarioMB.salvar(usuario)}" styleClass="btn btn-success" />
-				&nbsp;&nbsp;
-				<h:button value="Cancelar" outcome="#{usuarioMB.fromView}"
-					styleClass="btn btn-danger" />
+				<h:panelGroup layout="block" styleClass="btn-toolbar">
+					<h:panelGroup layout="block" styleClass="btn-group">
+						<h:commandButton value="Salvar" action="#{usuarioMB.salvar(usuario)}" styleClass="btn btn-success" />
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="btn-group">
+						<h:button value="Cancelar" outcome="#{usuarioMB.visaoOrigem}" styleClass="btn btn-danger" />
+					</h:panelGroup>
+				</h:panelGroup>
 				<br />
-				<br />
-				<h:messages globalOnly="true" layout="table" />
+				<h:panelGroup layout="block">
+					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+				</h:panelGroup>
 			</h:form>
-		</div>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

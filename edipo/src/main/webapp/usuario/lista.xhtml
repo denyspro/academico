@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -7,56 +7,71 @@
 
 <ui:composition	template="/resources/ui/leiaute.xhtml">
 	<ui:define name="corpo">
+		<h:panelGroup layout="block" class="page-header col-sm-10 col-sm-offset-1">
+			<h4>Usuários</h4>
+		</h:panelGroup>
+		<h:panelGroup layout="block" class="col-sm-10 col-sm-offset-1">
 			<h:form>
-				<legend>Usuários</legend>
-				<h:dataTable value="#{usuarioMB.usuarios}" var="usuario"
-					styleClass="table table-striped table-condensed table-hover">
+				<h:dataTable value="#{usuarioMB.usuarios}" var="usuario" styleClass="table table-striped table-condensed table-hover">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
 						<h:outputText value="#{usuario.idUsuario}" />
 					</h:column>
+	
 					<h:column>
 						<f:facet name="header">Email</f:facet>
 						<h:outputText value="#{usuario.dsIdentificador}" />
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">Senha</f:facet>
 						<h:outputText value="#{usuario.dsSenha}" />
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">Sal</f:facet>
 						<h:outputText value="#{usuario.dsSal}" />
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">Nome</f:facet>
 						<h:outputText value="#{usuario.dsNome}" />
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">Data Nascimento</f:facet>
 						<h:outputText value="#{usuario.dtNascimento}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</h:column>
+
 					<h:column>
 						<f:facet name="header">Opções</f:facet>
-						<h:commandLink value="editar"
-							action="editar?faces-redirect=true&amp;includeViewParams=true">
-							<f:setPropertyActionListener
-								target="#{usuarioMB.usuario.idUsuario}"
-								value="#{usuario.idUsuario}" />
-						</h:commandLink>
-						&nbsp;|&nbsp;
-						<h:commandLink value="excluir"
-							action="#{usuarioMB.excluir(usuario)}" />
+						<h:panelGroup layout="block" styleClass="btn-toolbar">
+							<h:panelGroup layout="block" styleClass="btn-group">
+								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs">
+									<f:param name="idUsuario" value="#{usuario.idUsuario}" />
+								</h:button>
+							</h:panelGroup>
+
+							<h:panelGroup layout="block" styleClass="btn-group">
+								<h:commandButton value="excluir" action="#{usuarioMB.excluir(usuario)}" styleClass="btn btn-danger btn-xs" disabled="#{usuario.idUsuario==autorizacaoMB.idUsuario}" />
+							</h:panelGroup>
+						</h:panelGroup>
 					</h:column>
 				</h:dataTable>
 				<br />
-				<h:commandButton value="Novo" action="editar"
-					styleClass="btn btn-primary" />
+
+				<h:panelGroup layout="block">
+					<h:commandButton value="Novo" action="detalhe" styleClass="btn btn-primary" />
+				</h:panelGroup>
 				<br />
-				<br />
-				<h:messages globalOnly="true" layout="table" />
+	
+				<h:panelGroup layout="block">
+					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+				</h:panelGroup>
 			</h:form>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 
