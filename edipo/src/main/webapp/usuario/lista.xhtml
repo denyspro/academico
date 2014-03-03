@@ -41,6 +41,15 @@
 					</h:column>
 
 					<h:column>
+						<f:facet name="header">Perfis</f:facet>
+						<ui:repeat value="#{usuario.perfis}" var="perfil" varStatus="status">
+								<h:outputText value="#{perfil.dsPerfil}" />
+								<h:outputText value=", " rendered="#{!status.last}" />
+								<h:outputText value="." rendered="#{status.last}" />
+						</ui:repeat>
+					</h:column>
+
+					<h:column>
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar">
 							<h:panelGroup layout="block" styleClass="btn-group">

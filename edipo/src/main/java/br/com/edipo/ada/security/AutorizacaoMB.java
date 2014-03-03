@@ -57,4 +57,8 @@ public class AutorizacaoMB {
 
 		return ultimoAcesso;
 	}
+
+	public static boolean getPossuiPerfil(String dsPerfil) {
+		return AutorizacaoSB.getPossuiPerfil(dsPerfil);
+	}
 }

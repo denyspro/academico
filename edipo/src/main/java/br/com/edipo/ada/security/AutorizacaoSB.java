@@ -30,4 +30,8 @@ public class AutorizacaoSB {
 		Date ultimoAcesso = SecurityUtils.getSubject().getSession().getLastAccessTime();
 		return ultimoAcesso;
 	}
+
+	public static boolean getPossuiPerfil(String dsPerfil) {
+		return SecurityUtils.getSubject().hasRole(dsPerfil);
+	}
 }

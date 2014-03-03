@@ -25,21 +25,29 @@
 							<f:param name="id" value="${autorizacaoMB.id}" />
 						</h:link>
 					</li>
-					<li>
-						<h:link value="Usuários" outcome="/usuario/lista" />
-					</li>
-					<li>
-						<h:link value="Avaliações" outcome="/login" />
-					</li>
-					<li>
-						<h:link value="Questões" outcome="/login" />
-					</li>
-					<li>
-						<h:link value="Resoluções" outcome="/login" />
-					</li>
-					<li>
-						<h:link value="Resultados" outcome="/login" />
-					</li>
+					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Administrador')}">
+						<li>
+							<h:link value="Usuários" outcome="/usuario/lista" />
+						</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Professor')}">
+						<li>
+							<h:link value="Avaliações" outcome="/login" />
+						</li>
+						<li>
+							<h:link value="Questões" outcome="/login" />
+						</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Aluno')}">
+						<li>
+							<h:link value="Resoluções" outcome="/login" />
+						</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Professor')||autorizacaoMB.getPossuiPerfil('Aluno')}">
+						<li>
+							<h:link value="Resultados" outcome="/login" />
+						</li>
+					</h:panelGroup>
 					<li>
 						<h:link value="Sair" outcome="/login" />
 					</li>

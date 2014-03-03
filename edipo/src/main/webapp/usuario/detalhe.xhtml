@@ -17,20 +17,13 @@
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-4 col-xs-offset-4">
 			<h:form>
-<!-- 
-				<h:outputLabel styleClass="control-label">ID:</h:outputLabel>
-				<h:inputText id="id" value="#{usuario.id}" styleClass="form-control" disabled="true" />
-				<em><h:message for="id" styleClass="text-danger small" /></em>
-				<br />
--->
-
 				<h:outputLabel styleClass="control-label">Email:</h:outputLabel>
 				<h:inputText id="dsIdentificador" value="#{usuario.dsIdentificador}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." />
 				<em><h:message for="dsIdentificador" styleClass="text-danger small" /></em>
 				<br />
 
 				<h:outputLabel styleClass="control-label">Senha:</h:outputLabel>
-				<h:inputText id="dsSenha" value="#{usuario.dsSenha}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." />
+				<h:inputSecret id="dsSenha" value="#{usuario.dsSenha}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." redisplay="true" />
 				<em><h:message for="dsSenha" styleClass="text-danger small" /></em>
 				<br />
 
