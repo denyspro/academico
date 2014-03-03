@@ -13,10 +13,11 @@ import br.com.edipo.ada.controller.UsuarioMB;
  * 
  * @author Denys
  */
-public class ViewUtil {
+public class VisaoUtil {
 
-	private static final Logger log = Logger.getLogger(UsuarioMB.class
-			.getName());
+	private static final Logger log = Logger.getLogger(UsuarioMB.class.getName());
+
+	public static final String VISAOORIGEM = "lista?faces-redirect=true";
 
 	/**
 	 * Retorna o valor de um parâmetro passado via método <i>GET</i>.

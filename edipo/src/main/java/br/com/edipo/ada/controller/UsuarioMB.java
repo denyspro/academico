@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.edipo.ada.entity.Usuario;
 import br.com.edipo.ada.model.UsuarioSB;
-import br.com.edipo.ada.util.ViewUtil;
+import br.com.edipo.ada.util.VisaoUtil;
 
 /***
  * <i>Backing bean</i> de escopo por vis‹o que faz o papel de controlador para o dom’nio de usu‡rios.
@@ -26,12 +26,12 @@ public class UsuarioMB {
 	private Usuario usuario;
 	private List<Usuario> usuarios;
 
-	private String visaoOrigem = "lista?faces-redirect=true";
+	private String visaoOrigem = VisaoUtil.VISAOORIGEM;
 
 	@PostConstruct
 	public void init() {
 
-		String id = ViewUtil.getViewParam("idUsuario");
+		String id = VisaoUtil.getViewParam("id");
 
 		if (id != null) {
 			try {
@@ -58,6 +58,10 @@ public class UsuarioMB {
 		return usuarios;
 	}
 
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -74,29 +78,31 @@ public class UsuarioMB {
 		this.visaoOrigem = origem;
 	}
 
-	public String excluir(Usuario usuario) {
-
-		String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
-
-		if (UsuarioSB.delete(usuario)) {
-			ViewUtil.setMessage(mensagem);
-		} else {
-			visaoOrigem = "";
-		}
-
-		return visaoOrigem;
-	}
-
 	public String salvar(Usuario usuario) {
 
 		String mensagem = String.format("Usu‡rio %s salvo.", usuario.getDsIdentificador());
+		String excecao = UsuarioSB.save(usuario);
 
-		if (UsuarioSB.save(usuario)) {
-			ViewUtil.setMessage(mensagem);
+		if (excecao=="") {
+			VisaoUtil.setMessage(mensagem);
+			return visaoOrigem;
 		} else {
-			visaoOrigem = "";
+			VisaoUtil.setMessage(excecao);
+			return "";
 		}
+	}
 
-		return visaoOrigem;
+	public String excluir(Usuario usuario) {
+
+		String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
+		String excecao = UsuarioSB.delete(usuario);
+
+		if (excecao=="") {
+			VisaoUtil.setMessage(mensagem);
+			return visaoOrigem;
+		} else {
+			VisaoUtil.setMessage(excecao);
+			return "";
+		}
 	}
 }

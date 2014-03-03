@@ -5,32 +5,31 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
- * The persistent class for the Usuario database table.
+ * Classe que mapeia a entidade Usuario.
  * 
+ * @author Denys
  */
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idUsuario")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idUsuario;
+	private int id;
 
 	private String dsIdentificador;
 
 	private String dsNome;
-
-	private String dsSal;
 
 	private String dsSenha;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtNascimento;
 
-	//bi-directional many-to-many association to Perfil
-	@ManyToMany
+	//Associação bi-direcional N:N com a entidade Perfil
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="UsuarioPerfil"
 		, joinColumns={
@@ -45,12 +44,12 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public int getIdUsuario() {
-		return this.idUsuario;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDsIdentificador() {
@@ -67,14 +66,6 @@ public class Usuario implements Serializable {
 
 	public void setDsNome(String dsNome) {
 		this.dsNome = dsNome;
-	}
-
-	public String getDsSal() {
-		return this.dsSal;
-	}
-
-	public void setDsSal(String dsSal) {
-		this.dsSal = dsSal;
 	}
 
 	public String getDsSenha() {
@@ -101,4 +92,32 @@ public class Usuario implements Serializable {
 		this.perfis = perfis;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dsIdentificador == null) ? 0 : dsIdentificador.hashCode());
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (dsIdentificador == null) {
+			if (other.dsIdentificador != null)
+				return false;
+		} else if (!dsIdentificador.equals(other.dsIdentificador))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 }

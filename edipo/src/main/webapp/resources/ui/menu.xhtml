@@ -7,22 +7,22 @@
 
 <ui:composition>
 	<h:panelGroup styleClass="navbar navbar-inverse navbar-fixed-top" layout="block" rendered="#{autorizacaoMB.usuarioAutenticado}">
-		<div class="container">
-			<div class="navbar-header">
+		<h:panelGroup layout="block" class="container">
+			<h:panelGroup layout="block" class="navbar-header">
 				<a class="navbar-brand" href="#">ÉDIPO</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			</div>
-			<div class="navbar-collapse collapse">
+			</h:panelGroup>
+			<h:panelGroup layout="block" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><h:link value="Painel" outcome="/index" /></li>
 					<li>
 						<h:link value="Conta" outcome="/usuario/detalhe">
 							<f:param name="visaoOrigem" value="/index" />
-							<f:param name="idUsuario" value="${autorizacaoMB.idUsuario}" />
+							<f:param name="id" value="${autorizacaoMB.id}" />
 						</h:link>
 					</li>
 					<li>
@@ -44,8 +44,8 @@
 						<h:link value="Sair" outcome="/login" />
 					</li>
 				</ul>
-			</div>
-		</div>
+			</h:panelGroup>
+		</h:panelGroup>
 	</h:panelGroup>
 </ui:composition>
 </html>

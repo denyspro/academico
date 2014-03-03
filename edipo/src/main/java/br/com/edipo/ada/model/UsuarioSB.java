@@ -8,9 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.edipo.ada.controller.UsuarioMB;
 import br.com.edipo.ada.entity.Usuario;
-import br.com.edipo.ada.util.PersistenceUtil;
+import br.com.edipo.ada.util.PersistenciaUtil;
 
 /***
  * <i>Stateless bean</i> que faz o papel de modelo para o dom’nio de usu‡rios.
@@ -20,18 +19,16 @@ import br.com.edipo.ada.util.PersistenceUtil;
 @Stateless
 public class UsuarioSB {
 
-	private static final Logger log = Logger.getLogger(UsuarioMB.class
-			.getName());
+	private static final Logger log = Logger.getLogger(UsuarioSB.class.getName());
 
 	public static List<Usuario> getAll() {
 		String jpql = "select u from Usuario u";
 
-		return PersistenceUtil.getEntityManager().createQuery(jpql, Usuario.class)
-				.getResultList();
+		return PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class).getResultList();
 	}
 
 	public static Usuario getById(Integer id) {
-		return PersistenceUtil.getEntityManager().find(Usuario.class, id);
+		return PersistenciaUtil.getEntityManager().find(Usuario.class, id);
 	}
 
 	public static Usuario getBySurrogate(String id) {
@@ -39,8 +36,7 @@ public class UsuarioSB {
 		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
 		Usuario u = null;
 
-		Query query = PersistenceUtil.getEntityManager().createQuery(jpql,
-				Usuario.class);
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class);
 		query.setParameter("dsIdentificador", id);
 
 		try {
@@ -48,61 +44,61 @@ public class UsuarioSB {
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
-			PersistenceUtil.closeEntityManager();
+			PersistenciaUtil.closeEntityManager();
 		}
 
 		return u;
 	}
 
-	public static boolean save(Usuario u) {
+	public static String save(Usuario u) {
 
-		boolean r = false;
+		String resposta = "";
 
-		EntityManager em = PersistenceUtil.getEntityManager();
+		EntityManager em = PersistenciaUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		try {
 			tx.begin();
 			em.persist(u);
 			tx.commit();
-
-			r = true;
 		} catch (Exception e) {
 			log.severe(e.toString());
+
+			resposta = e.getMessage();
 
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
 		} finally {
-			PersistenceUtil.closeEntityManager();
+			PersistenciaUtil.closeEntityManager();
 		}
 
-		return r;
+		return resposta;
 	}
 
-	public static boolean delete(Usuario u) {
+	public static String delete(Usuario u) {
 
-		boolean r = false;
+		String resposta = "";
 
-		EntityManager em = PersistenceUtil.getEntityManager();
+		EntityManager em = PersistenciaUtil.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 
 		try {
 			tx.begin();
 			em.remove(u);
 			tx.commit();
-
-			r = true;
 		} catch (Exception e) {
 			log.severe(e.toString());
+
+			resposta = e.getMessage();
 
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}
 		} finally {
-			PersistenceUtil.closeEntityManager();
+			PersistenciaUtil.closeEntityManager();
 		}
 
-		return r;
+		return resposta;
 	}
 }

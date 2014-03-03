@@ -12,7 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
 import br.com.edipo.ada.model.UsuarioSB;
-import br.com.edipo.ada.util.ViewUtil;
+import br.com.edipo.ada.util.VisaoUtil;
 
 /***
  * <i>Backing bean</i> de escopo por solicitação com papel de controlador da
@@ -50,7 +50,7 @@ public class AutenticacaoMB {
 		try {
 			usuarioAtual.login(ficha);
 		} catch (AuthenticationException e) {
-			ViewUtil.setMessage("Seu email e senha não correspondem, ou você ainda não possui uma conta.");
+			VisaoUtil.setMessage("Seu email e senha não correspondem, ou você ainda não possui uma conta.");
 
 			log.info("Acesso negado!");
 			log.warning(e.getMessage());
@@ -58,7 +58,7 @@ public class AutenticacaoMB {
 		}
 		log.info("Acesso concedido!");
 
-		AutorizacaoSB.setAtributo("idUsuario", Integer.toString(UsuarioSB.getBySurrogate(dsIdentificador).getIdUsuario()));
+		AutorizacaoSB.setAtributo("id", Integer.toString(UsuarioSB.getBySurrogate(dsIdentificador).getId()));
 		AutorizacaoSB.setAtributo("dsNome", UsuarioSB.getBySurrogate(dsIdentificador).getDsNome());
 
 		return "index?faces-redirect=true";

@@ -15,8 +15,8 @@
 <h:body>
 	<h:panelGroup layout="block" id="topo">
 		<ui:insert name="topo">
-			<h:outputStylesheet library="css" name="menu.css" />
-			<ui:include src="/resources/ui/menu.xhtml" />
+				<h:outputStylesheet library="css" name="menu.css" rendered="#{autorizacaoMB.usuarioAutenticado}" />
+				<ui:include src="/resources/ui/menu.xhtml" />
 		</ui:insert>
 	</h:panelGroup>
 

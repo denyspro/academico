@@ -8,9 +8,13 @@
 <ui:composition template="/resources/ui/leiaute.xhtml">
 	<ui:define name="corpo">
 		<h:body>
-			<h4>Olá #{autorizacaoMB.dsNome}!</h4>
-			<h6></h6>
-			<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+			<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
+				<h4>Olá #{autorizacaoMB.dsNome}!</h4>
+				<h6></h6>
+				<h:panelGroup layout="block">
+					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+				</h:panelGroup>
+			</h:panelGroup>
 		</h:body>
 	</ui:define>
 </ui:composition>

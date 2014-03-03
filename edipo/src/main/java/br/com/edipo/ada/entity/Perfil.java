@@ -2,36 +2,38 @@ package br.com.edipo.ada.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
-
 /**
- * The persistent class for the Perfil database table.
+ * Classe que mapeia a entidade Perfil.
  * 
+ * @author Denys
  */
 @Entity
 public class Perfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idPerfil")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idPerfil;
+	private int id;
 
 	private String dsPerfil;
 
-	//bi-directional many-to-many association to Usuario
+	//Associação bi-direcional N:N com a entidade Usuario
 	@ManyToMany(mappedBy="perfis")
 	private List<Usuario> usuarios;
 
-	public Perfil() {
+	public Perfil() {	
 	}
 
-	public int getIdPerfil() {
-		return this.idPerfil;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setIdPerfil(int idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setIdPerfil(int id) {
+		this.id = id;
 	}
 
 	public String getDsPerfil() {
@@ -50,4 +52,25 @@ public class Perfil implements Serializable {
 		this.usuarios = usuarios;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Perfil other = (Perfil) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 }

@@ -24,16 +24,16 @@ public class AutorizacaoMB {
 		log.info("Liberando recursos...");
 	}
 
-	public String getIdUsuario() {
-		String idUsuario = null;
+	public String getId() {
+		String id = null;
 
 		try {
-			idUsuario = AutorizacaoSB.getAtributo("idUsuario");
+			id = AutorizacaoSB.getAtributo("id");
 		} catch (Exception e) {
 			log.severe(e.toString());
 		}
 
-		return idUsuario;
+		return id;
 	}
 
 	public String getDsNome() {
