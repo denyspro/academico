@@ -32,6 +32,9 @@
 					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Professor')}">
 						<li>
+							<h:link value="Cursos" outcome="/curso/lista" />
+						</li>
+						<li>
 							<h:link value="Avaliações" outcome="/login" />
 						</li>
 						<li>
@@ -39,6 +42,9 @@
 						</li>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Aluno')}">
+						<li>
+							<h:link value="Inscrições" outcome="/login" />
+						</li>
 						<li>
 							<h:link value="Resoluções" outcome="/login" />
 						</li>

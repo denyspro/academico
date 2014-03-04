@@ -23,10 +23,10 @@ public class UsuarioMB {
 
 	private static final Logger log = Logger.getLogger(UsuarioMB.class.getName());
 
+	private String visaoOrigem = VisaoUtil.VISAOORIGEM;
+
 	private Usuario usuario;
 	private List<Usuario> usuarios;
-
-	private String visaoOrigem = VisaoUtil.VISAOORIGEM;
 
 	@PostConstruct
 	public void init() {
@@ -81,7 +81,7 @@ public class UsuarioMB {
 	public String salvar(Usuario usuario) {
 
 		String mensagem = String.format("Usu‡rio %s salvo.", usuario.getDsIdentificador());
-		String excecao = UsuarioSB.save(usuario);
+		String excecao = UsuarioSB.salvar(usuario);
 
 		if (excecao=="") {
 			VisaoUtil.setMessage(mensagem);
@@ -95,7 +95,7 @@ public class UsuarioMB {
 	public String excluir(Usuario usuario) {
 
 		String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
-		String excecao = UsuarioSB.delete(usuario);
+		String excecao = UsuarioSB.excluir(usuario);
 
 		if (excecao=="") {
 			VisaoUtil.setMessage(mensagem);

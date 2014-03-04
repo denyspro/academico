@@ -8,49 +8,38 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.edipo.ada.entity.Usuario;
+import br.com.edipo.ada.entity.Curso;
 import br.com.edipo.ada.util.PersistenciaUtil;
 
 /***
- * <i>Stateless bean</i> que faz o papel de modelo para o dom’nio de usu‡rios.
+ * <i>Stateless bean</i> que faz o papel de modelo para o dom’nio de cursos.
  * 
  * @author Denys
  */
 @Stateless
-public class UsuarioSB {
+public class CursoSB {
 
 	private static final Logger log = Logger.getLogger(UsuarioSB.class.getName());
 
-	public static List<Usuario> getAll() {
-		String jpql = "select u from Usuario u";
+	public static List<Curso> getByUser(Integer id) {
+		String jpql = "select c from Curso c where c.idUsuario = :idUsuario";
+		List<Curso> cursos = null;
 
-		return PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class).getResultList();
-	}
-
-	public static Usuario getById(Integer id) {
-		return PersistenciaUtil.getEntityManager().find(Usuario.class, id);
-	}
-
-	public static Usuario getByDsIdentificador(String id) {
-
-		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
-		Usuario u = null;
-
-		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class);
-		query.setParameter("dsIdentificador", id);
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class);
+		query.setParameter("idUsuario", id);
 
 		try {
-			u = (Usuario) query.getSingleResult();
+			cursos = (List<Curso>) query.getResultList();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenciaUtil.closeEntityManager();
 		}
 
-		return u;
+		return cursos;
 	}
 
-	public static String salvar(Usuario usuario) {
+	public static String salvar(Curso curso) {
 
 		String resposta = "";
 
@@ -59,7 +48,7 @@ public class UsuarioSB {
 
 		try {
 			tx.begin();
-			em.persist(usuario);
+			em.persist(curso);
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());
@@ -76,7 +65,7 @@ public class UsuarioSB {
 		return resposta;
 	}
 
-	public static String excluir(Usuario usuario) {
+	public static String excluir(Curso curso) {
 
 		String resposta = "";
 
@@ -85,7 +74,7 @@ public class UsuarioSB {
 
 		try {
 			tx.begin();
-			em.remove(usuario);
+			em.remove(curso);
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());

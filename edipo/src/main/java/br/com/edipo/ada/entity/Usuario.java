@@ -28,7 +28,6 @@ public class Usuario implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dtNascimento;
 
-	//Associação bi-direcional N:N com a entidade Perfil
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 		name="UsuarioPerfil"

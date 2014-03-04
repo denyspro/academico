@@ -7,6 +7,8 @@
 		<non-jta-data-source>java:jboss/datasources/edipo</non-jta-data-source>
 		<class>br.com.edipo.ada.entity.Perfil</class>
 		<class>br.com.edipo.ada.entity.Usuario</class>
+		<class>br.com.edipo.ada.entity.Curso</class>
+		<class>br.com.edipo.ada.entity.Inscricao</class>
 		<properties>
 <!--
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/edipo" />

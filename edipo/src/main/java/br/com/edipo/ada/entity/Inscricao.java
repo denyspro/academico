@@ -3,52 +3,51 @@ package br.com.edipo.ada.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import java.util.List;
-
 /**
- * Classe que mapeia a entidade Perfil.
+ * Classe que mapeia a entidade Inscricao.
  * 
  * @author Denys
  */
 @Entity
-public class Perfil implements Serializable {
+public class Inscricao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="idPerfil")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idInscricao")
 	private int id;
 
-	private String dsPerfil;
+	private int idUsuario;
 
-	@ManyToMany(mappedBy="perfis")
-	private List<Usuario> usuarios;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idCurso")
+	private Curso curso;
 
-	public Perfil() {	
+	public Inscricao() {
 	}
 
 	public int getId() {
 		return this.id;
 	}
 
-	public void setIdPerfil(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getDsPerfil() {
-		return this.dsPerfil;
+	public int getIdUsuario() {
+		return this.idUsuario;
 	}
 
-	public void setDsPerfil(String dsPerfil) {
-		this.dsPerfil = dsPerfil;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return this.usuarios;
+	public Curso getCurso() {
+		return this.curso;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class Perfil implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Perfil other = (Perfil) obj;
+		Inscricao other = (Inscricao) obj;
 		if (id != other.id)
 			return false;
 		return true;

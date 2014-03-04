@@ -14,7 +14,7 @@ import br.com.edipo.ada.util.PersistenciaUtil;
  */
 @Stateless
 public class PerfilSB {
-	public static List<Perfil> getAll() {
+	public static List<Perfil> getTodos() {
 		String jpql = "select p from Perfil p";
 
 		return PersistenciaUtil.getEntityManager().createQuery(jpql, Perfil.class).getResultList();

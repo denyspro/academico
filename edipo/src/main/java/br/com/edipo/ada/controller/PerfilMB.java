@@ -43,7 +43,7 @@ public class PerfilMB {
 
 	public List<Perfil> getPerfis() {
 		if (perfis == null) {
-			perfis = PerfilSB.getAll();
+			perfis = PerfilSB.getTodos();
 		}
 		return perfis;
 	}

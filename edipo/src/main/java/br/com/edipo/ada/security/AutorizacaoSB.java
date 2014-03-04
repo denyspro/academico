@@ -1,10 +1,13 @@
 package br.com.edipo.ada.security;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 
 import org.apache.shiro.SecurityUtils;
+
+import br.com.edipo.ada.controller.CursoMB;
 
 /***
  * <i>Stateless bean</i> que intermedia o acesso ˆ sess‹o do usu‡rio.
@@ -13,7 +16,6 @@ import org.apache.shiro.SecurityUtils;
  */
 @Stateless
 public class AutorizacaoSB {
-
 	public static String getAtributo(String chave) {
 		return SecurityUtils.getSubject().getSession().getAttribute(chave).toString();
 	}
