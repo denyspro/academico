@@ -18,7 +18,9 @@
 		<h:panelGroup layout="block" class="col-xs-4 col-xs-offset-4">
 			<h:form>
 				<h:outputLabel styleClass="control-label">Email:</h:outputLabel>
-				<h:inputText id="dsIdentificador" value="#{usuario.dsIdentificador}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." />
+				<h:inputText id="dsIdentificador" value="#{usuario.dsIdentificador}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório.">
+					<f:validator validatorId="validadorEmail" />
+				</h:inputText>
 				<em><h:message for="dsIdentificador" styleClass="text-danger small" /></em>
 				<br />
 

@@ -3,6 +3,7 @@ package br.com.edipo.ada.util;
 import java.util.logging.Logger;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import br.com.edipo.ada.controller.UsuarioMB;
@@ -43,9 +44,9 @@ public class VisaoUtil {
 	 * 
 	 * @see #setMessage(String)
 	 */
-	public static void setMessage(String m, String f) {
-		log.info(String.format("Mensagem: %s", m));
-		FacesContext.getCurrentInstance().addMessage(f, new FacesMessage(m));
+	public static void setMessage(String mensagem, UIComponent componente) {
+		log.info(String.format("Mensagem p/ %s: %s", componente.getId(), mensagem));
+		FacesContext.getCurrentInstance().addMessage(componente.getClientId(), new FacesMessage(mensagem));
 	}
 
 	/**
@@ -56,8 +57,8 @@ public class VisaoUtil {
 	 * 
 	 * @see #setMessage(String, String)
 	 */
-	public static void setMessage(String m) {
-		log.info(String.format("Mensagem: %s", m));
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(m));
+	public static void setMessage(String mensagem) {
+		log.info(String.format("Mensagem: %s", mensagem));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(mensagem));
 	}
 }
