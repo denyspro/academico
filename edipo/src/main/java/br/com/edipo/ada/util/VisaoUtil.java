@@ -16,7 +16,7 @@ import br.com.edipo.ada.controller.UsuarioMB;
  */
 public class VisaoUtil {
 
-	private static final Logger log = Logger.getLogger(UsuarioMB.class.getName());
+	private static final Logger log = Logger.getLogger(VisaoUtil.class.getName());
 
 	public static final String VISAOORIGEM = "lista?faces-redirect=true";
 
