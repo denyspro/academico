@@ -19,7 +19,7 @@ public class Inscricao implements Serializable {
 
 	private int idUsuario;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idCurso")
 	private Curso curso;
 

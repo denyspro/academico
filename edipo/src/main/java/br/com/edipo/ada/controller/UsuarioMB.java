@@ -51,6 +51,14 @@ public class UsuarioMB {
 		log.info("Liberando recursos...");
 	}
 
+	public String getVisaoOrigem() {
+		return visaoOrigem;
+	}
+
+	public void setVisaoOrigem(String origem) {
+		this.visaoOrigem = origem;
+	}
+
 	public List<Usuario> getUsuarios() {
 		if (usuarios == null) {
 			usuarios = UsuarioSB.getAll();
@@ -70,20 +78,12 @@ public class UsuarioMB {
 		this.usuario = usuario;
 	}
 
-	public String getVisaoOrigem() {
-		return visaoOrigem;
-	}
-
-	public void setVisaoOrigem(String origem) {
-		this.visaoOrigem = origem;
-	}
-
 	public String salvar(Usuario usuario) {
 
-		String mensagem = String.format("Usu‡rio %s salvo.", usuario.getDsIdentificador());
 		String excecao = UsuarioSB.salvar(usuario);
 
 		if (excecao=="") {
+			String mensagem = String.format("Usu‡rio %s salvo.", usuario.getDsIdentificador());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {
@@ -94,10 +94,10 @@ public class UsuarioMB {
 
 	public String excluir(Usuario usuario) {
 
-		String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
 		String excecao = UsuarioSB.excluir(usuario);
 
 		if (excecao=="") {
+			String mensagem = String.format("Usu‡rio %s exclu’do.", usuario.getDsIdentificador());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {
