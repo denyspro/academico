@@ -12,11 +12,7 @@
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
 			<h:form>
-				<h:panelGroup layout="block" rendered="#{empty usuarioMB.usuarios}">
-					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
-					<br />
-				</h:panelGroup>
-				<h:dataTable value="#{usuarioMB.usuarios}" var="usuario" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty usuarioMB.usuario}">
+				<h:dataTable value="#{usuarioMB.usuarios}" var="usuario" styleClass="table table-striped table-condensed table-hover">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
 						<h:outputText value="#{usuario.id}" />
@@ -55,7 +51,7 @@
 
 					<h:column headerClass="col-xs-1">
 						<f:facet name="header">Opções</f:facet>
-						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
+						<h:panelGroup layout="block" styleClass="nowrap">
 							<h:panelGroup layout="block">
 								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs">
 									<f:param name="id" value="#{usuario.id}" />

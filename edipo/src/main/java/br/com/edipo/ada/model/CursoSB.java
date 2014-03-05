@@ -19,9 +19,8 @@ import br.com.edipo.ada.util.PersistenciaUtil;
 @Stateless
 public class CursoSB {
 
-	private static final Logger log = Logger.getLogger(CursoSB.class.getName());
+	private static final Logger log = Logger.getLogger(UsuarioSB.class.getName());
 
-	@SuppressWarnings("unchecked")
 	public static List<Curso> getByUser(Integer id) {
 		String jpql = "select c from Curso c where c.idUsuario = :idUsuario";
 		List<Curso> cursos = null;
@@ -75,7 +74,7 @@ public class CursoSB {
 
 		try {
 			tx.begin();
-			em.remove(em.getReference(Curso.class, curso.getId()));
+			em.remove(curso);
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());

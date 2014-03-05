@@ -51,14 +51,6 @@ public class CursoMB {
 		log.info("Liberando recursos...");
 	}
 
-	public String getVisaoOrigem() {
-		return visaoOrigem;
-	}
-
-	public void setVisaoOrigem(String origem) {
-		this.visaoOrigem = origem;
-	}
-
 	public Curso getCurso() {
 		return curso;
 	}
@@ -71,6 +63,7 @@ public class CursoMB {
 		Integer idUsuario = null;
 
 		if (cursos == null) {
+
 			try {
 				idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
 			} catch (Exception e) {
@@ -86,12 +79,20 @@ public class CursoMB {
 		this.cursos = cursos;
 	}
 
+	public String getVisaoOrigem() {
+		return visaoOrigem;
+	}
+
+	public void setVisaoOrigem(String origem) {
+		this.visaoOrigem = origem;
+	}
+
 	public String salvar(Curso curso) {
 
+		String mensagem = String.format("Curso %s salvo.", curso.getDsCurso());
 		String excecao = CursoSB.salvar(curso);
 
 		if (excecao=="") {
-			String mensagem = String.format("Curso %s salvo.", curso.getDsCurso());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {
@@ -102,10 +103,10 @@ public class CursoMB {
 
 	public String excluir(Curso curso) {
 
+		String mensagem = String.format("Curso %s exclu’do.", curso.getDsCurso());
 		String excecao = CursoSB.excluir(curso);
 
 		if (excecao=="") {
-			String mensagem = String.format("Curso %s exclu’do.", curso.getDsCurso());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {
