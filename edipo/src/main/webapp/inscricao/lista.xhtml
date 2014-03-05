@@ -8,34 +8,39 @@
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
 		<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
-			<h4>Cursos</h4>
+			<h4>Inscrições</h4>
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
 			<h:form>
-				<h:panelGroup layout="block" rendered="#{empty cursoMB.cursos}">
+				<h:panelGroup layout="block" rendered="#{empty inscricaoMB.inscricoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
 				</h:panelGroup>
-				<h:dataTable value="#{cursoMB.cursos}" var="curso" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty cursoMB.cursos}">
+				<h:dataTable value="#{inscricaoMB.inscricoes}" var="inscricao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty inscricaoMB.inscricoes}">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{curso.id}" />
+						<h:outputText value="#{inscricao.id}" />
 					</h:column>
 	
 					<h:column>
-						<f:facet name="header">Nome</f:facet>
-						<h:outputText value="#{curso.dsCurso}" />
+						<f:facet name="header">Curso</f:facet>
+						<h:outputText value="#{inscricao.curso.dsCurso}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Responsável</f:facet>
+						<h:outputText value="#{inscricao.curso.idUsuario}" />
 					</h:column>
 
 					<h:column headerClass="col-xs-1">
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{curso.idUsuario!=autorizacaoMB.id}" />
+								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{inscricao.idUsuario!=autorizacaoMB.id}" />
 							</h:panelGroup>
 
 							<h:panelGroup layout="block">
-								<h:commandButton value="excluir" action="#{cursoMB.excluir(curso)}" styleClass="btn btn-danger btn-xs" disabled="#{curso.idUsuario!=autorizacaoMB.id}" />
+								<h:commandButton value="excluir" action="#{inscricaoMB.excluir(curso)}" styleClass="btn btn-danger btn-xs" disabled="#{inscricao.idUsuario!=autorizacaoMB.id}" />
 							</h:panelGroup>
 						</h:panelGroup>
 					</h:column>

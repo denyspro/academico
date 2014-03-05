@@ -8,39 +8,39 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import br.com.edipo.ada.entity.Curso;
+import br.com.edipo.ada.entity.Inscricao;
 import br.com.edipo.ada.util.PersistenciaUtil;
 
 /***
- * <i>Stateless bean</i> que faz o papel de modelo para o domínio de cursos.
+ * <i>Stateless bean</i> que faz o papel de modelo para o domínio de inscrições.
  * 
  * @author Denys
  */
 @Stateless
-public class CursoSB {
+public class InscricaoSB {
 
-	private static final Logger log = Logger.getLogger(CursoSB.class.getName());
+	private static final Logger log = Logger.getLogger(InscricaoSB.class.getName());
 
 	@SuppressWarnings("unchecked")
-	public static List<Curso> getByUser(Integer id) {
-		String jpql = "select c from Curso c where c.idUsuario = :idUsuario";
-		List<Curso> cursos = null;
+	public static List<Inscricao> getByUser(Integer id) {
+		String jpql = "select i from Inscricao i where i.idUsuario = :idUsuario";
+		List<Inscricao> inscricoes = null;
 
-		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class);
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Inscricao.class);
 		query.setParameter("idUsuario", id);
 
 		try {
-			cursos = (List<Curso>) query.getResultList();
+			inscricoes = (List<Inscricao>) query.getResultList();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenciaUtil.closeEntityManager();
 		}
 
-		return cursos;
+		return inscricoes;
 	}
 
-	public static String salvar(Curso curso) {
+	public static String salvar(Inscricao inscricao) {
 
 		String resposta = "";
 
@@ -49,7 +49,7 @@ public class CursoSB {
 
 		try {
 			tx.begin();
-			em.persist(curso);
+			em.persist(inscricao);
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());
@@ -66,7 +66,7 @@ public class CursoSB {
 		return resposta;
 	}
 
-	public static String excluir(Curso curso) {
+	public static String excluir(Inscricao inscricao) {
 
 		String resposta = "";
 
@@ -75,7 +75,7 @@ public class CursoSB {
 
 		try {
 			tx.begin();
-			em.remove(em.getReference(Curso.class, curso.getId()));
+			em.remove(em.getReference(Inscricao.class, inscricao.getId()));
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());
