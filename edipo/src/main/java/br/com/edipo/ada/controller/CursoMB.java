@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.edipo.ada.entity.Curso;
 import br.com.edipo.ada.model.CursoSB;
+import br.com.edipo.ada.model.UsuarioSB;
 import br.com.edipo.ada.security.AutorizacaoSB;
 import br.com.edipo.ada.util.VisaoUtil;
 
@@ -42,7 +43,7 @@ public class CursoMB {
 
 		if (curso == null) {
 			curso = new Curso();
-			curso.setIdUsuario(idUsuario);
+			curso.setUsuario(UsuarioSB.getById(idUsuario));
 		}
 	}
 

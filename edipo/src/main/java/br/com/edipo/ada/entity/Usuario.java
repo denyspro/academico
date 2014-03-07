@@ -2,6 +2,7 @@ package br.com.edipo.ada.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class Usuario implements Serializable {
 			}
 		)
 	private List<Perfil> perfis;
+
+	@OneToMany(mappedBy="usuario")
+	private List<Curso> cursos;
 
 	public Usuario() {
 	}
@@ -89,6 +93,14 @@ public class Usuario implements Serializable {
 
 	public void setPerfis(List<Perfil> perfis) {
 		this.perfis = perfis;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	@Override

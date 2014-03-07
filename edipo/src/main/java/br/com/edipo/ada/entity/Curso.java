@@ -2,6 +2,7 @@ package br.com.edipo.ada.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 /**
@@ -20,7 +21,9 @@ public class Curso implements Serializable {
 
 	private String dsCurso;
 
-	private int idUsuario;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario;
 
 	@OneToMany(mappedBy="curso")
 	private List<Inscricao> inscritos;
@@ -44,12 +47,12 @@ public class Curso implements Serializable {
 		this.dsCurso = dsCurso;
 	}
 
-	public int getIdUsuario() {
-		return this.idUsuario;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Inscricao> getInscritos() {

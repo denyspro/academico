@@ -31,11 +31,11 @@
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{curso.idUsuario!=autorizacaoMB.id}" />
+								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{curso.usuario.id!=autorizacaoMB.id}" />
 							</h:panelGroup>
 
 							<h:panelGroup layout="block">
-								<h:commandButton value="excluir" action="#{cursoMB.excluir(curso)}" styleClass="btn btn-danger btn-xs" disabled="#{curso.idUsuario!=autorizacaoMB.id}" />
+								<h:commandButton value="excluir" action="#{cursoMB.excluir(curso)}" styleClass="btn btn-danger btn-xs" disabled="#{curso.usuario.id!=autorizacaoMB.id}" />
 							</h:panelGroup>
 						</h:panelGroup>
 					</h:column>

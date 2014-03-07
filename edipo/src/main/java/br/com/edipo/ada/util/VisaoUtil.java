@@ -6,8 +6,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-import br.com.edipo.ada.controller.UsuarioMB;
-
 /**
  * Agrupa os métodos de manipulação de view para efeito de reaproveitamento de
  * código.

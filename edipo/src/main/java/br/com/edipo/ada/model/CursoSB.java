@@ -22,12 +22,12 @@ public class CursoSB {
 	private static final Logger log = Logger.getLogger(CursoSB.class.getName());
 
 	@SuppressWarnings("unchecked")
-	public static List<Curso> getByUser(Integer id) {
-		String jpql = "select c from Curso c where c.idUsuario = :idUsuario";
+	public static List<Curso> getByUser(Integer idUsuario) {
+		String jpql = "select c from Curso c where c.usuario = :usuario";
 		List<Curso> cursos = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class);
-		query.setParameter("idUsuario", id);
+		query.setParameter("usuario", UsuarioSB.getById(idUsuario));
 
 		try {
 			cursos = (List<Curso>) query.getResultList();

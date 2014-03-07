@@ -29,7 +29,7 @@
 
 					<h:column>
 						<f:facet name="header">Responsável</f:facet>
-						<h:outputText value="#{inscricao.curso.idUsuario}" />
+						<h:outputText value="#{inscricao.curso.usuario.dsNome}" />
 					</h:column>
 
 					<h:column headerClass="col-xs-1">
@@ -37,6 +37,7 @@
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
 								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{inscricao.idUsuario!=autorizacaoMB.id}" />
+									<f:param name="id" value="#{inscricao.id}" />
 							</h:panelGroup>
 
 							<h:panelGroup layout="block">
