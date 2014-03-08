@@ -9,8 +9,8 @@
 	<ui:define name="corpo">
 		<c:set var="usuario" value="#{usuarioMB.usuario}" />
 		<f:metadata>
-			<f:viewParam name="visaoOrigem" value="#{usuarioMB.visaoOrigem}" />
 			<f:viewParam name="id" value="#{usuarioMB.usuario.id}" />
+			<f:viewParam name="visaoOrigem" value="#{usuarioMB.visaoOrigem}" />
 		</f:metadata>
 		<h:panelGroup layout="block" class="page-header col-xs-4 col-xs-offset-4">
 			<h4>Usuário</h4>

@@ -32,15 +32,25 @@ public class InscricaoMB {
 	@PostConstruct
 	public void init() {
 
-		Integer idUsuario = null;
+		String id = VisaoUtil.getViewParam("id");
 
-		try {
-			idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
-		} catch (Exception e) {
-			log.severe("init: " + e.toString());
+		if (id != null) {
+			try {
+				inscricao = InscricaoSB.getById(Integer.parseInt(id));
+			} catch (Exception e) {
+				log.severe(e.toString());
+			}
 		}
 
 		if (inscricao == null) {
+			Integer idUsuario = null;
+
+			try {
+				idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
+			} catch (Exception e) {
+				log.severe("init: " + e.toString());
+			}
+
 			inscricao = new Inscricao();
 			inscricao.setIdUsuario(idUsuario);
 		}
@@ -91,9 +101,7 @@ public class InscricaoMB {
 		String excecao = InscricaoSB.salvar(inscricao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Inscrição %s salva (usuário %s, curso $s)."
-					, inscricao.getId(), inscricao.getIdUsuario()
-					, inscricao.getCurso().getId());
+			String mensagem = String.format("Inscrição %s salva." , inscricao.getId());
 
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;

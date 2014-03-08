@@ -19,12 +19,14 @@
 			<h:panelGroup layout="block" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><h:link value="Painel" outcome="/index" /></li>
-					<li>
-						<h:link value="Conta" outcome="/usuario/detalhe">
-							<f:param name="visaoOrigem" value="/index" />
-							<f:param name="id" value="${autorizacaoMB.id}" />
-						</h:link>
-					</li>
+					<h:panelGroup rendered="#{!autorizacaoMB.getPossuiPerfil('Administrador')}">
+						<li>
+							<h:link value="Conta" outcome="/usuario/detalhe">
+								<f:param name="visaoOrigem" value="/index" />
+								<f:param name="id" value="${autorizacaoMB.id}" />
+							</h:link>
+						</li>
+					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Administrador')}">
 						<li>
 							<h:link value="Usuários" outcome="/usuario/lista" />

@@ -33,15 +33,15 @@ public class CursoMB {
 	@PostConstruct
 	public void init() {
 
-		Integer idUsuario = null;
-
-		try {
-			idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
-		} catch (Exception e) {
-			log.severe("init: " + e.toString());
-		}
-
 		if (curso == null) {
+			Integer idUsuario = null;
+
+			try {
+				idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
+			} catch (Exception e) {
+				log.severe("init: " + e.toString());
+			}
+
 			curso = new Curso();
 			curso.setUsuario(UsuarioSB.getById(idUsuario));
 		}

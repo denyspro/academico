@@ -21,6 +21,10 @@ public class InscricaoSB {
 
 	private static final Logger log = Logger.getLogger(InscricaoSB.class.getName());
 
+	public static Inscricao getById(Integer id) {
+		return PersistenciaUtil.getEntityManager().find(Inscricao.class, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Inscricao> getByUser(Integer id) {
 		String jpql = "select i from Inscricao i where i.idUsuario = :idUsuario";
@@ -49,7 +53,7 @@ public class InscricaoSB {
 
 		try {
 			tx.begin();
-			em.persist(inscricao);
+			em.persist(em.merge(inscricao));
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());

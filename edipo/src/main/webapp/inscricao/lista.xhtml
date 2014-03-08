@@ -36,8 +36,9 @@
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="editar" outcome="detalhe?faces-redirect=true&amp;includeViewParams=true" styleClass="btn btn-success btn-xs" disabled="#{inscricao.idUsuario!=autorizacaoMB.id}" />
+								<h:button value="editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{inscricao.idUsuario!=autorizacaoMB.id}">
 									<f:param name="id" value="#{inscricao.id}" />
+								</h:button>
 							</h:panelGroup>
 
 							<h:panelGroup layout="block">

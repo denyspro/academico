@@ -59,7 +59,7 @@ public class UsuarioSB {
 
 		try {
 			tx.begin();
-			em.persist(usuario);
+			em.persist(em.merge(usuario));
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());
