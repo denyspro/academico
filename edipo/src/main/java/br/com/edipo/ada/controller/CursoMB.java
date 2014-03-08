@@ -33,6 +33,16 @@ public class CursoMB {
 	@PostConstruct
 	public void init() {
 
+		String id = VisaoUtil.getViewParam("id");
+
+		if (id != null) {
+			try {
+				curso = CursoSB.getById(Integer.parseInt(id));
+			} catch (Exception e) {
+				log.severe(e.toString());
+			}
+		}
+
 		if (curso == null) {
 			Integer idUsuario = null;
 

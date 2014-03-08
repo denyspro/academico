@@ -21,6 +21,10 @@ public class CursoSB {
 
 	private static final Logger log = Logger.getLogger(CursoSB.class.getName());
 
+	public static Curso getById(Integer id) {
+		return PersistenciaUtil.getEntityManager().find(Curso.class, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Curso> getByUser(Integer idUsuario) {
 		String jpql = "select c from Curso c where c.usuario = :usuario";
@@ -49,7 +53,7 @@ public class CursoSB {
 
 		try {
 			tx.begin();
-			em.persist(curso);
+			em.persist(em.merge(curso));
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());

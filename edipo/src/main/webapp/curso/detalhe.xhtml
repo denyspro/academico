@@ -9,6 +9,7 @@
 	<ui:define name="corpo">
 		<c:set var="curso" value="#{cursoMB.curso}" />
 		<f:metadata>
+			<f:viewParam name="id" value="#{cursoMB.curso.id}" />
 			<f:viewParam name="visaoOrigem" value="#{cursoMB.visaoOrigem}" />
 		</f:metadata>
 		<h:panelGroup layout="block" class="page-header col-xs-4 col-xs-offset-4">
