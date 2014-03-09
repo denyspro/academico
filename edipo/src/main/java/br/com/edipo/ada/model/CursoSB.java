@@ -86,6 +86,21 @@ public class CursoSB {
 
 			resposta = e.getMessage();
 
+			Throwable t = e.getCause();
+
+			/***
+			 * O contêiner encapsula a causa raiz em outras exceções, sem dar acesso direto à sua classe.
+			 * Portanto, a única forma de identificar é buscando pelo nome da classe entre as mensagens.
+			 */
+			while (t != null) {
+				if (t.getMessage().contains("ConstraintViolationException")) {
+					resposta = "Este item não pode ser excluído porque encontra-se em uso.";
+					break;
+				}
+
+				t = t.getCause();
+			}
+
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
 			}

@@ -64,6 +64,11 @@ public class AutenticacaoMB {
 		return "index?faces-redirect=true";
 	}
 
+	/***
+	 * Encerra a sessão do usuário.
+	 * 
+	 * @return Caminho para navegação implícita.
+	 */
 	public String sair() {
 		Subject usuarioAtual = SecurityUtils.getSubject();
 

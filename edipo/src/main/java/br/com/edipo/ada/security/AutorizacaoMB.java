@@ -65,6 +65,19 @@ public class AutorizacaoMB {
 		return AutorizacaoSB.getUsuarioAutenticado();
 	}
 
+	/***
+	 * Método que consulta se um usuário possui um certo perfil. Implementado de
+	 * forma a evitar uma consulta em banco ao perfil de usuário a cada
+	 * requisição de página. Isto pode acontecer na montagem do menu porque o
+	 * método que verifica se um usuário do Shiro é estático. A lista
+	 * pertencente à esta classe com escopo de sessão serve como um <i>cache</i>
+	 * de permissões. Sua única desvantagem é que o usuário precisa se
+	 * autenticar novamente para atualizar a matriz de permissões.
+	 * 
+	 * @param dsPerfil
+	 *            Perfil de usuário a ser consultado.
+	 * @return verdadeiro ou falso
+	 */
 	public boolean getPossuiPerfil(String dsPerfil) {
 		if (possuiPerfil.contains(dsPerfil)) {
 			return true;
