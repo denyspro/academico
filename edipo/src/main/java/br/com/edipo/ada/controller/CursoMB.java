@@ -29,6 +29,7 @@ public class CursoMB {
 
 	private Curso curso;
 	private List<Curso> cursos;
+	private List<Curso> cursosTodos;
 
 	@PostConstruct
 	public void init() {
@@ -95,6 +96,18 @@ public class CursoMB {
 
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
+	}
+
+	public List<Curso> getCursosTodos() {
+		if (cursosTodos == null) {
+			cursosTodos = CursoSB.getAll();
+		}
+
+		return cursosTodos;
+	}
+
+	public void setCursosTodos(List<Curso> cursosTodos) {
+		this.cursosTodos = cursosTodos;
 	}
 
 	public String salvar(Curso curso) {

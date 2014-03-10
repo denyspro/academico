@@ -58,7 +58,11 @@ public class InscricaoSB {
 		} catch (Exception e) {
 			log.severe(e.toString());
 
-			resposta = e.getMessage();
+			if (PersistenciaUtil.possuiNaExcecao(e, "ConstraintViolationException")) {
+				resposta = "Não é possível inscrever-se mais de uma vez no mesmo curso.";
+			} else {
+				resposta = e.getMessage();
+			}
 
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
@@ -84,21 +88,10 @@ public class InscricaoSB {
 		} catch (Exception e) {
 			log.severe(e.toString());
 
-			resposta = e.getMessage();
-
-			Throwable t = e.getCause();
-
-			/***
-			 * O contêiner encapsula a causa raiz em outras exceções, sem dar acesso direto à sua classe.
-			 * Portanto, a única forma de identificar é buscando pelo nome da classe entre as mensagens.
-			 */
-			while (t != null) {
-				if (t.getMessage().contains("ConstraintViolationException")) {
-					resposta = "Este item não pode ser excluído porque encontra-se em uso.";
-					break;
-				}
-
-				t = t.getCause();
+			if (PersistenciaUtil.possuiNaExcecao(e, "ConstraintViolationException")) {
+				resposta = "Não é possível excluir esta inscrição porque já se encontra em uso.";
+			} else {
+				resposta = e.getMessage();
 			}
 
 			if (tx != null && tx.isActive()) {

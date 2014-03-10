@@ -25,6 +25,12 @@ public class CursoSB {
 		return PersistenciaUtil.getEntityManager().find(Curso.class, id);
 	}
 
+	public static List<Curso> getAll() {
+		String jpql = "select c from Curso c";
+
+		return PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class).getResultList();
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Curso> getByUser(Integer idUsuario) {
 		String jpql = "select c from Curso c where c.usuario = :usuario";
@@ -84,21 +90,10 @@ public class CursoSB {
 		} catch (Exception e) {
 			log.severe(e.toString());
 
-			resposta = e.getMessage();
-
-			Throwable t = e.getCause();
-
-			/***
-			 * O contêiner encapsula a causa raiz em outras exceções, sem dar acesso direto à sua classe.
-			 * Portanto, a única forma de identificar é buscando pelo nome da classe entre as mensagens.
-			 */
-			while (t != null) {
-				if (t.getMessage().contains("ConstraintViolationException")) {
-					resposta = "Este item não pode ser excluído porque encontra-se em uso.";
-					break;
-				}
-
-				t = t.getCause();
+			if (PersistenciaUtil.possuiNaExcecao(e, "ConstraintViolationException")) {
+				resposta = "Não é possível excluir este curso porque já se encontra em uso.";
+			} else {
+				resposta = e.getMessage();
 			}
 
 			if (tx != null && tx.isActive()) {

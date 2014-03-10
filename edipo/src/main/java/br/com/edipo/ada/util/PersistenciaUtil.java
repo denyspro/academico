@@ -16,13 +16,14 @@ public class PersistenciaUtil {
 	private PersistenciaUtil() {
 	}
 
-	public static boolean isEntityManagerOpen(){
+	public static boolean isEntityManagerOpen() {
 		return manager.get() != null && manager.get().isOpen();
 	}
-	
+
 	public static EntityManager getEntityManager() {
 		if (factory == null) {
-			factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+			factory = Persistence
+					.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		}
 		EntityManager em = manager.get();
 		if (em == null || !em.isOpen()) {
@@ -36,16 +37,44 @@ public class PersistenciaUtil {
 		EntityManager em = manager.get();
 		if (em != null) {
 			EntityTransaction tx = em.getTransaction();
-			if (tx.isActive()) { 
+			if (tx.isActive()) {
 				tx.commit();
 			}
 			em.close();
 			manager.set(null);
 		}
 	}
-	
-	public static void closeEntityManagerFactory(){
+
+	public static void closeEntityManagerFactory() {
 		closeEntityManager();
 		factory.close();
+	}
+
+	/***
+	 * Método utilizado para auxiliar o tratamento de exceções na JPA. O
+	 * contêiner encapsula a causa raiz em outras exceções, sem dar acesso
+	 * direto à sua classe. Portanto, a única forma de identificar é buscando
+	 * pelo nome da classe entre as mensagens. Este método retorna verdadeiro se
+	 * a exceção procurada for encontrada.
+	 * 
+	 * @param excecao
+	 *            Exceção disparada durante a operação.
+	 * @param chave
+	 *            Referência da exceção expecífica a ser procurada dentro da
+	 *            cadeia de exceções para que seu seja feito tratamento.
+	 * @return verdadeiro ou falso
+	 */
+	public static boolean possuiNaExcecao(Throwable excecao, String chave) {
+		boolean resposta = false;
+
+		while (excecao != null) {
+			if (excecao.getMessage().contains(chave)) {
+				resposta = true;
+				break;
+			}
+			excecao = excecao.getCause();
+		}
+
+		return resposta;
 	}
 }
