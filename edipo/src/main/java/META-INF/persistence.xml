@@ -9,6 +9,8 @@
 		<class>br.com.edipo.ada.entity.Usuario</class>
 		<class>br.com.edipo.ada.entity.Curso</class>
 		<class>br.com.edipo.ada.entity.Inscricao</class>
+		<class>br.com.edipo.ada.entity.Etiqueta</class>
+		<class>br.com.edipo.ada.entity.Questao</class>
 		<properties>
 <!--
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/edipo" />
