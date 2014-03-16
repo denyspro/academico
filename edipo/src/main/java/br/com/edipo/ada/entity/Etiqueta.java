@@ -19,6 +19,8 @@ public class Etiqueta implements Serializable {
 	@Column(name="idEtiqueta")
 	private int id;
 
+	private String dsEtiqueta;
+
 	@ManyToMany(mappedBy="etiquetas", fetch=FetchType.EAGER)
 	private List<Questao> questoes;
 
@@ -29,8 +31,16 @@ public class Etiqueta implements Serializable {
 		return this.id;
 	}
 
-	public void setIdEtiqueta(int id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getDsEtiqueta() {
+		return dsEtiqueta;
+	}
+
+	public void setDsEtiqueta(String dsEtiqueta) {
+		this.dsEtiqueta = dsEtiqueta;
 	}
 
 	public List<Questao> getQuestoes() {

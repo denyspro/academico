@@ -19,8 +19,10 @@ public class Questao implements Serializable {
 	@Column(name="idQuestao")
 	private int id;
 
+	@Column(columnDefinition="BIT")
 	private boolean blMultiplaEscolha;
 
+	@Column(columnDefinition="BINARY(1)")
 	private byte[] bnImagem;
 
 	private String dsEnunciado;
