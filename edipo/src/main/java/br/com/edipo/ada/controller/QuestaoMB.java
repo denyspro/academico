@@ -1,13 +1,18 @@
 package br.com.edipo.ada.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.edipo.ada.entity.Etiqueta;
 import br.com.edipo.ada.entity.Questao;
 import br.com.edipo.ada.model.QuestaoSB;
 import br.com.edipo.ada.security.AutorizacaoSB;
@@ -28,7 +33,10 @@ public class QuestaoMB {
 
 	private Questao questao;
 	private List<Questao> questoes;
-	
+	private String dsEtiquetas;
+
+	private static final String EXP_ETIQUETA = "#\\w+";
+
 	@PostConstruct
 	public void init() {
 
@@ -96,7 +104,47 @@ public class QuestaoMB {
 		this.questoes = questoes;
 	}
 
+	public String getDsEtiquetas() {
+		if (dsEtiquetas == null && questao.getEtiquetas() != null) {
+			Iterator <Etiqueta> i = questao.getEtiquetas().iterator();
+
+			dsEtiquetas = "";
+
+			while(i.hasNext()) {
+				dsEtiquetas += " " + i.next().getDsEtiqueta();
+				log.info("Etiqueta encontrada: " + dsEtiquetas);
+			}
+		}
+
+		return dsEtiquetas;
+	}
+
+	public void setDsEtiquetas(String etiquetasEmLinha) {
+		this.dsEtiquetas = etiquetasEmLinha;
+	}
+
 	public String salvar(Questao questao) {
+
+		if (dsEtiquetas != null) {
+			Pattern padrao = Pattern.compile(EXP_ETIQUETA, Pattern.CASE_INSENSITIVE);
+			Matcher combinador = padrao.matcher(dsEtiquetas);
+
+			Etiqueta etiqueta = null;
+			ArrayList<Etiqueta> etiquetas = new ArrayList<Etiqueta>();
+
+			while (combinador.find()) {
+				log.info("Etiqueta identificada: " + combinador.group());
+
+				etiqueta = new Etiqueta();
+				etiqueta.setDsEtiqueta(combinador.group());
+
+				etiquetas.add(etiqueta);
+			}
+
+			if(!etiquetas.isEmpty()) {
+				questao.setEtiquetas(etiquetas);
+			}
+		}
 
 		String excecao = QuestaoSB.salvar(questao);
 
