@@ -35,7 +35,7 @@ public class UsuarioMB {
 
 		if (id != null) {
 			try {
-				usuario = UsuarioSB.getById(Integer.parseInt(id));
+				usuario = UsuarioSB.getPorId(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
@@ -61,7 +61,7 @@ public class UsuarioMB {
 
 	public List<Usuario> getUsuarios() {
 		if (usuarios == null) {
-			usuarios = UsuarioSB.getAll();
+			usuarios = UsuarioSB.getTodos();
 		}
 		return usuarios;
 	}

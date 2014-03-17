@@ -22,15 +22,9 @@
 						<h:outputText value="#{questao.id}" />
 					</h:column>
 
-					<h:column>
+					<h:column headerClass="col-xs-6">
 						<f:facet name="header">Enunciado</f:facet>
-						<h:outputText value="#{questao.dsEnunciado}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Múltipla Escolha</f:facet>
-						<h:outputText value="Sim" rendered="#{questao.blMultiplaEscolha}" />
-						<h:outputText value="Não" rendered="#{!questao.blMultiplaEscolha}" />
+						<h:outputText value="#{((questao.dsEnunciado.length() > 60) ? (questao.dsEnunciado.substring(0, 60).concat(' ...')) : questao.dsEnunciado)}" title="#{questao.dsEnunciado}" />
 					</h:column>
 
 					<h:column>
@@ -42,18 +36,37 @@
 						</ui:repeat>
 					</h:column>
 
+					<h:column>
+						<f:facet name="header">Múltipla Escolha</f:facet>
+						<h:outputText value="Sim" rendered="#{questao.blMultiplaEscolha}" />
+						<h:outputText value="Não" rendered="#{!questao.blMultiplaEscolha}" />
+					</h:column>
+
 					<h:column headerClass="col-xs-1">
 						<f:facet name="header">Opções</f:facet>
-						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
-							<h:panelGroup layout="block">
-								<h:button value="editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{questao.idUsuario!=autorizacaoMB.id}">
-									<f:param name="id" value="#{questao.id}" />
-								</h:button>
-							</h:panelGroup>
-
-							<h:panelGroup layout="block">
-								<h:commandButton value="excluir" action="#{questaoMB.excluir(questao)}" styleClass="btn btn-danger btn-xs" disabled="#{questao.idUsuario!=autorizacaoMB.id}" />
-							</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="btn-group">
+							<button class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+								selecione <h:panelGroup styleClass="caret" />
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<h:link value="Editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{questao.idUsuario!=autorizacaoMB.id}">
+										<f:param name="id" value="#{questao.id}" />
+									</h:link>
+								</li>
+								<li>
+									<h:commandLink value="Excluir" action="#{questaoMB.excluir(questao)}" styleClass="" disabled="#{questao.idUsuario!=autorizacaoMB.id}" />
+								</li>
+								<li class="divider"></li>
+								<li>
+									<h:link value="Alternativas" outcome="/alternativa/lista?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{questao.idUsuario!=autorizacaoMB.id}">
+										<f:param name="idQuestao" value="#{questao.id}" />
+										<h:panelGroup styleClass="badge pull-right">
+											<h:outputText value="#{questao.alternativas.size()}" />
+										</h:panelGroup>
+									</h:link>
+								</li>
+							</ul>
 						</h:panelGroup>
 					</h:column>
 				</h:dataTable>
@@ -68,6 +81,7 @@
 				<h:panelGroup layout="block">
 					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
 				</h:panelGroup>
+				<c:set target="#{flash}" property="keepMessages" value="true" />
 			</h:form>
 		</h:panelGroup>
 	</ui:define>

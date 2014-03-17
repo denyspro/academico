@@ -21,17 +21,17 @@ public class InscricaoSB {
 
 	private static final Logger log = Logger.getLogger(InscricaoSB.class.getName());
 
-	public static Inscricao getById(Integer id) {
+	public static Inscricao getPorId(Integer id) {
 		return PersistenciaUtil.getEntityManager().find(Inscricao.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Inscricao> getByUser(Integer id) {
+	public static List<Inscricao> getPorIdUsuario(Integer idUsuario) {
 		String jpql = "select i from Inscricao i where i.idUsuario = :idUsuario";
 		List<Inscricao> inscricoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Inscricao.class);
-		query.setParameter("idUsuario", id);
+		query.setParameter("idUsuario", idUsuario);
 
 		try {
 			inscricoes = (List<Inscricao>) query.getResultList();

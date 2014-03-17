@@ -21,23 +21,23 @@ public class CursoSB {
 
 	private static final Logger log = Logger.getLogger(CursoSB.class.getName());
 
-	public static Curso getById(Integer id) {
+	public static Curso getPorId(Integer id) {
 		return PersistenciaUtil.getEntityManager().find(Curso.class, id);
 	}
 
-	public static List<Curso> getAll() {
+	public static List<Curso> getTodos() {
 		String jpql = "select c from Curso c";
 
 		return PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Curso> getByUser(Integer idUsuario) {
+	public static List<Curso> getPorIdUsuario(Integer idUsuario) {
 		String jpql = "select c from Curso c where c.usuario = :usuario";
 		List<Curso> cursos = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class);
-		query.setParameter("usuario", UsuarioSB.getById(idUsuario));
+		query.setParameter("usuario", UsuarioSB.getPorId(idUsuario));
 
 		try {
 			cursos = (List<Curso>) query.getResultList();

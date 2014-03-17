@@ -36,7 +36,7 @@ public class InscricaoMB {
 
 		if (id != null) {
 			try {
-				inscricao = InscricaoSB.getById(Integer.parseInt(id));
+				inscricao = InscricaoSB.getPorId(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
@@ -87,7 +87,7 @@ public class InscricaoMB {
 				log.severe("getInscricoes: " + e.toString());
 			}
 
-			inscricoes = InscricaoSB.getByUser(idUsuario);
+			inscricoes = InscricaoSB.getPorIdUsuario(idUsuario);
 		}
 		return inscricoes;
 	}

@@ -26,13 +26,13 @@ public class EtiquetaSB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Etiqueta> getByUser(Integer id) {
+	public static List<Etiqueta> getPorIdUsuario(Integer idUsuario) {
 		String jpql = "select e from Etiqueta e inner join QuestaoEtiqueta qe on qe.idEtiqueta = e.idEtiqueta"
 				+ " inner join Questao q on q.idQuestao = qe.idQuestao where q.idUsuario = :idUsuario";
 		List<Etiqueta> etiquetas = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Etiqueta.class);
-		query.setParameter("idUsuario", id);
+		query.setParameter("idUsuario", idUsuario);
 
 		try {
 			etiquetas = (List<Etiqueta>) query.getResultList();
@@ -84,7 +84,7 @@ public class EtiquetaSB {
 			log.severe(e.toString());
 
 			if (PersistenciaUtil.possuiNaExcecao(e, "ConstraintViolationException")) {
-				resposta = "Não é possível excluir esta inscrição porque já se encontra em uso.";
+				resposta = "Não é possível excluir esta etiqueta porque já se encontra em uso.";
 			} else {
 				resposta = e.getMessage();
 			}

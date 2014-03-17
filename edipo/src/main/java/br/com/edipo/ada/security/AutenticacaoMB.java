@@ -58,8 +58,8 @@ public class AutenticacaoMB {
 		}
 		log.info("Acesso concedido!");
 
-		AutorizacaoSB.setAtributo("id", Integer.toString(UsuarioSB.getByDsIdentificador(dsIdentificador).getId()));
-		AutorizacaoSB.setAtributo("dsNome", UsuarioSB.getByDsIdentificador(dsIdentificador).getDsNome());
+		AutorizacaoSB.setAtributo("id", Integer.toString(UsuarioSB.getPorDsIdentificador(dsIdentificador).getId()));
+		AutorizacaoSB.setAtributo("dsNome", UsuarioSB.getPorDsIdentificador(dsIdentificador).getDsNome());
 
 		return "index?faces-redirect=true";
 	}

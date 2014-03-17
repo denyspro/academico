@@ -44,7 +44,7 @@ public class QuestaoMB {
 
 		if (id != null) {
 			try {
-				questao = QuestaoSB.getById(Integer.parseInt(id));
+				questao = QuestaoSB.getPorId(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
@@ -95,7 +95,7 @@ public class QuestaoMB {
 				log.severe("getQuestoes: " + e.toString());
 			}
 
-			questoes = QuestaoSB.getByUser(idUsuario);
+			questoes = QuestaoSB.getPorIdUsuario(idUsuario);
 		}
 		return questoes;
 	}

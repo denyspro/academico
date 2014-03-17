@@ -38,7 +38,7 @@ public class CursoMB {
 
 		if (id != null) {
 			try {
-				curso = CursoSB.getById(Integer.parseInt(id));
+				curso = CursoSB.getPorId(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
 			}
@@ -54,7 +54,7 @@ public class CursoMB {
 			}
 
 			curso = new Curso();
-			curso.setUsuario(UsuarioSB.getById(idUsuario));
+			curso.setUsuario(UsuarioSB.getPorId(idUsuario));
 		}
 	}
 
@@ -80,17 +80,18 @@ public class CursoMB {
 	}
 
 	public List<Curso> getCursos() {
-		Integer idUsuario = null;
-
 		if (cursos == null) {
+			Integer idUsuario = null;
+
 			try {
 				idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
 			} catch (Exception e) {
 				log.severe("getCursos: " + e.toString());
 			}
 
-			cursos = CursoSB.getByUser(idUsuario);
+			cursos = CursoSB.getPorIdUsuario(idUsuario);
 		}
+
 		return cursos;
 	}
 
@@ -100,7 +101,7 @@ public class CursoMB {
 
 	public List<Curso> getCursosTodos() {
 		if (cursosTodos == null) {
-			cursosTodos = CursoSB.getAll();
+			cursosTodos = CursoSB.getTodos();
 		}
 
 		return cursosTodos;

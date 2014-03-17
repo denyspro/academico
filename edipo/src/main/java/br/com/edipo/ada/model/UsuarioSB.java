@@ -21,17 +21,17 @@ public class UsuarioSB {
 
 	private static final Logger log = Logger.getLogger(UsuarioSB.class.getName());
 
-	public static List<Usuario> getAll() {
+	public static List<Usuario> getTodos() {
 		String jpql = "select u from Usuario u";
 
 		return PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class).getResultList();
 	}
 
-	public static Usuario getById(Integer id) {
+	public static Usuario getPorId(Integer id) {
 		return PersistenciaUtil.getEntityManager().find(Usuario.class, id);
 	}
 
-	public static Usuario getByDsIdentificador(String id) {
+	public static Usuario getPorDsIdentificador(String id) {
 
 		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
 		Usuario u = null;

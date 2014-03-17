@@ -37,10 +37,10 @@
 							<h:link value="Cursos" outcome="/curso/lista" />
 						</li>
 						<li>
-							<h:link value="Avaliações" outcome="/login" disabled="true" />
+							<h:link value="Questões" outcome="/questao/lista" />
 						</li>
 						<li>
-							<h:link value="Questões" outcome="/questao/lista" />
+							<h:link value="Avaliações" outcome="/login" rendered="false" />
 						</li>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Aluno')}">
@@ -48,12 +48,12 @@
 							<h:link value="Inscrições" outcome="/inscricao/lista" />
 						</li>
 						<li>
-							<h:link value="Resoluções" outcome="/login" disabled="true" />
+							<h:link value="Resoluções" outcome="/login" rendered="false" />
 						</li>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Professor')||autorizacaoMB.getPossuiPerfil('Aluno')}">
 						<li>
-							<h:link value="Resultados" outcome="/login" disabled="true" />
+							<h:link value="Resultados" outcome="/login" rendered="false" />
 						</li>
 					</h:panelGroup>
 					<li>

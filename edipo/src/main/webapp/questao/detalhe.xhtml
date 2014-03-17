@@ -22,23 +22,16 @@
 				<em><h:message for="dsEnunciado" styleClass="text-danger small" /></em>
 				<br />
 
+				<h:outputLabel styleClass="control-label">Etiquetas:</h:outputLabel>
+				<h:inputText id="dsEtiquetas" value="#{questaoMB.dsEtiquetas}" styleClass="form-control" required="false" requiredMessage="Campo obrigatório." />
+				<em><h:message for="dsEtiquetas" styleClass="text-danger small" /></em>
+				<br />
+
 				<h:panelGroup layout="block" styleClass="checkbox">
 					<h:outputLabel styleClass="control-label">Múltipla Escolha?</h:outputLabel>
 					<h:selectBooleanCheckbox id="blMultiplaEscolha" value="#{questaoMB.questao.blMultiplaEscolha}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." />
 				</h:panelGroup>
-				<em><h:message for="dsEnunciado" styleClass="text-danger small" /></em>
-				<br />
-
-<!--
-				<h:outputLabel styleClass="control-label">Ilustração:</h:outputLabel>
-				<h:graphicImage value="#{questaoMB.questao.bnImagem}" />
-				<em><h:message for="curso" styleClass="text-danger small" /></em>
-				<br />
--->
-
-				<h:outputLabel styleClass="control-label">Etiquetas:</h:outputLabel>
-				<h:inputText id="dsEtiquetas" value="#{questaoMB.dsEtiquetas}" styleClass="form-control" required="false" requiredMessage="Campo obrigatório." />
-				<em><h:message for="dsEtiquetas" styleClass="text-danger small" /></em>
+				<em><h:message for="blMultiplaEscolha" styleClass="text-danger small" /></em>
 				<br />
 
 				<br />
@@ -56,8 +49,6 @@
 				</h:panelGroup>
 			</h:form>
 		</h:panelGroup>
-
-
 
 	</ui:define>
 </ui:composition>

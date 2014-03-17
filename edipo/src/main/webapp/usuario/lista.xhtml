@@ -79,6 +79,7 @@
 				<h:panelGroup layout="block">
 					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
 				</h:panelGroup>
+				<c:set target="#{flash}" property="keepMessages" value="true" />
 			</h:form>
 		</h:panelGroup>
 	</ui:define>

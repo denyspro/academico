@@ -41,6 +41,10 @@ public class Questao implements Serializable {
 		)
 	private List<Etiqueta> etiquetas;
 
+	@OneToMany(mappedBy="questao",fetch=FetchType.EAGER)
+	@OrderColumn(name="idAlternativa") //necessário para evitar exceção "cannot simultaneously fetch multiple bags".
+	private List<Alternativa> alternativas;
+
 	public Questao() {
 	}
 
@@ -90,6 +94,14 @@ public class Questao implements Serializable {
 
 	public void setEtiquetas(List<Etiqueta> etiquetas) {
 		this.etiquetas = etiquetas;
+	}
+
+	public List<Alternativa> getAlternativas() {
+		return alternativas;
+	}
+
+	public void setAlternativas(List<Alternativa> alternativas) {
+		this.alternativas = alternativas;
 	}
 
 	@Override

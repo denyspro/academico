@@ -55,7 +55,7 @@ public class EtiquetaMB {
 
 			etiqueta = new Etiqueta();
 			List<Questao> questoes = etiqueta.getQuestoes();
-			questoes.add(QuestaoSB.getById(idQuestao));
+			questoes.add(QuestaoSB.getPorId(idQuestao));
 			etiqueta.setQuestoes(questoes);
 		}
 	}
@@ -91,7 +91,7 @@ public class EtiquetaMB {
 				log.severe("getEtiquetas: " + e.toString());
 			}
 
-			etiquetas = EtiquetaSB.getByUser(idUsuario);
+			etiquetas = EtiquetaSB.getPorIdUsuario(idUsuario);
 		}
 		return etiquetas;
 	}
