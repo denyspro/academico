@@ -19,20 +19,22 @@
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
 				</h:panelGroup>
-				<h:dataTable value="#{alternativaMB.alternativas}" var="alternativa" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty inscricaoMB.inscricoes}">
+				<h:dataTable value="#{alternativaMB.alternativas}" var="alternativa" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty alternativaMB.alternativas}">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
 						<h:outputText value="#{alternativa.id}" />
 					</h:column>
 	
-					<h:column>
+					<h:column headerClass="col-xs-6">
 						<f:facet name="header">Descrição</f:facet>
-						<h:outputText value="#{alternativa.dsAlternativa}" />
+						<h:outputText value="#{((alternativa.dsAlternativa.length() > 60) ? (alternativa.dsAlternativa.substring(0, 60).concat(' ...')) : alternativa.dsAlternativa)}" title="#{alternativa.dsAlternativa}" />
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Valor</f:facet>
-						<h:outputText value="#{alternativa.vlAlternativa}" />
+						<f:facet name="header">Peso (%)</f:facet>
+						<h:outputText value="#{alternativa.vlAlternativa}">
+							<f:convertNumber type="number" minIntegerDigits="1" maxIntegerDigits="3" minFractionDigits="2" maxFractionDigits="2" />
+						</h:outputText>
 					</h:column>
 
 					<h:column headerClass="col-xs-1">
@@ -41,6 +43,7 @@
 							<h:panelGroup layout="block">
 								<h:button value="editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{alternativa.questao.idUsuario!=autorizacaoMB.id}">
 									<f:param name="id" value="#{alternativa.id}" />
+									<f:param name="idQuestao" value="#{alternativa.questao.id}" />
 								</h:button>
 							</h:panelGroup>
 
@@ -53,7 +56,9 @@
 				<br />
 
 				<h:panelGroup layout="block">
-					<h:commandButton value="Novo" action="detalhe" styleClass="btn btn-primary" />
+					<h:button value="Novo" outcome="detalhe" includeViewParams="true" styleClass="btn btn-primary">
+						<f:param name="idQuestao" value="#{alternativaMB.alternativa.questao.id}" />
+					</h:button>
 				</h:panelGroup>
 				<br />
 				<br />

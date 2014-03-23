@@ -22,7 +22,7 @@ import br.com.edipo.ada.util.VisaoUtil;
 @ManagedBean
 public class AlternativaMB {
 
-	private static final Logger log = Logger.getLogger(InscricaoMB.class.getName());
+	private static final Logger log = Logger.getLogger(AlternativaMB.class.getName());
 
 	private String visaoOrigem = VisaoUtil.VISAOORIGEM;
 
@@ -104,7 +104,7 @@ public class AlternativaMB {
 		if (excecao=="") {
 			String mensagem = String.format("Alternativa %s salva.", alternativa.getId());
 			VisaoUtil.setMessage(mensagem);
-			return visaoOrigem;
+			return visaoOrigem.concat("idQuestao=" + Integer.toString(alternativa.getQuestao().getId()));
 		} else {
 			VisaoUtil.setMessage(excecao);
 			return "";
@@ -116,9 +116,9 @@ public class AlternativaMB {
 		String excecao = AlternativaSB.excluir(alternativa);
 
 		if (excecao=="") {
-			String mensagem = String.format("Alternativa %s exclu’do.", alternativa.getId());
+			String mensagem = String.format("Alternativa %s exclu’da.", alternativa.getId());
 			VisaoUtil.setMessage(mensagem);
-			return visaoOrigem;
+			return visaoOrigem.concat("idQuestao=" + Integer.toString(alternativa.getQuestao().getId()));
 		} else {
 			VisaoUtil.setMessage(excecao);
 			return "";

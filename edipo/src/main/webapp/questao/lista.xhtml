@@ -62,7 +62,7 @@
 									<h:link value="Alternativas" outcome="/alternativa/lista?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{questao.idUsuario!=autorizacaoMB.id}">
 										<f:param name="idQuestao" value="#{questao.id}" />
 										<h:panelGroup styleClass="badge pull-right">
-											<h:outputText value="#{questao.alternativas.size()}" />
+											<h:outputText value="#{questaoMB.getNrAlternativas(questao)}" />
 										</h:panelGroup>
 									</h:link>
 								</li>

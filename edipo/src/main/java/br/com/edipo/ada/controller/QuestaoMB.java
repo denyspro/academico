@@ -123,6 +123,14 @@ public class QuestaoMB {
 		this.dsEtiquetas = etiquetasEmLinha;
 	}
 
+	public int getNrAlternativas(Questao questao) {
+		int nrAlternativas = 0;
+
+		nrAlternativas = QuestaoSB.getNrAlternativas(questao.getId());
+
+		return nrAlternativas;
+	}
+
 	public String salvar(Questao questao) {
 
 		if (dsEtiquetas != null) {

@@ -44,6 +44,25 @@ public class QuestaoSB {
 		return questoes;
 	}
 
+	public static Integer getNrAlternativas(Integer id) {
+		Integer nrAlternativas = 0;
+
+		String jpql = "select size(q.alternativas) from Questao q where q.id = :idQuestao";
+		
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("idQuestao", id);
+
+		try {
+			nrAlternativas = (Integer) query.getSingleResult();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return nrAlternativas;
+	}
+
 	public static String salvar(Questao questao) {
 
 		String resposta = "";
