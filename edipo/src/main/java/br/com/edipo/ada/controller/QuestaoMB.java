@@ -27,7 +27,7 @@ import br.com.edipo.ada.util.VisaoUtil;
 @ManagedBean
 public class QuestaoMB {
 
-	private static final Logger log = Logger.getLogger(InscricaoMB.class.getName());
+	private static final Logger log = Logger.getLogger(QuestaoMB.class.getName());
 
 	private String visaoOrigem = VisaoUtil.VISAOORIGEM;
 
@@ -47,6 +47,17 @@ public class QuestaoMB {
 				questao = QuestaoSB.getPorId(Integer.parseInt(id));
 			} catch (Exception e) {
 				log.severe(e.toString());
+			}
+		} else {
+
+			id = VisaoUtil.getViewParam("idQuestao");
+
+			if (id != null) {
+				try {
+					questao = QuestaoSB.getPorId(Integer.parseInt(id));
+				} catch (Exception e) {
+					log.severe(e.toString());
+				}
 			}
 		}
 
@@ -105,6 +116,7 @@ public class QuestaoMB {
 	}
 
 	public String getDsEtiquetas() {
+
 		if (dsEtiquetas == null && questao.getEtiquetas() != null) {
 			Iterator <Etiqueta> i = questao.getEtiquetas().iterator();
 

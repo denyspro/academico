@@ -7,6 +7,7 @@
 
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
+		<c:set var="questao" value="#{questaoMB.questao}" />
 		<f:metadata>
 			<f:viewParam name="idQuestao" value="#{alternativaMB.alternativa.questao.id}" />
 		</f:metadata>
@@ -15,6 +16,15 @@
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
 			<h:form>
+				<h:panelGroup layout="block" styleClass="panel panel-default">
+					<h:panelGroup layout="block" styleClass="panel-heading">
+						<h3 class="panel-title">Questão:</h3>
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="panel-body">
+						<p>#{questaoMB.questao.dsEnunciado}</p>
+					</h:panelGroup>
+				</h:panelGroup>
+
 				<h:panelGroup layout="block" rendered="#{empty alternativaMB.alternativas}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
