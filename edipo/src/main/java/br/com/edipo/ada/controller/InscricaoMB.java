@@ -101,7 +101,7 @@ public class InscricaoMB {
 		String excecao = InscricaoSB.salvar(inscricao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Inscrição %s salva." , inscricao.getId());
+			String mensagem = String.format("Inscrição %d salva." , inscricao.getId());
 
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
@@ -116,7 +116,7 @@ public class InscricaoMB {
 		String excecao = InscricaoSB.excluir(inscricao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Inscrição %s excluída.", inscricao.getId());
+			String mensagem = String.format("Inscrição %d excluída.", inscricao.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

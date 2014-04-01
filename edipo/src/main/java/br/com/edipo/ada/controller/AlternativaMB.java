@@ -102,7 +102,7 @@ public class AlternativaMB {
 		String excecao = AlternativaSB.salvar(alternativa);
 
 		if (excecao=="") {
-			String mensagem = String.format("Alternativa %s salva.", alternativa.getId());
+			String mensagem = String.format("Alternativa %d salva.", alternativa.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem.concat("idQuestao=" + Integer.toString(alternativa.getQuestao().getId()));
 		} else {
@@ -116,7 +116,7 @@ public class AlternativaMB {
 		String excecao = AlternativaSB.excluir(alternativa);
 
 		if (excecao=="") {
-			String mensagem = String.format("Alternativa %s exclu’da.", alternativa.getId());
+			String mensagem = String.format("Alternativa %d exclu’da.", alternativa.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem.concat("idQuestao=" + Integer.toString(alternativa.getQuestao().getId()));
 		} else {
