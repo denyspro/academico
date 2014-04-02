@@ -23,7 +23,6 @@ public class Alternativa implements Serializable {
 
 	private BigDecimal vlAlternativa;
 
-	//bi-directional many-to-one association to Questao
 	@ManyToOne
 	@JoinColumn(name="idQuestao")
 	private Questao questao;

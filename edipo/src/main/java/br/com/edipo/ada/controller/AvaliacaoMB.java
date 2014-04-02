@@ -1,7 +1,5 @@
 package br.com.edipo.ada.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -53,10 +51,6 @@ public class AvaliacaoMB {
 			} catch (Exception e) {
 				log.severe("init: " + e.toString());
 			}
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-			log.info(dateFormat.format(new Date()).toString());
-			log.info(new Date().toString());
 
 			avaliacao = new Avaliacao();
 			avaliacao.setIdUsuario(idUsuario);

@@ -42,7 +42,7 @@ public class Questao implements Serializable {
 	private List<Etiqueta> etiquetas;
 
 	@OneToMany(mappedBy="questao",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@OrderColumn(name="idAlternativa") //necessário para evitar exceção "cannot simultaneously fetch multiple bags".
+//	@OrderColumn(name="idAlternativa") //necessário para evitar exceção "cannot simultaneously fetch multiple bags".
 	private List<Alternativa> alternativas;
 
 	public Questao() {

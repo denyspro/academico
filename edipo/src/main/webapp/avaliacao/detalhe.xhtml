@@ -20,14 +20,14 @@
 
 				<h:outputLabel styleClass="control-label">Início:</h:outputLabel>
 				<h:inputText id="dtIniAvaliacao" value="#{avaliacao.dtIniAvaliacao}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório.">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
 				</h:inputText>
 				<em><h:message for="dtIniAvaliacao" styleClass="text-danger small" /></em>
 				<br />
 
 				<h:outputLabel styleClass="control-label">Término:</h:outputLabel>
 				<h:inputText id="dtFimAvaliacao" value="#{avaliacao.dtFimAvaliacao}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório.">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
 				</h:inputText>
 				<em><h:message for="dtFimAvaliacao" styleClass="text-danger small" /></em>
 				<br />
@@ -37,6 +37,13 @@
 					<f:validateDoubleRange minimum="0" maximum="100" />
 				</h:inputText>
 				<em><h:message for="vlAvaliacao" styleClass="text-danger small" /></em>
+				<br />
+
+				<h:outputLabel styleClass="control-label">Curso:</h:outputLabel>
+				<h:selectManyCheckbox id="cursos" value="#{avaliacao.cursos}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList">
+					<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.dsCurso}" />
+				</h:selectManyCheckbox>
+				<em><h:message for="curso" styleClass="text-danger small" /></em>
 				<br />
 
 				<br />
