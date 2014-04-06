@@ -13,6 +13,8 @@
 		<class>br.com.edipo.ada.entity.Questao</class>
 		<class>br.com.edipo.ada.entity.Alternativa</class>
 		<class>br.com.edipo.ada.entity.Avaliacao</class>
+		<class>br.com.edipo.ada.entity.AvaliacaoQuestao</class>
+		<class>br.com.edipo.ada.entity.AvaliacaoQuestaoPK</class>
 		<properties>
 <!--
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/edipo" />

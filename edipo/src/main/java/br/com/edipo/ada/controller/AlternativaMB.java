@@ -84,7 +84,7 @@ public class AlternativaMB {
 			try {
 				idQuestao = Integer.parseInt(VisaoUtil.getViewParam("idQuestao"));
 			} catch (Exception e) {
-				log.severe("init: " + e.toString());
+				log.severe(e.toString());
 			}
 
 			alternativas = AlternativaSB.getPorIdQuestao(idQuestao);

@@ -42,6 +42,25 @@ public class AvaliacaoSB {
 		return avaliacao;
 	}
 
+	public static Integer getNrQuestoes(Integer id) {
+		Integer nrQuestoes = 0;
+
+		String jpql = "select count(*) from AvaliacaoQuestao a where a.id.idAvaliacao = :idAvaliacao";
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("idAvaliacao", id);
+
+		try {
+			nrQuestoes = ((Long) query.getSingleResult()).intValue();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return nrQuestoes;
+	}
+
 	public static String salvar(Avaliacao avaliacao) {
 
 		String resposta = "";

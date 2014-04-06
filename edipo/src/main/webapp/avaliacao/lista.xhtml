@@ -37,7 +37,7 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Valor</f:facet>
+						<f:facet name="header">Nota máxima</f:facet>
 						<h:outputText value="#{avaliacao.vlAvaliacao}" />
 					</h:column>
 
@@ -58,10 +58,10 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<h:link value="Alternativas" outcome="/alternativa/lista?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}">
-										<f:param name="idQuestao" value="#{avaliacao.id}" />
+									<h:link value="Questões" outcome="/avaliacaoquestao/lista?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}">
+										<f:param name="idAvaliacao" value="#{avaliacao.id}" />
 										<h:panelGroup styleClass="badge pull-right">
-											<h:outputText value="0" />
+											<h:outputText value="#{avaliacaoMB.getNrQuestoes(avaliacao)}" />
 										</h:panelGroup>
 									</h:link>
 								</li>

@@ -99,6 +99,14 @@ public class AvaliacaoMB {
 		this.avaliacoes = avaliacoes;
 	}
 
+	public int getNrQuestoes(Avaliacao avaliacao) {
+		int nrQuestoes = 0;
+
+		nrQuestoes = AvaliacaoSB.getNrQuestoes(avaliacao.getId());
+
+		return nrQuestoes;
+	}
+
 	public String salvar(Avaliacao curso) {
 
 		String excecao = AvaliacaoSB.salvar(curso);

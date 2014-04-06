@@ -7,58 +7,64 @@
 
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
-		<c:set var="questao" value="#{questaoMB.questao}" />
 		<f:metadata>
-			<f:viewParam name="idQuestao" value="#{alternativaMB.alternativa.questao.id}" />
+			<f:viewParam name="idAvaliacao" value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.id}" />
 		</f:metadata>
 		<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
-			<h4>Alternativas</h4>
+			<h4>Questões</h4>
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
 			<h:form>
 				<h:panelGroup layout="block" styleClass="panel panel-default">
 					<h:panelGroup layout="block" styleClass="panel-heading">
-						<h3 class="panel-title">Questão</h3>
+						<h3 class="panel-title">Avaliação</h3>
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="panel-body">
 						<p>
-							<strong>Enunciado: </strong>
-							<h:outputText value="#{questaoMB.questao.dsEnunciado}" />
+							<strong>Início: </strong>
+							<h:outputText value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.dtIniAvaliacao}">
+								<f:convertDateTime pattern="dd/MM/yyyy hh:mm" />
+							</h:outputText>
 						</p>
 						<p>
-							<strong>Etiquetas: </strong>
-							<ui:repeat value="#{questaoMB.questao.etiquetas}" var="etiqueta" varStatus="status">
-									<h:outputText value="#{etiqueta.dsEtiqueta}" />
+							<strong>Término: </strong>
+							<h:outputText value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.dtFimAvaliacao}">
+								<f:convertDateTime pattern="dd/MM/yyyy hh:mm" />
+							</h:outputText>
+						</p>
+						<p>
+							<strong>Nota máxima: </strong>
+							<h:outputText value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.vlAvaliacao}" />
+						</p>
+						<p>
+							<strong>Curso(s): </strong>
+							<ui:repeat value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.cursos}" var="curso" varStatus="status">
+									<h:outputText value="#{curso.dsCurso}" />
 									<h:outputText value=", " rendered="#{!status.last}" />
 									<h:outputText value="." rendered="#{status.last}" />
 							</ui:repeat>
 						</p>
-						<p>
-							<strong>Múltipla Escolha: </strong>
-							<h:outputText value="Sim" rendered="#{questaoMB.questao.blMultiplaEscolha}" />
-							<h:outputText value="Não" rendered="#{!questaoMB.questao.blMultiplaEscolha}" />
-						</p>
 					</h:panelGroup>
 				</h:panelGroup>
 
-				<h:panelGroup layout="block" rendered="#{empty alternativaMB.alternativas}">
+				<h:panelGroup layout="block" rendered="#{empty avaliacaoQuestaoMB.avaliacaoQuestoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
 				</h:panelGroup>
-				<h:dataTable value="#{alternativaMB.alternativas}" var="alternativa" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty alternativaMB.alternativas}">
+				<h:dataTable value="#{avaliacaoQuestaoMB.avaliacaoQuestoes}" var="avaliacaoQuestao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty avaliacaoQuestaoMB.avaliacaoQuestoes}">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{alternativa.id}" />
+						<h:outputText value="#{avaliacaoQuestao.questao.id}" />
 					</h:column>
 	
 					<h:column headerClass="col-xs-6">
 						<f:facet name="header">Descrição</f:facet>
-						<h:outputText value="#{((alternativa.dsAlternativa.length() > 60) ? (alternativa.dsAlternativa.substring(0, 60).concat(' ...')) : alternativa.dsAlternativa)}" title="#{alternativa.dsAlternativa}" />
+						<h:outputText value="#{((avaliacaoQuestao.questao.dsEnunciado.length() > 60) ? (avaliacaoQuestao.questao.dsEnunciado.substring(0, 60).concat(' ...')) : avaliacaoQuestao.questao.dsEnunciado)}" title="#{avaliacaoQuestao.questao.dsEnunciado}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Peso (%)</f:facet>
-						<h:outputText value="#{alternativa.vlAlternativa}">
+						<h:outputText value="#{avaliacaoQuestao.vlQuestao}">
 							<f:convertNumber type="number" minIntegerDigits="1" maxIntegerDigits="3" minFractionDigits="2" maxFractionDigits="2" />
 						</h:outputText>
 					</h:column>
@@ -67,14 +73,14 @@
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{alternativa.questao.idUsuario!=autorizacaoMB.id}">
-									<f:param name="id" value="#{alternativa.id}" />
-									<f:param name="idQuestao" value="#{alternativa.questao.id}" />
+								<h:button value="editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{avaliacaoQuestao.avaliacao.idUsuario!=autorizacaoMB.id}">
+									<f:param name="idAvaliacao" value="#{avaliacaoQuestao.avaliacao.id}" />
+									<f:param name="idQuestao" value="#{avaliacaoQuestao.questao.id}" />
 								</h:button>
 							</h:panelGroup>
 
 							<h:panelGroup layout="block">
-								<h:commandButton value="excluir" action="#{alternativaMB.excluir(alternativa)}" styleClass="btn btn-danger btn-xs" disabled="#{alternativa.questao.idUsuario!=autorizacaoMB.id}" />
+								<h:commandButton value="excluir" action="#{avaliacaoQuestaoMB.excluir(avaliacaoQuestao)}" styleClass="btn btn-danger btn-xs" disabled="#{avaliacaoQuestao.avaliacao.idUsuario!=autorizacaoMB.id}" />
 							</h:panelGroup>
 						</h:panelGroup>
 					</h:column>
@@ -83,7 +89,7 @@
 
 				<h:panelGroup layout="block">
 					<h:button value="Novo" outcome="detalhe" includeViewParams="true" styleClass="btn btn-primary">
-						<f:param name="idQuestao" value="#{alternativaMB.alternativa.questao.id}" />
+						<f:param name="idAvaliacao" value="#{avaliacaoQuestaoMB.avaliacaoQuestao.avaliacao.id}" />
 					</h:button>
 				</h:panelGroup>
 				<br />

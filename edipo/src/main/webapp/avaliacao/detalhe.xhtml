@@ -32,18 +32,18 @@
 				<em><h:message for="dtFimAvaliacao" styleClass="text-danger small" /></em>
 				<br />
 
-				<h:outputLabel styleClass="control-label">Valor:</h:outputLabel>
-				<h:inputText id="vlAvaliacao" value="#{avaliacao.vlAvaliacao}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." validatorMessage="Precisa ser de 0,00 a 100,00.">
-					<f:validateDoubleRange minimum="0" maximum="100" />
+				<h:outputLabel styleClass="control-label">Nota máxima:</h:outputLabel>
+				<h:inputText id="vlAvaliacao" value="#{avaliacao.vlAvaliacao}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." validatorMessage="Precisa ser de 1,00 a 10,00.">
+					<f:validateDoubleRange minimum="1" maximum="10" />
 				</h:inputText>
 				<em><h:message for="vlAvaliacao" styleClass="text-danger small" /></em>
 				<br />
 
-				<h:outputLabel styleClass="control-label">Curso:</h:outputLabel>
+				<h:outputLabel styleClass="control-label">Curso(s):</h:outputLabel>
 				<h:selectManyCheckbox id="cursos" value="#{avaliacao.cursos}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList">
 					<f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.dsCurso}" />
 				</h:selectManyCheckbox>
-				<em><h:message for="curso" styleClass="text-danger small" /></em>
+				<em><h:message for="cursos" styleClass="text-danger small" /></em>
 				<br />
 
 				<br />
