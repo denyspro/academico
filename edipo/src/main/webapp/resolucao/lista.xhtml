@@ -8,15 +8,15 @@
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
 		<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
-			<h4>Avaliações</h4>
+			<h4>Resoluções</h4>
 		</h:panelGroup>
 		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
 			<h:form>
-				<h:panelGroup layout="block" rendered="#{empty avaliacaoMB.avaliacoes}">
+				<h:panelGroup layout="block" rendered="#{empty resolucaoMB.avaliacoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
 				</h:panelGroup>
-				<h:dataTable value="#{avaliacaoMB.avaliacoes}" var="avaliacao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty avaliacaoMB.avaliacoes}">
+				<h:dataTable value="#{resolucaoMB.avaliacoes}" var="avaliacao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty resolucaoMB.avaliacoes}">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
 						<h:outputText value="#{avaliacao.id}" />
@@ -41,40 +41,24 @@
 						<h:outputText value="#{avaliacao.vlAvaliacao}" />
 					</h:column>
 
+					<h:column>
+						<f:facet name="header">Questões</f:facet>
+						<h:outputText value="#{avaliacaoMB.getNrQuestoes(avaliacao)}" />
+					</h:column>
+
 					<h:column headerClass="col-xs-1">
 						<f:facet name="header">Opções</f:facet>
-						<h:panelGroup layout="block" styleClass="btn-group">
-							<button class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-								selecione <h:panelGroup styleClass="caret" />
-							</button>
-							<ul class="dropdown-menu">
-								<li>
-									<h:link value="Editar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}">
-										<f:param name="id" value="#{avaliacao.id}" />
-									</h:link>
-								</li>
-								<li>
-									<h:commandLink value="Excluir" action="#{avaliacaoMB.excluir(avaliacao)}" styleClass="" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}" />
-								</li>
-								<li class="divider"></li>
-								<li>
-									<h:link value="Questões" outcome="/avaliacaoquestao/lista?faces-redirect=true" includeViewParams="true" styleClass="" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}">
-										<f:param name="idAvaliacao" value="#{avaliacao.id}" />
-										<h:panelGroup styleClass="badge pull-right">
-											<h:outputText value="#{avaliacaoMB.getNrQuestoes(avaliacao)}" />
-										</h:panelGroup>
-									</h:link>
-								</li>
-							</ul>
+						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
+							<h:panelGroup layout="block">
+								<h:button value="selecionar" outcome="lista?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{empty autorizacaoMB.id}">
+									<f:param name="idAvaliacao" value="#{avaliacao.id}" />
+								</h:button>
+							</h:panelGroup>
 						</h:panelGroup>
 					</h:column>
 				</h:dataTable>
 				<br />
 
-				<h:panelGroup layout="block">
-					<h:commandButton value="Novo" action="detalhe" styleClass="btn btn-primary" />
-				</h:panelGroup>
-				<br />
 				<br />
 	
 				<h:panelGroup layout="block">

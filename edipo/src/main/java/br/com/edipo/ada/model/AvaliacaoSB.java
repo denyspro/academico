@@ -1,5 +1,6 @@
 package br.com.edipo.ada.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,6 +31,26 @@ public class AvaliacaoSB {
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
 		query.setParameter("idUsuario", idUsuario);
+
+		try {
+			avaliacao = (List<Avaliacao>) query.getResultList();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return avaliacao;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Avaliacao> getAbertas(Integer idUsuario) {
+		String jpql = "select distinct a from Avaliacao a join a.cursos c join c.inscritos i where i.idUsuario = :idUsuario and :dtIniResolucao between a.dtIniAvaliacao and dtFimAvaliacao";
+		List<Avaliacao> avaliacao = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
+		query.setParameter("idUsuario", idUsuario);
+		query.setParameter("dtIniResolucao", new Date());
 
 		try {
 			avaliacao = (List<Avaliacao>) query.getResultList();
