@@ -7,10 +7,10 @@
 
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
-		<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-10 col-xs-offset-1">
 			<h4>Inscrições</h4>
 		</h:panelGroup>
-		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
+		<h:panelGroup layout="block" styleClass="col-xs-10 col-xs-offset-1">
 			<h:form>
 				<h:panelGroup layout="block" rendered="#{empty inscricaoMB.inscricoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>

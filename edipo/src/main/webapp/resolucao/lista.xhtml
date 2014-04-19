@@ -7,10 +7,10 @@
 
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
-		<h:panelGroup layout="block" class="page-header col-xs-10 col-xs-offset-1">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-10 col-xs-offset-1">
 			<h4>Resoluções</h4>
 		</h:panelGroup>
-		<h:panelGroup layout="block" class="col-xs-10 col-xs-offset-1">
+		<h:panelGroup layout="block" styleClass="col-xs-10 col-xs-offset-1">
 			<h:form>
 				<h:panelGroup layout="block" rendered="#{empty resolucaoMB.avaliacoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
@@ -50,7 +50,7 @@
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="selecionar" outcome="lista?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{empty autorizacaoMB.id}">
+								<h:button value="selecionar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{avaliacaoMB.getNrQuestoes(avaliacao) == 0}">
 									<f:param name="idAvaliacao" value="#{avaliacao.id}" />
 								</h:button>
 							</h:panelGroup>

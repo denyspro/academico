@@ -107,12 +107,12 @@ public class AvaliacaoMB {
 		return nrQuestoes;
 	}
 
-	public String salvar(Avaliacao curso) {
+	public String salvar(Avaliacao avaliacao) {
 
-		String excecao = AvaliacaoSB.salvar(curso);
+		String excecao = AvaliacaoSB.salvar(avaliacao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Avaliacao %d salva.", avaliacao.getId());
+			String mensagem = (avaliacao.getId() == 0) ? String.format("Nova avaliação salva.") : String.format("Avaliação %d salva.", avaliacao.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {
@@ -121,12 +121,12 @@ public class AvaliacaoMB {
 		}
 	}
 
-	public String excluir(Avaliacao curso) {
+	public String excluir(Avaliacao avaliacao) {
 
-		String excecao = AvaliacaoSB.excluir(curso);
+		String excecao = AvaliacaoSB.excluir(avaliacao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Avaliacao %d excluído.", avaliacao.getId());
+			String mensagem = String.format("Avaliacao %d excluída.", avaliacao.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

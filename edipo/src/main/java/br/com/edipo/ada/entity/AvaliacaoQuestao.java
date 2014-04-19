@@ -19,6 +19,10 @@ public class AvaliacaoQuestao implements Serializable {
 
 	private BigDecimal vlQuestao;
 
+	@Column(columnDefinition="BIT")
+	@Transient
+	private boolean blMultiplaEscolha;
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idAvaliacao", insertable=false, updatable=false)
 	private Avaliacao avaliacao;

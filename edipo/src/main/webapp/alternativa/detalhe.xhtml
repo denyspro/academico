@@ -13,10 +13,10 @@
 			<f:viewParam name="idQuestao" value="#{alternativaMB.alternativa.questao.id}" />
 			<f:viewParam name="visaoOrigem" value="#{alternativaMB.visaoOrigem}" />
 		</f:metadata>
-		<h:panelGroup layout="block" class="page-header col-xs-4 col-xs-offset-4">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-4 col-xs-offset-4">
 			<h4>Alternativa</h4>
 		</h:panelGroup>
-		<h:panelGroup layout="block" class="col-xs-4 col-xs-offset-4">
+		<h:panelGroup layout="block" styleClass="col-xs-4 col-xs-offset-4">
 			<h:form>
 				<h:outputLabel styleClass="control-label">Descrição:</h:outputLabel>
 				<h:inputTextarea id="dsAlternativa" value="#{alternativa.dsAlternativa}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." cols="9" rows="5" />

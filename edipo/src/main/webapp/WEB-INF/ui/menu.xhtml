@@ -7,8 +7,8 @@
 
 <ui:composition>
 	<h:panelGroup styleClass="navbar navbar-inverse navbar-fixed-top" layout="block" rendered="#{autorizacaoMB.usuarioAutenticado}">
-		<h:panelGroup layout="block" class="container">
-			<h:panelGroup layout="block" class="navbar-header">
+		<h:panelGroup layout="block" styleClass="container">
+			<h:panelGroup layout="block" styleClass="navbar-header">
 				<a class="navbar-brand" href="#">ÉDIPO</a>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span>
@@ -16,7 +16,7 @@
 					<span class="icon-bar"></span>
 				</button>
 			</h:panelGroup>
-			<h:panelGroup layout="block" class="navbar-collapse collapse">
+			<h:panelGroup layout="block" styleClass="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><h:link value="Painel" outcome="/index" /></li>
 					<h:panelGroup rendered="#{!autorizacaoMB.getPossuiPerfil('Administrador')}">

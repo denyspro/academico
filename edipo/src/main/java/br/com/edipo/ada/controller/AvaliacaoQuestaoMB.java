@@ -39,10 +39,9 @@ public class AvaliacaoQuestaoMB {
 		String idAvaliacao = VisaoUtil.getViewParam("idAvaliacao");
 		String idQuestao = VisaoUtil.getViewParam("idQuestao");
 
-		log.info(String.format("AvaliacaoQuestaoMB: %s, %s)", idAvaliacao, idQuestao));
+		log.info(String.format("idAvaliacao: %s, idQuestao: %s)", idAvaliacao, idQuestao));
 
 		if (idAvaliacao != null && idQuestao != null) {
-
 			try {
 				AvaliacaoQuestaoPK id = new AvaliacaoQuestaoPK();
 				id.setIdAvaliacao(Integer.parseInt(idAvaliacao));

@@ -12,10 +12,10 @@
 			<f:viewParam name="id" value="#{cursoMB.curso.id}" />
 			<f:viewParam name="visaoOrigem" value="#{cursoMB.visaoOrigem}" />
 		</f:metadata>
-		<h:panelGroup layout="block" class="page-header col-xs-4 col-xs-offset-4">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-4 col-xs-offset-4">
 			<h4>Curso</h4>
 		</h:panelGroup>
-		<h:panelGroup layout="block" class="col-xs-4 col-xs-offset-4">
+		<h:panelGroup layout="block" styleClass="col-xs-4 col-xs-offset-4">
 			<h:form>
 				<h:outputLabel styleClass="control-label">Nome:</h:outputLabel>
 				<h:inputText id="dsCurso" value="#{curso.dsCurso}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." />

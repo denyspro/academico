@@ -68,7 +68,8 @@ public class UsuarioSB {
 
 			if (tx != null && tx.isActive()) {
 				tx.rollback();
-			}		} finally {
+			}		
+		} finally {
 			PersistenciaUtil.closeEntityManager();
 		}
 
@@ -84,7 +85,7 @@ public class UsuarioSB {
 
 		try {
 			tx.begin();
-			em.remove(usuario);
+			em.remove(em.getReference(Usuario.class, usuario.getId()));
 			tx.commit();
 		} catch (Exception e) {
 			log.severe(e.toString());

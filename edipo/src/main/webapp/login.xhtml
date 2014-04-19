@@ -7,7 +7,7 @@
 
 <ui:composition template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="topo">
-		<h:panelGroup layout="block" class="page-header col-xs-4 col-xs-offset-4">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-4 col-xs-offset-4">
 			<h1>Édipo</h1>
 			<h4>Avaliação de desempenho acadêmico</h4>
 		</h:panelGroup>
@@ -16,8 +16,8 @@
 		<f:metadata>
 			<f:event type="preRenderView" listener="#{autenticacaoMB.sair()}" />
 		</f:metadata>
-		<h:panelGroup layout="block" class="jumbotron col-xs-4 col-xs-offset-4">
-			<h:panelGroup layout="block" class="container">
+		<h:panelGroup layout="block" styleClass="jumbotron col-xs-4 col-xs-offset-4">
+			<h:panelGroup layout="block" styleClass="container">
 				<h:form>
 					<h:outputLabel styleClass="control-label">Email:</h:outputLabel>
 					<h:inputText id="dsIdentificador" value="#{autenticacaoMB.dsIdentificador}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." />

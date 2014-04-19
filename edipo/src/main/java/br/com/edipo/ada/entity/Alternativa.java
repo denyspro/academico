@@ -23,6 +23,10 @@ public class Alternativa implements Serializable {
 
 	private BigDecimal vlAlternativa;
 
+	@Column(columnDefinition="BIT")
+	@Transient
+	private boolean blEscolhida;
+
 	@ManyToOne
 	@JoinColumn(name="idQuestao")
 	private Questao questao;
@@ -52,6 +56,14 @@ public class Alternativa implements Serializable {
 
 	public void setVlAlternativa(BigDecimal vlAlternativa) {
 		this.vlAlternativa = vlAlternativa;
+	}
+
+	public boolean isBlEscolhida() {
+		return blEscolhida;
+	}
+
+	public void setBlEscolhida(boolean blEscolhida) {
+		this.blEscolhida = blEscolhida;
 	}
 
 	public Questao getQuestao() {

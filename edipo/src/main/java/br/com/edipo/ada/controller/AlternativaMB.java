@@ -102,7 +102,7 @@ public class AlternativaMB {
 		String excecao = AlternativaSB.salvar(alternativa);
 
 		if (excecao=="") {
-			String mensagem = String.format("Alternativa %d salva.", alternativa.getId());
+			String mensagem = (alternativa.getId() == 0) ? String.format("Nova alternativa salva.") : String.format("Alternativa %d salva.", alternativa.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem.concat("idQuestao=" + Integer.toString(alternativa.getQuestao().getId()));
 		} else {

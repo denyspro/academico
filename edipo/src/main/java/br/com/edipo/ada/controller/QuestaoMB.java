@@ -169,8 +169,7 @@ public class QuestaoMB {
 		String excecao = QuestaoSB.salvar(questao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Quest‹o %d salva." , questao.getId());
-
+			String mensagem = (questao.getId() == 0) ? String.format("Nova quest‹o salva.") : String.format("Quest‹o %d salva.", questao.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

@@ -101,8 +101,7 @@ public class InscricaoMB {
 		String excecao = InscricaoSB.salvar(inscricao);
 
 		if (excecao=="") {
-			String mensagem = String.format("Inscrição %d salva." , inscricao.getId());
-
+			String mensagem = (inscricao.getId() == 0) ? String.format("Nova inscrição salva.") : String.format("Inscrição %d salva.", inscricao.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

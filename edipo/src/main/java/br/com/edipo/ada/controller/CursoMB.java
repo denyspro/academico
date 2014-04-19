@@ -116,7 +116,7 @@ public class CursoMB {
 		String excecao = CursoSB.salvar(curso);
 
 		if (excecao=="") {
-			String mensagem = String.format("Curso %s salvo.", curso.getDsCurso());
+			String mensagem = (curso.getId() == 0) ? String.format("Novo curso salvo.") : String.format("Curso %d salvo.", curso.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

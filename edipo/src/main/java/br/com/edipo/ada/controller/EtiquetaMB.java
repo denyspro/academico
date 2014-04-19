@@ -105,8 +105,7 @@ public class EtiquetaMB {
 		String excecao = EtiquetaSB.salvar(etiqueta);
 
 		if (excecao=="") {
-			String mensagem = String.format("Etiqueta %d salva." , etiqueta.getId());
-
+			String mensagem = (etiqueta.getId() == 0) ? String.format("Nova etiqueta salva.") : String.format("Etiqueta %d salva.", etiqueta.getId());
 			VisaoUtil.setMessage(mensagem);
 			return visaoOrigem;
 		} else {

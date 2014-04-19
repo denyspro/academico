@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Classe que mapeia a entidade Questao.
@@ -41,9 +42,10 @@ public class Questao implements Serializable {
 		)
 	private List<Etiqueta> etiquetas;
 
-	@OneToMany(mappedBy="questao",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-//	@OrderColumn(name="idAlternativa") //necessário para evitar exceção "cannot simultaneously fetch multiple bags".
-	private List<Alternativa> alternativas;
+	// Necessário ser de um tipo diferente de List para evitar exceção "cannot simultaneously fetch multiple bags".
+	// A desvantagem é que para iterar, precisa usar o método toArray().
+	@OneToMany(mappedBy="questao",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private Set<Alternativa> alternativas;
 
 	public Questao() {
 	}
@@ -96,11 +98,11 @@ public class Questao implements Serializable {
 		this.etiquetas = etiquetas;
 	}
 
-	public List<Alternativa> getAlternativas() {
+	public Set<Alternativa> getAlternativas() {
 		return alternativas;
 	}
 
-	public void setAlternativas(List<Alternativa> alternativas) {
+	public void setAlternativas(Set<Alternativa> alternativas) {
 		this.alternativas = alternativas;
 	}
 
