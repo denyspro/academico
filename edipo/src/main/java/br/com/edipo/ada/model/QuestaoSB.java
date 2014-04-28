@@ -1,5 +1,6 @@
 package br.com.edipo.ada.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -48,7 +49,7 @@ public class QuestaoSB {
 		Integer nrAlternativas = 0;
 
 		String jpql = "select size(q.alternativas) from Questao q where q.id = :idQuestao";
-		
+
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
 		query.setParameter("idQuestao", id);
 
@@ -61,6 +62,25 @@ public class QuestaoSB {
 		}
 
 		return nrAlternativas;
+	}
+
+	public static BigDecimal getVlSomaAlternativas(Questao questao) {
+		BigDecimal vlSomaAlternativas = BigDecimal.ZERO;
+
+		String jpql = "select sum(a.vlAlternativa) from Alternativa a where a.questao = :questao";
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("questao", questao);
+
+		try {
+			vlSomaAlternativas = (BigDecimal) query.getSingleResult();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return vlSomaAlternativas;
 	}
 
 	public static String salvar(Questao questao) {

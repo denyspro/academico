@@ -1,6 +1,8 @@
 package br.com.edipo.ada.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 /**
@@ -16,6 +18,8 @@ public class Escolha implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idEscolha")
 	private int id;
+
+	private BigDecimal vlEscolha;
 
 	@Column(columnDefinition="BIT")
 	private boolean blSelecionada;
@@ -37,6 +41,14 @@ public class Escolha implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public BigDecimal getVlEscolha() {
+		return vlEscolha;
+	}
+
+	public void setVlEscolha(BigDecimal vlEscolha) {
+		this.vlEscolha = vlEscolha;
 	}
 
 	public boolean getBlSelecionada() {

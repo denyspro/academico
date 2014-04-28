@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
+	<ui:define name="corpo">
+		<h:panelGroup layout="block" styleClass="page-header col-xs-10 col-xs-offset-1">
+			<h4>Correções</h4>
+		</h:panelGroup>
+		<h:panelGroup layout="block" styleClass="col-xs-10 col-xs-offset-1">
+			<h:form>
+				<h:panelGroup layout="block" rendered="#{empty correcaoMB.resolucoes}">
+					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
+					<br />
+				</h:panelGroup>
+				<h:dataTable value="#{correcaoMB.resolucoes}" var="resolucao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty correcaoMB.resolucoes}">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{resolucao.id}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Início</f:facet>
+						<h:outputText value="#{resolucao.dtIniResolucao}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Término</f:facet>
+						<h:outputText value="#{resolucao.dtFimResolucao}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Curso(s)</f:facet>
+						<ui:repeat value="#{resolucao.avaliacao.cursos}" var="curso" varStatus="status">
+								<h:outputText value="#{curso.dsCurso}" />
+								<h:outputText value=", " rendered="#{!status.last}" />
+								<h:outputText value="." rendered="#{status.last}" />
+						</ui:repeat>
+					</h:column>
+ 
+					<h:column headerClass="col-xs-1">
+						<f:facet name="header">Opções</f:facet>
+						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
+							<h:panelGroup layout="block">
+								<h:button value="selecionar" outcome="/login" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{resolucao.idUsuario!=autorizacaoMB.id}">
+									<f:param name="idResolucao" value="#{resolucao.id}" />
+								</h:button>
+							</h:panelGroup>
+						</h:panelGroup>
+					</h:column>
+				</h:dataTable>
+				<br />
+
+				<br />
+	
+				<h:panelGroup layout="block">
+					<h:messages globalOnly="true" layout="table" styleClass="text-danger" />
+				</h:panelGroup>
+				<c:set target="#{flash}" property="keepMessages" value="true" />
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+
+</html>

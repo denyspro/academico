@@ -27,7 +27,7 @@ public class EtiquetaSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Etiqueta> getPorIdUsuario(Integer idUsuario) {
-		String jpql = "select e from Etiqueta e inner join QuestaoEtiqueta qe on qe.idEtiqueta = e.idEtiqueta"
+		String jpql = "select distinct e from Etiqueta e inner join QuestaoEtiqueta qe on qe.idEtiqueta = e.idEtiqueta"
 				+ " inner join Questao q on q.idQuestao = qe.idQuestao where q.idUsuario = :idUsuario";
 		List<Etiqueta> etiquetas = null;
 
@@ -43,6 +43,25 @@ public class EtiquetaSB {
 		}
 
 		return etiquetas;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Etiqueta getPorDsEtiqueta(String dsEtiqueta) {
+		String jpql = "select e from Etiqueta e where e.dsEtiqueta = :dsEtiqueta order by idEtiqueta";
+		List<Etiqueta> etiquetas = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Etiqueta.class);
+		query.setParameter("dsEtiqueta", dsEtiqueta);
+
+		try {
+			etiquetas = (List<Etiqueta>) query.getResultList();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return (etiquetas.isEmpty()) ? null : etiquetas.get(0);
 	}
 
 	public static String salvar(Etiqueta etiqueta) {

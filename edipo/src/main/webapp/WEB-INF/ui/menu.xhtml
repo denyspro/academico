@@ -42,6 +42,9 @@
 						<li>
 							<h:link value="Avaliações" outcome="/avaliacao/lista" />
 						</li>
+						<li>
+							<h:link value="Resultados" outcome="/login" />
+						</li>
 					</h:panelGroup>
 					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Aluno')}">
 						<li>
@@ -50,10 +53,8 @@
 						<li>
 							<h:link value="Resoluções" outcome="/resolucao/lista" />
 						</li>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{autorizacaoMB.getPossuiPerfil('Professor')||autorizacaoMB.getPossuiPerfil('Aluno')}">
 						<li>
-							<h:link value="Resultados" outcome="/login" rendered="false" />
+							<h:link value="Correções" outcome="/correcao/lista" />
 						</li>
 					</h:panelGroup>
 					<li>

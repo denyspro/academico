@@ -45,22 +45,22 @@ public class AvaliacaoSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Avaliacao> getAbertas(Integer idUsuario) {
-		String jpql = "select distinct a from Avaliacao a join a.cursos c join c.inscritos i where i.idUsuario = :idUsuario and :dtIniResolucao between a.dtIniAvaliacao and dtFimAvaliacao";
-		List<Avaliacao> avaliacao = null;
+		String jpql = "select distinct a from Avaliacao a join a.cursos c join c.inscritos i where i.idUsuario = :idUsuario and :dtIniResolucao between a.dtIniAvaliacao and dtFimAvaliacao and not exists (select r from Resolucao r where r.idUsuario = :idUsuario and r.avaliacao = a)";
+		List<Avaliacao> avaliacoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
 		query.setParameter("idUsuario", idUsuario);
 		query.setParameter("dtIniResolucao", new Date());
 
 		try {
-			avaliacao = (List<Avaliacao>) query.getResultList();
+			avaliacoes = (List<Avaliacao>) query.getResultList();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenciaUtil.closeEntityManager();
 		}
 
-		return avaliacao;
+		return avaliacoes;
 	}
 
 	public static Integer getNrQuestoes(Integer id) {

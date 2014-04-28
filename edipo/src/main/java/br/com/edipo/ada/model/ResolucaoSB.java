@@ -1,9 +1,11 @@
 package br.com.edipo.ada.model;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import br.com.edipo.ada.entity.Resolucao;
 import br.com.edipo.ada.util.PersistenciaUtil;
@@ -16,6 +18,25 @@ import br.com.edipo.ada.util.PersistenciaUtil;
 public class ResolucaoSB {
 
 	private static final Logger log = Logger.getLogger(ResolucaoSB.class.getName());
+
+	@SuppressWarnings("unchecked")
+	public static List<Resolucao> getResolvidas(Integer idUsuario) {
+		String jpql = "select r from Resolucao r where r.idUsuario = :idUsuario and dtFimResolucao is not null order by dtIniResolucao desc";
+		List<Resolucao> resolucoes = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resolucao.class);
+		query.setParameter("idUsuario", idUsuario);
+
+		try {
+			resolucoes = (List<Resolucao>) query.getResultList();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return resolucoes;
+	}
 
 	public static String salvar(Resolucao resolucao) {
 

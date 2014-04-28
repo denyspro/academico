@@ -14,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.edipo.ada.entity.Etiqueta;
 import br.com.edipo.ada.entity.Questao;
+import br.com.edipo.ada.model.EtiquetaSB;
 import br.com.edipo.ada.model.QuestaoSB;
 import br.com.edipo.ada.security.AutorizacaoSB;
 import br.com.edipo.ada.util.VisaoUtil;
@@ -116,15 +117,21 @@ public class QuestaoMB {
 	}
 
 	public String getDsEtiquetas() {
+		String dsEtiqueta = "";
 
 		if (dsEtiquetas == null && questao.getEtiquetas() != null) {
 			Iterator <Etiqueta> i = questao.getEtiquetas().iterator();
+			//log.info(String.format("Quantidade de etiquetas: %d", questao.getEtiquetas().size()));
 
 			dsEtiquetas = "";
 
 			while(i.hasNext()) {
-				dsEtiquetas += " " + i.next().getDsEtiqueta();
-				log.info("Etiqueta encontrada: " + dsEtiquetas);
+				dsEtiqueta = i.next().getDsEtiqueta();
+
+				if (!dsEtiquetas.contains(dsEtiqueta)) {
+					dsEtiquetas += " " + dsEtiqueta;
+					log.info(String.format("Etiqueta encontrada: %s", dsEtiquetas));
+				}
 			}
 		}
 
@@ -153,17 +160,20 @@ public class QuestaoMB {
 			ArrayList<Etiqueta> etiquetas = new ArrayList<Etiqueta>();
 
 			while (combinador.find()) {
-				log.info("Etiqueta identificada: " + combinador.group());
+				etiqueta = EtiquetaSB.getPorDsEtiqueta(combinador.group());
 
-				etiqueta = new Etiqueta();
-				etiqueta.setDsEtiqueta(combinador.group());
+				if (etiqueta == null) {
+					etiqueta = new Etiqueta();
+					etiqueta.setDsEtiqueta(combinador.group());
+				}
+
+				// se o id for zero, significa que Ž nova
+				log.info(String.format("Etiqueta identificada: %d - %s", etiqueta.getId(), combinador.group()));
 
 				etiquetas.add(etiqueta);
 			}
 
-			if(!etiquetas.isEmpty()) {
-				questao.setEtiquetas(etiquetas);
-			}
+			questao.setEtiquetas(etiquetas);
 		}
 
 		String excecao = QuestaoSB.salvar(questao);

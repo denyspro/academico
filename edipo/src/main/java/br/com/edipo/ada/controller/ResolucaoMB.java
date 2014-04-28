@@ -1,5 +1,7 @@
 package br.com.edipo.ada.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -14,9 +16,11 @@ import br.com.edipo.ada.entity.Alternativa;
 import br.com.edipo.ada.entity.Avaliacao;
 import br.com.edipo.ada.entity.AvaliacaoQuestao;
 import br.com.edipo.ada.entity.Escolha;
+import br.com.edipo.ada.entity.Questao;
 import br.com.edipo.ada.entity.Resolucao;
 import br.com.edipo.ada.model.AvaliacaoQuestaoSB;
 import br.com.edipo.ada.model.AvaliacaoSB;
+import br.com.edipo.ada.model.QuestaoSB;
 import br.com.edipo.ada.model.ResolucaoSB;
 import br.com.edipo.ada.security.AutorizacaoSB;
 import br.com.edipo.ada.util.VisaoUtil;
@@ -62,24 +66,32 @@ public class ResolucaoMB {
 			resolucao.setIdUsuario(idUsuario);
 			resolucao.setDtIniResolucao(new Date());
 			resolucao.setAvaliacao(AvaliacaoSB.getPorId(idAvaliacao));
+			resolucao.setVlResultado(resolucao.getAvaliacao().getVlAvaliacao());
 
+			Questao questao = null;
 			Alternativa alternativa = null;
 			Escolha escolha = null;
+			BigDecimal vlSomaAlternativas = null;
 
-			Iterator <AvaliacaoQuestao> q = getAvaliacaoQuestoes().iterator();
-			Iterator <Alternativa> a = null;
+			Iterator <AvaliacaoQuestao> questoes = getAvaliacaoQuestoes().iterator();
+			Iterator <Alternativa> alternativas = null;
 
-			while(q.hasNext()) {
-				a = q.next().getQuestao().getAlternativas().iterator();
+			while(questoes.hasNext()) {
+				questao = questoes.next().getQuestao();
+				alternativas = questao.getAlternativas().iterator();
+				vlSomaAlternativas = QuestaoSB.getVlSomaAlternativas(questao);
 
-				while(a.hasNext()) {
-					alternativa = a.next();
+				while(alternativas.hasNext()) {
+					alternativa = alternativas.next();
 
 					if (alternativa != null) {
 						escolha = new Escolha();
+
+						escolha.setVlEscolha((vlSomaAlternativas == BigDecimal.ZERO) ? BigDecimal.ZERO : alternativa.getVlAlternativa().divide(vlSomaAlternativas.divide(new BigDecimal("100")), 2, RoundingMode.HALF_UP));
 						escolha.setBlSelecionada(false);
 						escolha.setAlternativa(alternativa);
-						log.info(String.format("Adicionando a alternativa '%s'...", alternativa.getDsAlternativa()));
+
+						log.info(String.format("Adicionando a alternativa '%s' com valor %s...", alternativa.getDsAlternativa(), escolha.getVlEscolha().toPlainString()));
 						resolucao.addEscolha(escolha);
 					}
 				}
@@ -187,7 +199,7 @@ public class ResolucaoMB {
 
 				if (alternativa.equals(escolha.getAlternativa())) {
 					escolha.setBlSelecionada(true); // Marca alternativa escolhida
-					log.info(" Selecionanda!");
+					log.info(" Selecionada!");
 					break;
 				}
 			}
