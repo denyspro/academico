@@ -19,6 +19,10 @@ public class ResolucaoSB {
 
 	private static final Logger log = Logger.getLogger(ResolucaoSB.class.getName());
 
+	public static Resolucao getPorId(Integer id) {
+		return PersistenciaUtil.getEntityManager().find(Resolucao.class, id);
+	}
+
 	@SuppressWarnings("unchecked")
 	public static List<Resolucao> getResolvidas(Integer idUsuario) {
 		String jpql = "select r from Resolucao r where r.idUsuario = :idUsuario and dtFimResolucao is not null order by dtIniResolucao desc";
