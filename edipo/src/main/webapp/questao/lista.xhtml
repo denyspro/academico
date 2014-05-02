@@ -29,11 +29,13 @@
 
 					<h:column>
 						<f:facet name="header">Etiquetas</f:facet>
-						<ui:repeat value="#{questao.etiquetas}" var="etiqueta" varStatus="status">
+						<small>
+							<ui:repeat value="#{questao.etiquetas}" var="etiqueta" varStatus="status">
 								<h:outputText value="#{etiqueta.dsEtiqueta}" />
 								<h:outputText value=", " rendered="#{!status.last}" />
 								<h:outputText value="." rendered="#{status.last}" />
-						</ui:repeat>
+							</ui:repeat>
+						</small>
 					</h:column>
 
 					<h:column>

@@ -21,7 +21,7 @@ public class Curso implements Serializable {
 
 	private String dsCurso;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
 

@@ -18,15 +18,19 @@ public class AvaliacaoQuestaoPK implements Serializable {
 
 	public AvaliacaoQuestaoPK() {
 	}
+
 	public int getIdAvaliacao() {
 		return this.idAvaliacao;
 	}
+
 	public void setIdAvaliacao(int idAvaliacao) {
 		this.idAvaliacao = idAvaliacao;
 	}
+
 	public int getIdQuestao() {
 		return this.idQuestao;
 	}
+
 	public void setIdQuestao(int idQuestao) {
 		this.idQuestao = idQuestao;
 	}

@@ -27,7 +27,7 @@ public class InscricaoSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Inscricao> getPorIdUsuario(Integer idUsuario) {
-		String jpql = "select i from Inscricao i where i.idUsuario = :idUsuario";
+		String jpql = "select distinct i from Inscricao i join fetch i.curso c join fetch c.usuario u where i.idUsuario = :idUsuario order by c.dsCurso";
 		List<Inscricao> inscricoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Inscricao.class);

@@ -22,7 +22,7 @@ public class UsuarioSB {
 	private static final Logger log = Logger.getLogger(UsuarioSB.class.getName());
 
 	public static List<Usuario> getTodos() {
-		String jpql = "select u from Usuario u";
+		String jpql = "select distinct u from Usuario u join fetch u.perfis p order by u.dsIdentificador";
 
 		return PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class).getResultList();
 	}
@@ -33,7 +33,7 @@ public class UsuarioSB {
 
 	public static Usuario getPorDsIdentificador(String id) {
 
-		String jpql = "select u from Usuario u where u.dsIdentificador = :dsIdentificador";
+		String jpql = "select u from Usuario u join fetch u.perfis p where u.dsIdentificador = :dsIdentificador";
 		Usuario u = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Usuario.class);

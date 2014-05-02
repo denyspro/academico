@@ -40,4 +40,71 @@ public class ResultadoSB {
 
 		return resultados;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Resultado> getResultado(Integer idAvaliacao) {
+		String jpql = "select new br.com.edipo.ada.entity.Resultado (et.dsEtiqueta, avg(es.vlEscolha) as vlCalculado) "
+				+	"from Escolha es "
+				+	"join es.resolucao re "
+				+	"join es.alternativa al "
+				+	"join al.questao qu "
+				+	"join qu.etiquetas et "
+				+	"where es.blSelecionada = 1 "
+				+	"and re.avaliacao.id = :idAvaliacao "
+				+	"group by et.dsEtiqueta";
+		List <Resultado> resultados = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resultado.class);
+		query.setParameter("idAvaliacao", idAvaliacao);
+
+		try {
+			resultados = (List<Resultado>) query.getResultList();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return resultados;
+	}
+
+	public static Long getNrResolucoes(Integer idAvaliacao) {
+		String jpql = "select count(r) from Resolucao r where r.avaliacao.id = :idAvaliacao";
+		Long nrResolucoes = 0L;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("idAvaliacao", idAvaliacao);
+
+		try {
+			nrResolucoes = (Long) query.getSingleResult();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return nrResolucoes;
+	}
+
+	public static Long getNrInscritos(Integer idAvaliacao) {
+		String jpql = "select count(distinct i.idUsuario) "
+		+	"from Avaliacao a "
+		+	"join a.cursos c "
+		+	"join c.inscritos i "
+		+	"where a.id = :idAvaliacao";
+		Long nrInscritos = 0L;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("idAvaliacao", idAvaliacao);
+
+		try {
+			nrInscritos = (Long) query.getSingleResult();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return nrInscritos;
+	}
 }

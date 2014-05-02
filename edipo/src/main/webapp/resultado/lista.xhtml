@@ -8,42 +8,51 @@
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
 		<h:panelGroup layout="block" styleClass="page-header col-xs-10 col-xs-offset-1">
-			<h4>Correções</h4>
+			<h4>Resultados</h4>
 		</h:panelGroup>
 		<h:panelGroup layout="block" styleClass="col-xs-10 col-xs-offset-1">
 			<h:form>
-				<h:panelGroup layout="block" rendered="#{empty correcaoMB.resolucoes}">
+				<h:panelGroup layout="block" rendered="#{empty resultadoMB.avaliacoes}">
 					<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 					<br />
 				</h:panelGroup>
-				<h:dataTable value="#{correcaoMB.resolucoes}" var="resolucao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty correcaoMB.resolucoes}">
+				<h:dataTable value="#{resultadoMB.avaliacoes}" var="avaliacao" styleClass="table table-striped table-condensed table-hover" rendered="#{!empty resultadoMB.avaliacoes}">
 					<h:column>
 						<f:facet name="header">ID</f:facet>
-						<h:outputText value="#{resolucao.id}" />
+						<h:outputText value="#{avaliacao.id}" />
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Data</f:facet>
-						<h:outputText value="#{resolucao.dtFimResolucao}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+						<f:facet name="header">Início</f:facet>
+						<h:outputText value="#{avaliacao.dtIniAvaliacao}">
+							<f:convertDateTime pattern="dd/MM HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Término</f:facet>
+						<h:outputText value="#{avaliacao.dtFimAvaliacao}">
+							<f:convertDateTime pattern="dd/MM HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Curso(s)</f:facet>
-						<ui:repeat value="#{resolucao.avaliacao.cursos}" var="curso" varStatus="status">
+						<small>
+						<ui:repeat value="#{avaliacao.cursos}" var="curso" varStatus="status">
 								<h:outputText value="#{curso.dsCurso}" />
 								<h:outputText value=", " rendered="#{!status.last}" />
 								<h:outputText value="." rendered="#{status.last}" />
 						</ui:repeat>
+						</small>
 					</h:column>
  
 					<h:column headerClass="col-xs-1">
 						<f:facet name="header">Opções</f:facet>
 						<h:panelGroup layout="block" styleClass="btn-toolbar nowrap">
 							<h:panelGroup layout="block">
-								<h:button value="selecionar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{resolucao.idUsuario!=autorizacaoMB.id}">
-									<f:param name="idResolucao" value="#{resolucao.id}" />
+								<h:button value="selecionar" outcome="detalhe?faces-redirect=true" includeViewParams="true" styleClass="btn btn-success btn-xs" disabled="#{avaliacao.idUsuario!=autorizacaoMB.id}">
+									<f:param name="idAvaliacao" value="#{avaliacao.id}" />
 								</h:button>
 							</h:panelGroup>
 						</h:panelGroup>

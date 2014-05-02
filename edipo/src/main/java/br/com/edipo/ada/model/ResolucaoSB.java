@@ -20,12 +20,27 @@ public class ResolucaoSB {
 	private static final Logger log = Logger.getLogger(ResolucaoSB.class.getName());
 
 	public static Resolucao getPorId(Integer id) {
-		return PersistenciaUtil.getEntityManager().find(Resolucao.class, id);
+		String jpql = "select distinct r from Resolucao r join fetch r.avaliacao a join fetch a.cursos c where r.id = :id";
+		Resolucao resolucao = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resolucao.class);
+		query.setParameter("id", id);
+
+		try {
+			resolucao = (Resolucao) query.getResultList().get(0);
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return resolucao;
+//		return PersistenciaUtil.getEntityManager().find(Resolucao.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<Resolucao> getResolvidas(Integer idUsuario) {
-		String jpql = "select r from Resolucao r where r.idUsuario = :idUsuario and dtFimResolucao is not null order by dtIniResolucao desc";
+		String jpql = "select distinct r from Resolucao r join fetch r.avaliacao a join fetch a.cursos c where r.idUsuario = :idUsuario and dtFimResolucao is not null order by dtIniResolucao desc";
 		List<Resolucao> resolucoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resolucao.class);

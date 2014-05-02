@@ -42,7 +42,7 @@
 				<br />
 
 				<h:outputLabel styleClass="control-label">Perfil:</h:outputLabel>
-				<h:selectManyCheckbox id="perfis" value="#{usuario.perfis}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList">
+				<h:selectManyCheckbox id="perfis" value="#{usuario.perfis}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList" disabled="#{!empty autorizacaoMB.id}">
 					<f:selectItems value="#{perfilMB.perfis}" var="perfil" itemValue="#{perfil}" itemLabel="#{perfil.dsPerfil}" />
 				</h:selectManyCheckbox>
 				<em><h:message for="perfis" styleClass="text-danger small" /></em>

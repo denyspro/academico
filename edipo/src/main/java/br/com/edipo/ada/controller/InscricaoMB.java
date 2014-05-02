@@ -8,7 +8,9 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.edipo.ada.entity.Curso;
 import br.com.edipo.ada.entity.Inscricao;
+import br.com.edipo.ada.model.CursoSB;
 import br.com.edipo.ada.model.InscricaoSB;
 import br.com.edipo.ada.security.AutorizacaoSB;
 import br.com.edipo.ada.util.VisaoUtil;
@@ -28,6 +30,7 @@ public class InscricaoMB {
 
 	private Inscricao inscricao;
 	private List<Inscricao> inscricoes;
+	private List<Curso> cursos;
 
 	@PostConstruct
 	public void init() {
@@ -94,6 +97,18 @@ public class InscricaoMB {
 
 	public void setInscricoes(List<Inscricao> inscricoes) {
 		this.inscricoes = inscricoes;
+	}
+
+	public List<Curso> getCursos() {
+		if (cursos == null) {
+			cursos = CursoSB.getTodos();
+		}
+
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursosTodos) {
+		this.cursos = cursosTodos;
 	}
 
 	public String salvar(Inscricao inscricao) {

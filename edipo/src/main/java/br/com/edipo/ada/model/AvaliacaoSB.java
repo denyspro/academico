@@ -21,12 +21,27 @@ public class AvaliacaoSB {
 	private static final Logger log = Logger.getLogger(AvaliacaoSB.class.getName());
 
 	public static Avaliacao getPorId(Integer id) {
-		return PersistenciaUtil.getEntityManager().find(Avaliacao.class, id);
+		String jpql = "select distinct a from Avaliacao a join fetch a.cursos c where a.id = :id";
+		Avaliacao avaliacao = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
+		query.setParameter("id", id);
+
+		try {
+			avaliacao = (Avaliacao) query.getResultList().get(0);
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return avaliacao;
+//		return PersistenciaUtil.getEntityManager().find(Avaliacao.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<Avaliacao> getPorIdUsuario(Integer idUsuario) {
-		String jpql = "select a from Avaliacao a where a.idUsuario = :idUsuario";
+		String jpql = "select distinct a from Avaliacao a join fetch a.cursos c where a.idUsuario = :idUsuario order by a.dtIniAvaliacao desc";
 		List<Avaliacao> avaliacao = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
@@ -44,8 +59,28 @@ public class AvaliacaoSB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Avaliacao> getAbertas(Integer idUsuario) {
-		String jpql = "select distinct a from Avaliacao a join a.cursos c join c.inscritos i where i.idUsuario = :idUsuario and :dtIniResolucao between a.dtIniAvaliacao and dtFimAvaliacao and not exists (select r from Resolucao r where r.idUsuario = :idUsuario and r.avaliacao = a)";
+	public static List<Avaliacao> getIniciadas(Integer idUsuario) {
+		String jpql = "select distinct a from Avaliacao a join fetch a.cursos c where a.idUsuario = :idUsuario and a.dtIniAvaliacao <= :dtIniAvaliacao order by a.dtIniAvaliacao desc";
+		List<Avaliacao> avaliacao = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);
+		query.setParameter("idUsuario", idUsuario);
+		query.setParameter("dtIniAvaliacao", new Date());
+
+		try {
+			avaliacao = (List<Avaliacao>) query.getResultList();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return avaliacao;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Avaliacao> getAbertasPorInscrito(Integer idUsuario) {
+		String jpql = "select distinct a from Avaliacao a join fetch a.cursos c join c.inscritos i where i.idUsuario = :idUsuario and :dtIniResolucao between a.dtIniAvaliacao and dtFimAvaliacao and not exists (select r from Resolucao r where r.idUsuario = :idUsuario and r.avaliacao = a)";
 		List<Avaliacao> avaliacoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Avaliacao.class);

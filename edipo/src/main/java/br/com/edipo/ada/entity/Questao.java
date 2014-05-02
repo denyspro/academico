@@ -30,7 +30,7 @@ public class Questao implements Serializable {
 
 	private int idUsuario;
 
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(
 		name="QuestaoEtiqueta"
 		, joinColumns={
@@ -44,7 +44,7 @@ public class Questao implements Serializable {
 
 	// Necessário ser de um tipo diferente de List para evitar exceção "cannot simultaneously fetch multiple bags".
 	// A desvantagem é que para iterar, precisa usar o método toArray().
-	@OneToMany(mappedBy="questao",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="questao",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private Set<Alternativa> alternativas;
 
 	public Questao() {

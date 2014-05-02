@@ -25,20 +25,26 @@
 					<h:column>
 						<f:facet name="header">Início</f:facet>
 						<h:outputText value="#{avaliacao.dtIniAvaliacao}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+							<f:convertDateTime pattern="dd/MM HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">Término</f:facet>
 						<h:outputText value="#{avaliacao.dtFimAvaliacao}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+							<f:convertDateTime pattern="dd/MM HH:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">Nota máxima</f:facet>
-						<h:outputText value="#{avaliacao.vlAvaliacao}" />
+						<f:facet name="header">Curso(s)</f:facet>
+						<small>
+							<ui:repeat value="#{avaliacao.cursos}" var="curso" varStatus="status">
+								<h:outputText value="#{curso.dsCurso}" />
+								<h:outputText value=", " rendered="#{!status.last}" />
+								<h:outputText value="." rendered="#{status.last}" />
+							</ui:repeat>
+						</small>
 					</h:column>
 
 					<h:column headerClass="col-xs-1">

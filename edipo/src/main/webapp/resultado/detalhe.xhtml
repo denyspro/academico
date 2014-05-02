@@ -7,12 +7,12 @@
 
 <ui:composition	template="/WEB-INF/ui/leiaute.xhtml">
 	<ui:define name="corpo">
-		<c:set var="resolucao" value="#{correcaoMB.resolucao}" />
+		<c:set var="avaliacao" value="#{resultadoMB.avaliacao}" />
 		<f:metadata>
-			<f:viewParam name="idAvaliacao" value="#{correcaoMB.resolucao.avaliacao.id}" />
+			<f:viewParam name="idAvaliacao" value="#{resultadoMB.avaliacao.id}" />
 		</f:metadata>
 		<h:panelGroup layout="block" styleClass="page-header col-xs-10 col-xs-offset-1">
-			<h4>Correção</h4>
+			<h4>Resultado</h4>
 		</h:panelGroup>
 		<h:panelGroup layout="block" styleClass="col-xs-10 col-xs-offset-1">
 			<h:form>	
@@ -23,35 +23,36 @@
 					<h:panelGroup layout="block" styleClass="panel-body">
 						<p>
 							<strong>Duração: </strong>
-							<h:outputText value="#{correcaoMB.resolucao.avaliacao.dtIniAvaliacao}">
-								<f:convertDateTime pattern="dd/MM hh:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+							<h:outputText value="#{resultadoMB.avaliacao.dtIniAvaliacao}">
+								<f:convertDateTime pattern="dd/MM hh:mm" />
 							</h:outputText>
 							<h:outputText value=" - " />
-							<h:outputText value="#{correcaoMB.resolucao.avaliacao.dtFimAvaliacao}">
-								<f:convertDateTime pattern="dd/MM hh:mm" locale="pt-BR" timeZone="America/Sao_Paulo" />
+							<h:outputText value="#{resultadoMB.avaliacao.dtFimAvaliacao}">
+								<f:convertDateTime pattern="dd/MM hh:mm" />
 							</h:outputText>
 						</p>
 						<p>
-							<strong>Nota: </strong>
-							<h:outputText value="#{correcaoMB.resolucao.vlResultado}" />
+							<strong>Qtd. de resoluções: </strong>
+							<h:outputText value="#{resultadoMB.nrResolucoes}" />
 							<h:outputText value=" de " />
-							<h:outputText value="#{correcaoMB.resolucao.avaliacao.vlAvaliacao}" />
+							<h:outputText value="#{resultadoMB.nrInscritos}" />
+							<h:outputText value=" inscrito(s)." />
 						</p>
 						<p>
 							<strong>Curso(s): </strong>
-							<ui:repeat value="#{correcaoMB.resolucao.avaliacao.cursos}" var="curso" varStatus="status">
+							<ui:repeat value="#{resultadoMB.avaliacao.cursos}" var="curso" varStatus="status">
 									<h:outputText value="#{curso.dsCurso}" />
 									<h:outputText value=", " rendered="#{!status.last}" />
 									<h:outputText value="." rendered="#{status.last}" />
 							</ui:repeat>
 						</p>
 					</h:panelGroup>
-					<h:panelGroup layout="block" rendered="#{empty correcaoMB.resultados}">
+					<h:panelGroup layout="block" rendered="#{empty resultadoMB.resultados}">
 						<em><h:outputText value="Não há registros." styleClass="text-info" /></em>
 						<br />
 					</h:panelGroup>
 					<ul class="list-group">
-						<ui:repeat value="#{correcaoMB.resultados}" var="resultado" varStatus="status">
+						<ui:repeat value="#{resultadoMB.resultados}" var="resultado" varStatus="status">
 							<li class="list-group-item">
 								<p>
 									<strong>Categoria: </strong>
@@ -83,7 +84,7 @@
 				<br />
 
 				<h:panelGroup layout="block">
-					<h:button value="Voltar" outcome="#{correcaoMB.visaoOrigem}" styleClass="btn btn-info" />
+					<h:button value="Voltar" outcome="#{resultadoMB.visaoOrigem}" styleClass="btn btn-info" />
 				</h:panelGroup>
 				<br />
 				<br />

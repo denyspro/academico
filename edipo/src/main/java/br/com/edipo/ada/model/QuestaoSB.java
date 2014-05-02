@@ -28,7 +28,7 @@ public class QuestaoSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Questao> getPorIdUsuario(Integer idUsuario) {
-		String jpql = "select q from Questao q where q.idUsuario = :idUsuario";
+		String jpql = "select distinct q from Questao q join fetch q.etiquetas e where q.idUsuario = :idUsuario";
 		List<Questao> questoes = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Questao.class);

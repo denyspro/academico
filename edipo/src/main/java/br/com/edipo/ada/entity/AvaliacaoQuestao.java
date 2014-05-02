@@ -27,7 +27,7 @@ public class AvaliacaoQuestao implements Serializable {
 	@JoinColumn(name="idAvaliacao", insertable=false, updatable=false)
 	private Avaliacao avaliacao;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idQuestao", insertable=false, updatable=false)
 	private Questao questao;
 

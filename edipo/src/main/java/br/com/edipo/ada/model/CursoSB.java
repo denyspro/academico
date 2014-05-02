@@ -26,14 +26,14 @@ public class CursoSB {
 	}
 
 	public static List<Curso> getTodos() {
-		String jpql = "select c from Curso c";
+		String jpql = "select distinct c from Curso c join fetch c.usuario u order by c.dsCurso";
 
 		return PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	public static List<Curso> getPorIdUsuario(Integer idUsuario) {
-		String jpql = "select c from Curso c where c.usuario = :usuario";
+		String jpql = "select distinct c from Curso c join fetch c.usuario where c.usuario = :usuario order by c.dsCurso";
 		List<Curso> cursos = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Curso.class);

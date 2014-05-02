@@ -16,7 +16,7 @@ import br.com.edipo.ada.security.AutorizacaoSB;
 import br.com.edipo.ada.util.VisaoUtil;
 
 /***
- * <i>Backing bean</i> de escopo por visão que faz o papel de controlador para o domínio de resultados.
+ * <i>Backing bean</i> de escopo por visão que faz o papel de controlador para o domínio de correções individuais.
  * 
  * @author Denys
  */
@@ -42,7 +42,7 @@ public class CorrecaoMB {
 		}
 
 		if (idResolucao != null) {
-			log.info(String.format("idResolucao: %s)", idResolucao));
+			log.info(String.format("Resolução selecionada: %s", idResolucao));
 
 			try {
 				resolucao = ResolucaoSB.getPorId(idResolucao);
@@ -54,7 +54,6 @@ public class CorrecaoMB {
 				resultados = ResultadoSB.getResultado(resolucao.getAvaliacao().getId(), resolucao.getIdUsuario());
 			}
 		}
-
 	}
 
 	@PreDestroy

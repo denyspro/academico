@@ -21,7 +21,7 @@ public class Etiqueta implements Serializable {
 
 	private String dsEtiqueta;
 
-	@ManyToMany(mappedBy="etiquetas", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="etiquetas", fetch=FetchType.LAZY)
 	private List<Questao> questoes;
 
 	public Etiqueta() {

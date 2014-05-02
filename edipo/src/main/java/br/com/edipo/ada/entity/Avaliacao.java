@@ -31,7 +31,7 @@ public class Avaliacao implements Serializable {
 
 	private BigDecimal vlAvaliacao;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 		name="AvaliacaoCurso"
 		, joinColumns={

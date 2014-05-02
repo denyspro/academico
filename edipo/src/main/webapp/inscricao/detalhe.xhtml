@@ -20,7 +20,7 @@
 				<h:outputLabel styleClass="control-label">Curso:</h:outputLabel>
 				<h:selectOneMenu id="curso" value="#{inscricao.curso}" styleClass="form-control" required="true" requiredMessage="Campo obrigatório." converter="conversaoUtil" collectionType="java.util.ArrayList">
 					<f:selectItem itemLabel="Selecione..." noSelectionOption="true" />
-					<f:selectItems value="#{cursoMB.cursosTodos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.dsCurso}" />
+					<f:selectItems value="#{inscricaoMB.cursos}" var="curso" itemValue="#{curso}" itemLabel="#{curso.dsCurso}" />
 				</h:selectOneMenu>
 				<em><h:message for="curso" styleClass="text-danger small" /></em>
 				<br />

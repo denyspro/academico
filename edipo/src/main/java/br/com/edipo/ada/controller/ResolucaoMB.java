@@ -60,13 +60,12 @@ public class ResolucaoMB {
 
 		// Caso uma avaliação tenha sido selecionada, inicializa uma resolução com base em seus dados. 
 		if (idAvaliacao != null && idUsuario != null) {
-			log.info(String.format("idAvaliacao: %s)", idAvaliacao));
+			log.info(String.format("Avaliação selecionada: %s", idAvaliacao));
 
 			resolucao = new Resolucao();
+			resolucao.setAvaliacao(AvaliacaoSB.getPorId(idAvaliacao));
 			resolucao.setIdUsuario(idUsuario);
 			resolucao.setDtIniResolucao(new Date());
-			resolucao.setAvaliacao(AvaliacaoSB.getPorId(idAvaliacao));
-			resolucao.setVlResultado(resolucao.getAvaliacao().getVlAvaliacao());
 
 			Questao questao = null;
 			Alternativa alternativa = null;
@@ -76,12 +75,12 @@ public class ResolucaoMB {
 			Iterator <AvaliacaoQuestao> questoes = getAvaliacaoQuestoes().iterator();
 			Iterator <Alternativa> alternativas = null;
 
-			while(questoes.hasNext()) {
+			while (questoes.hasNext()) {
 				questao = questoes.next().getQuestao();
 				alternativas = questao.getAlternativas().iterator();
 				vlSomaAlternativas = QuestaoSB.getVlSomaAlternativas(questao);
 
-				while(alternativas.hasNext()) {
+				while (alternativas.hasNext()) {
 					alternativa = alternativas.next();
 
 					if (alternativa != null) {
@@ -135,7 +134,7 @@ public class ResolucaoMB {
 		if (avaliacoes == null) {
 			try {
 				idUsuario = Integer.parseInt(AutorizacaoSB.getAtributo("id"));
-				avaliacoes = AvaliacaoSB.getAbertas(idUsuario);
+				avaliacoes = AvaliacaoSB.getAbertasPorInscrito(idUsuario);
 			} catch (Exception e) {
 				log.severe("getAvaliacoes: " + e.toString());
 			}
@@ -185,26 +184,44 @@ public class ResolucaoMB {
 	public String salvar(Resolucao resolucao) {
 		Alternativa alternativa = null;
 		Escolha escolha = null;
+		AvaliacaoQuestao avaliacaoQuestao = null;
+		BigDecimal vlResultado = BigDecimal.ZERO;
+		BigDecimal vlSomaQuestoes = BigDecimal.ZERO;
 
 		Iterator <Alternativa> a = escolhidas.iterator();
 		Iterator <Escolha> e = resolucao.getEscolhas().iterator(); // Como são preenchidas na mesma ordem, não preciso iterar desde o início
 
-		while(a.hasNext()) {
+		while (a.hasNext()) {
 			alternativa = a.next();
 			log.info(String.format("Alternativa '%s'...", alternativa.getDsAlternativa()));
 
-			while(e.hasNext()) {
+			while (e.hasNext()) {
 				escolha = e.next();
-				log.info(String.format(" Escolha '%s'...", escolha.getAlternativa().getDsAlternativa()));
+				log.info(String.format("Escolha '%s'...", escolha.getAlternativa().getDsAlternativa()));
 
 				if (alternativa.equals(escolha.getAlternativa())) {
 					escolha.setBlSelecionada(true); // Marca alternativa escolhida
-					log.info(" Selecionada!");
+
+					avaliacaoQuestao = AvaliacaoQuestaoSB.getPorId(resolucao.getAvaliacao().getId(), alternativa.getQuestao().getId()); // Busca o peso da questão nesta avaliação
+					vlSomaQuestoes = AvaliacaoQuestaoSB.getVlSomaQuestoes(resolucao.getAvaliacao().getId());
+
+					log.info(String.format("Valor da avaliação: %s", resolucao.getAvaliacao().getVlAvaliacao().toPlainString()));
+					log.info(String.format("Peso da questão: %s", avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes.divide(new BigDecimal("100")), 2, RoundingMode.HALF_UP).toPlainString()));
+					log.info(String.format("Peso da alternativa: %s", escolha.getVlEscolha().toPlainString()));
+
+					// Acréscimo no resultado igual a valor da avaliação vezes peso da questão vezes peso da alternativa, caso escolhida
+					vlResultado = vlResultado.add((vlSomaQuestoes == BigDecimal.ZERO) ? BigDecimal.ZERO :
+									resolucao.getAvaliacao().getVlAvaliacao().multiply(
+											avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes, 2, RoundingMode.HALF_UP).multiply(
+												escolha.getVlEscolha().divide(new BigDecimal("100")))));
+
+					log.info(String.format("Acréscimo na nota: %s", vlResultado.toPlainString()));
 					break;
 				}
 			}
 		}
 
+		resolucao.setVlResultado(vlResultado);
 		resolucao.setDtFimResolucao(new Date());
 
 		String excecao = ResolucaoSB.salvar(resolucao);
