@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.4" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="false" realizations="false" associations="false" dependencies="false" nesting-relationships="false">  
+  <class id="1" language="java" name="br.com.edipo.ada.util.ConversaoUtil" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/util/ConversaoUtil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="327" x="770" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="br.com.edipo.ada.util.ValidadorEmail" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/util/ValidadorEmail.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="295" x="10636" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="br.com.edipo.ada.util.VisaoUtil" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/util/VisaoUtil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="237" x="4416" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="br.com.edipo.ada.util.PersistenciaUtil" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/util/PersistenciaUtil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="274" x="5411" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="br.com.edipo.ada.security.AutorizacaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/security/AutorizacaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="207" x="9538" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="br.com.edipo.ada.security.AutorizacaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/security/AutorizacaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="278" width="207" x="9785" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="br.com.edipo.ada.security.AutenticacaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/security/AutenticacaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="314" width="235" x="3328" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="br.com.edipo.ada.model.QuestaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/QuestaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="270" x="5973" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="br.com.edipo.ada.model.AvaliacaoQuestaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/AvaliacaoQuestaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="308" x="8949" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="br.com.edipo.ada.model.PerfilSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/PerfilSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="98" width="149" x="6283" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="br.com.edipo.ada.model.EtiquetaSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/EtiquetaSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="242" x="6742" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="br.com.edipo.ada.model.CursoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/CursoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="230" x="1137" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="br.com.edipo.ada.model.ResultadoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/ResultadoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="278" x="10032" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="br.com.edipo.ada.model.UsuarioSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/UsuarioSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="230" x="2269" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="br.com.edipo.ada.model.InscricaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/InscricaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="246" x="10350" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="br.com.edipo.ada.model.AvaliacaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/AvaliacaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="279" x="4097" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="br.com.edipo.ada.model.AlternativaSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/AlternativaSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="258" x="2784" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="br.com.edipo.ada.model.ResolucaoSB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/model/ResolucaoSB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="299" x="8115" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="br.com.edipo.ada.entity.Etiqueta" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Etiqueta.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="207" x="282" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="br.com.edipo.ada.entity.Questao" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Questao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="512" width="230" x="6472" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="br.com.edipo.ada.entity.Escolha" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Escolha.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="404" width="201" x="529" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="br.com.edipo.ada.entity.Curso" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Curso.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="215" x="7297" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="br.com.edipo.ada.entity.Avaliacao" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Avaliacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="458" width="204" x="2025" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="br.com.edipo.ada.entity.Resolucao" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Resolucao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="548" width="206" x="3082" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="br.com.edipo.ada.entity.AvaliacaoQuestao" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/AvaliacaoQuestao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="368" width="202" x="8707" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="br.com.edipo.ada.entity.Perfil" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Perfil.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="201" x="9297" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="br.com.edipo.ada.entity.Resultado" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Resultado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="183" x="3603" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="br.com.edipo.ada.entity.AvaliacaoQuestaoPK" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/AvaliacaoQuestaoPK.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="168" x="10971" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="br.com.edipo.ada.entity.Inscricao" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Inscricao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="154" x="11179" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="br.com.edipo.ada.entity.Usuario" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Usuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="512" width="190" x="5181" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="br.com.edipo.ada.entity.Alternativa" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/entity/Alternativa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="404" width="208" x="5725" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="br.com.edipo.ada.controller.UsuarioMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/UsuarioMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="201" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="br.com.edipo.ada.controller.AlternativaMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/AlternativaMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="231" x="3826" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="br.com.edipo.ada.controller.ResolucaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/ResolucaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="476" width="315" x="1407" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="br.com.edipo.ada.controller.CorrecaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/CorrecaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="350" width="233" x="7024" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="br.com.edipo.ada.controller.AvaliacaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/AvaliacaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="350" width="223" x="1762" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="br.com.edipo.ada.controller.EtiquetaMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/EtiquetaMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="205" x="2539" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="br.com.edipo.ada.controller.PerfilMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/PerfilMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="168" x="7552" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="br.com.edipo.ada.controller.AvaliacaoQuestaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/AvaliacaoQuestaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="315" x="7760" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="br.com.edipo.ada.controller.ResultadoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/ResultadoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="458" width="227" x="4693" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="br.com.edipo.ada.controller.CursoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/CursoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="181" x="4960" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="br.com.edipo.ada.controller.QuestaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/QuestaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="207" x="11373" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="br.com.edipo.ada.controller.InscricaoMB" project="edipo" 
+    file="/edipo/src/main/java/br/com/edipo/ada/controller/InscricaoMB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="213" x="8454" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>

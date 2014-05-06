@@ -27,7 +27,7 @@
 				<em><h:message for="dsEtiquetas" styleClass="text-danger small" /></em>
 				<br />
 
-				<h:panelGroup layout="block" styleClass="checkbox">
+				<h:panelGroup layout="block" styleClass="checkbox" rendered="false">
 					<h:outputLabel styleClass="control-label">Múltipla Escolha?</h:outputLabel>
 					<h:selectBooleanCheckbox id="blMultiplaEscolha" value="#{questaoMB.questao.blMultiplaEscolha}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." />
 				</h:panelGroup>

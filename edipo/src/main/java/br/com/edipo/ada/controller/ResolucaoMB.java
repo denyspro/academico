@@ -86,6 +86,7 @@ public class ResolucaoMB {
 					if (alternativa != null) {
 						escolha = new Escolha();
 
+						// calcula o peso desta escolha dentro da questão (valor desta alternativa / soma das alternativas)
 						escolha.setVlEscolha((vlSomaAlternativas == BigDecimal.ZERO) ? BigDecimal.ZERO : alternativa.getVlAlternativa().divide(vlSomaAlternativas.divide(new BigDecimal("100")), 2, RoundingMode.HALF_UP));
 						escolha.setBlSelecionada(false);
 						escolha.setAlternativa(alternativa);
@@ -184,13 +185,11 @@ public class ResolucaoMB {
 	public String salvar(Resolucao resolucao) {
 		Alternativa alternativa = null;
 		Escolha escolha = null;
-		AvaliacaoQuestao avaliacaoQuestao = null;
-		BigDecimal vlResultado = BigDecimal.ZERO;
-		BigDecimal vlSomaQuestoes = BigDecimal.ZERO;
 
 		Iterator <Alternativa> a = escolhidas.iterator();
-		Iterator <Escolha> e = resolucao.getEscolhas().iterator(); // Como são preenchidas na mesma ordem, não preciso iterar desde o início
+		Iterator <Escolha> e = resolucao.getEscolhas().iterator();
 
+		// Como são preenchidas na mesma ordem, não preciso iterar desde o início
 		while (a.hasNext()) {
 			alternativa = a.next();
 			log.info(String.format("Alternativa '%s'...", alternativa.getDsAlternativa()));
@@ -199,32 +198,22 @@ public class ResolucaoMB {
 				escolha = e.next();
 				log.info(String.format("Escolha '%s'...", escolha.getAlternativa().getDsAlternativa()));
 
+				// Marca alternativa escolhida
 				if (alternativa.equals(escolha.getAlternativa())) {
-					escolha.setBlSelecionada(true); // Marca alternativa escolhida
-
-					avaliacaoQuestao = AvaliacaoQuestaoSB.getPorId(resolucao.getAvaliacao().getId(), alternativa.getQuestao().getId()); // Busca o peso da questão nesta avaliação
-					vlSomaQuestoes = AvaliacaoQuestaoSB.getVlSomaQuestoes(resolucao.getAvaliacao().getId());
-
-					log.info(String.format("Valor da avaliação: %s", resolucao.getAvaliacao().getVlAvaliacao().toPlainString()));
-					log.info(String.format("Peso da questão: %s", avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes.divide(new BigDecimal("100")), 2, RoundingMode.HALF_UP).toPlainString()));
-					log.info(String.format("Peso da alternativa: %s", escolha.getVlEscolha().toPlainString()));
-
-					// Acréscimo no resultado igual a valor da avaliação vezes peso da questão vezes peso da alternativa, caso escolhida
-					vlResultado = vlResultado.add((vlSomaQuestoes == BigDecimal.ZERO) ? BigDecimal.ZERO :
-									resolucao.getAvaliacao().getVlAvaliacao().multiply(
-											avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes, 2, RoundingMode.HALF_UP).multiply(
-												escolha.getVlEscolha().divide(new BigDecimal("100")))));
-
-					log.info(String.format("Acréscimo na nota: %s", vlResultado.toPlainString()));
+					escolha.setBlSelecionada(true);
 					break;
 				}
 			}
 		}
 
-		resolucao.setVlResultado(vlResultado);
 		resolucao.setDtFimResolucao(new Date());
-
 		String excecao = ResolucaoSB.salvar(resolucao);
+
+		if (excecao=="") {
+			resolucao = ResolucaoSB.getPorIdAvaliacao(resolucao.getIdUsuario(), resolucao.getAvaliacao().getId());
+			resolucao.setVlResultado(ResolucaoSB.getVlResultadoCalculado(resolucao));
+			excecao = ResolucaoSB.salvar(resolucao);
+		}
 
 		if (excecao=="") {
 			String mensagem = (resolucao.getId() == 0) ? String.format("Nova resolução salva.") : String.format("Resolução %d salva.", resolucao.getId());

@@ -38,7 +38,7 @@
 						</small>
 					</h:column>
 
-					<h:column>
+					<h:column rendered="false">
 						<f:facet name="header">Múltipla Escolha</f:facet>
 						<h:outputText value="Sim" rendered="#{questao.blMultiplaEscolha}" />
 						<h:outputText value="Não" rendered="#{!questao.blMultiplaEscolha}" />

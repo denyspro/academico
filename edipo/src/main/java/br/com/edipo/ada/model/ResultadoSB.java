@@ -1,5 +1,6 @@
 package br.com.edipo.ada.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,15 +16,15 @@ public class ResultadoSB {
 	@SuppressWarnings("unchecked")
 	public static List<Resultado> getResultado(Integer idAvaliacao, Integer idUsuario) {
 		String jpql = "select new br.com.edipo.ada.entity.Resultado (et.dsEtiqueta, avg(es.vlEscolha) as vlCalculado) "
-				+	"from Escolha es "
-				+	"join es.resolucao re "
-				+	"join es.alternativa al "
-				+	"join al.questao qu "
-				+	"join qu.etiquetas et "
-				+	"where es.blSelecionada = 1 "
-				+	"and re.avaliacao.id = :idAvaliacao "
-				+	"and re.idUsuario = :idUsuario "
-				+	"group by et.dsEtiqueta";
+			+	"from Escolha es "
+			+	"join es.resolucao re "
+			+	"join es.alternativa al "
+			+	"join al.questao qu "
+			+	"join qu.etiquetas et "
+			+	"where es.blSelecionada = 1 "
+			+	"and re.avaliacao.id = :idAvaliacao "
+			+	"and re.idUsuario = :idUsuario "
+			+	"group by et.dsEtiqueta";
 		List <Resultado> resultados = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resultado.class);
@@ -44,14 +45,14 @@ public class ResultadoSB {
 	@SuppressWarnings("unchecked")
 	public static List<Resultado> getResultado(Integer idAvaliacao) {
 		String jpql = "select new br.com.edipo.ada.entity.Resultado (et.dsEtiqueta, avg(es.vlEscolha) as vlCalculado) "
-				+	"from Escolha es "
-				+	"join es.resolucao re "
-				+	"join es.alternativa al "
-				+	"join al.questao qu "
-				+	"join qu.etiquetas et "
-				+	"where es.blSelecionada = 1 "
-				+	"and re.avaliacao.id = :idAvaliacao "
-				+	"group by et.dsEtiqueta";
+			+	"from Escolha es "
+			+	"join es.resolucao re "
+			+	"join es.alternativa al "
+			+	"join al.questao qu "
+			+	"join qu.etiquetas et "
+			+	"where es.blSelecionada = 1 "
+			+	"and re.avaliacao.id = :idAvaliacao "
+			+	"group by et.dsEtiqueta";
 		List <Resultado> resultados = null;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resultado.class);
@@ -88,10 +89,10 @@ public class ResultadoSB {
 
 	public static Long getNrInscritos(Integer idAvaliacao) {
 		String jpql = "select count(distinct i.idUsuario) "
-		+	"from Avaliacao a "
-		+	"join a.cursos c "
-		+	"join c.inscritos i "
-		+	"where a.id = :idAvaliacao";
+			+	"from Avaliacao a "
+			+	"join a.cursos c "
+			+	"join c.inscritos i "
+			+	"where a.id = :idAvaliacao";
 		Long nrInscritos = 0L;
 
 		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
@@ -106,5 +107,33 @@ public class ResultadoSB {
 		}
 
 		return nrInscritos;
+	}
+
+	public static BigDecimal getIndiceAcerto(Integer idResolucao, Integer idQuestao) {
+		String jpql = "select sum(es.vlEscolha) * ( sum( case when es.vlEscolha > 0.00 then 1 else 0 end ) / count(es) ) "
+			+	"from Escolha es "
+			+	"join es.alternativa al "
+			+	"join al.questao qu "
+			+	"where es.blSelecionada = 1 "
+			+	"and es.resolucao.id = :idResolucao "
+			+	"and qu.id = :idQuestao "
+			+	"group by qu";
+		BigDecimal vlIndiceAcerto = BigDecimal.ZERO;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql);
+		query.setParameter("idResolucao", idResolucao);
+		query.setParameter("idQuestao", idQuestao);
+
+		log.info(String.format("getIndiceAcerto: %d, %d", idResolucao, idQuestao));
+
+		try {
+			vlIndiceAcerto = (BigDecimal) query.getSingleResult();
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return vlIndiceAcerto;
 	}
 }

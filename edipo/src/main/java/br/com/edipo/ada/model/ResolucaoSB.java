@@ -1,5 +1,8 @@
 package br.com.edipo.ada.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import br.com.edipo.ada.entity.AvaliacaoQuestao;
 import br.com.edipo.ada.entity.Resolucao;
 import br.com.edipo.ada.util.PersistenciaUtil;
 
@@ -35,7 +39,25 @@ public class ResolucaoSB {
 		}
 
 		return resolucao;
-//		return PersistenciaUtil.getEntityManager().find(Resolucao.class, id);
+	}
+
+	public static Resolucao getPorIdAvaliacao(Integer idUsuario, Integer idAvaliacao) {
+		String jpql = "select distinct r from Resolucao r join fetch r.avaliacao a join fetch a.cursos c where r.idUsuario = :idUsuario and a.id = :idAvaliacao";
+		Resolucao resolucao = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resolucao.class);
+		query.setParameter("idUsuario", idUsuario);
+		query.setParameter("idAvaliacao", idAvaliacao);
+
+		try {
+			resolucao = (Resolucao) query.getResultList().get(0);
+		} catch (Exception e) {
+			log.severe(e.toString());
+		} finally {
+			PersistenciaUtil.closeEntityManager();
+		}
+
+		return resolucao;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -55,6 +77,37 @@ public class ResolucaoSB {
 		}
 
 		return resolucoes;
+	}
+
+	public static BigDecimal getVlResultadoCalculado(Resolucao resolucao) {
+		BigDecimal vlResultado = BigDecimal.ZERO;
+		BigDecimal vlIndiceAcerto = BigDecimal.ZERO;
+
+		BigDecimal vlAvaliacao = resolucao.getAvaliacao().getVlAvaliacao();
+		BigDecimal vlSomaQuestoes = AvaliacaoQuestaoSB.getVlSomaQuestoes(resolucao.getAvaliacao().getId());
+
+		List<AvaliacaoQuestao> avaliacaoQuestoes = AvaliacaoQuestaoSB.getPorIdAvaliacao(resolucao.getAvaliacao().getId());
+		Iterator <AvaliacaoQuestao> questoes = avaliacaoQuestoes.iterator();
+		AvaliacaoQuestao avaliacaoQuestao = null;
+
+		log.info(String.format("Valor da avaliação: %s", vlAvaliacao.toPlainString()));
+		log.info(String.format("Valor da soma questões: %s", vlSomaQuestoes.toPlainString()));
+
+		while (questoes.hasNext()) {
+			avaliacaoQuestao = questoes.next();
+
+			vlIndiceAcerto = ResultadoSB.getIndiceAcerto(resolucao.getId(), avaliacaoQuestao.getQuestao().getId()).divide(new BigDecimal(100));
+
+			log.info(String.format("Índice acerto: %s", vlIndiceAcerto.toPlainString()));
+			log.info(String.format("Peso questão: %s", avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes, 2, RoundingMode.HALF_UP).toPlainString()));
+			log.info(String.format("Valor questão: %s", vlAvaliacao.multiply(avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes, 2, RoundingMode.HALF_UP).multiply(vlIndiceAcerto)).toPlainString()));
+
+			vlResultado = vlResultado.add(vlAvaliacao.multiply(avaliacaoQuestao.getVlQuestao().divide(vlSomaQuestoes, 2, RoundingMode.HALF_UP).multiply(vlIndiceAcerto)));
+		}
+
+		log.info(String.format("Resultado: %s", vlResultado.toPlainString()));
+
+		return vlResultado;
 	}
 
 	public static String salvar(Resolucao resolucao) {

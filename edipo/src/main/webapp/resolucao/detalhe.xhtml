@@ -49,22 +49,22 @@
 						<br />
 					</h:panelGroup>
 					<ul class="list-group">
-						<ui:repeat value="#{resolucaoMB.avaliacaoQuestoes}" var="questoes" varStatus="status">
+						<ui:repeat value="#{resolucaoMB.avaliacaoQuestoes}" var="avaliacaoQuestao" varStatus="status">
 							<li class="list-group-item">
 								<p>
 									<strong>Questão #{status.index+1}: </strong>
-									<h:outputText value="#{questoes.questao.dsEnunciado}" />
+									<h:outputText value="#{avaliacaoQuestao.questao.dsEnunciado}" />
 								</p>
 								<p>
 									<strong>Peso: </strong>
-									<h:outputText value="#{questoes.vlQuestao}" />
+									<h:outputText value="#{avaliacaoQuestao.vlQuestao}" />
 								</p>
 								<p>
 									<strong>Alternativas: </strong>
-									<h:selectManyCheckbox id="escolhas" value="#{resolucaoMB.escolhidas}" styleClass="radio small" required="false" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList">
-										<f:selectItems value="#{questoes.questao.alternativas.toArray()}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.dsAlternativa}" />
+									<h:selectManyCheckbox id="escolhas" value="#{resolucaoMB.escolhidas}" styleClass="radio small" required="true" requiredMessage="Campo obrigatório." layout="pageDirection" converter="conversaoUtil" collectionType="java.util.ArrayList">
+										<f:selectItems value="#{avaliacaoQuestao.questao.alternativas.toArray()}" var="alternativa" itemValue="#{alternativa}" itemLabel="#{alternativa.dsAlternativa}" />
 									</h:selectManyCheckbox>
-									<em><h:message for="escolhas" styleClass="text-danger small" /></em>
+									<em><h:message for="escolhas" styleClass="text-danger small" rendered="#{avaliacaoQuestao.questao.blMultiplaEscolha}" /></em>
 								</p>
 							</li>
 						</ui:repeat>
