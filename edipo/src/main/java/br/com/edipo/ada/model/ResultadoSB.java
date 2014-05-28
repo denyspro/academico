@@ -1,6 +1,8 @@
 package br.com.edipo.ada.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,28 +17,47 @@ public class ResultadoSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Resultado> getResultado(Integer idAvaliacao, Integer idUsuario) {
-		String jpql = "select new br.com.edipo.ada.entity.Resultado (et.dsEtiqueta, avg(es.vlEscolha) as vlCalculado) "
-			+	"from Escolha es "
-			+	"join es.resolucao re "
-			+	"join es.alternativa al "
-			+	"join al.questao qu "
-			+	"join qu.etiquetas et "
-			+	"where es.blSelecionada = 1 "
-			+	"and re.avaliacao.id = :idAvaliacao "
-			+	"and re.idUsuario = :idUsuario "
-			+	"group by et.dsEtiqueta";
-		List <Resultado> resultados = null;
+		String jpql = "select et.dsEtiqueta, avg(ia.vlIndiceAcerto) as vlCalculado "
+		+	"from Etiqueta et "
+		+	"inner join QuestaoEtiqueta qe on qe.idEtiqueta = et.idEtiqueta "
+		+	"inner join ( "
+		+	"select qu.idQuestao, (sum(es.vlEscolha) * (sum(case when es.vlEscolha > 0.00 then 1 else 0 end) / count(es.idEscolha))) as vlIndiceAcerto "
+		+	"from Escolha es "
+		+	"inner join Alternativa al on es.idAlternativa = al.idAlternativa "
+		+	"inner join Questao qu on al.idQuestao = qu.idQuestao "
+		+	"inner join Resolucao re on re.idResolucao = es.idResolucao "
+		+	"where es.blSelecionada = 1 "
+		+	"and re.idAvaliacao = ? "
+		+	"and re.idUsuario = ? "
+		+	"group by qu.idQuestao) ia on ia.idQuestao = qe.idQuestao "
+		+	"group by et.dsEtiqueta;";
+		List <Resultado> resultados = new ArrayList<Resultado>();
 
-		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resultado.class);
-		query.setParameter("idAvaliacao", idAvaliacao);
-		query.setParameter("idUsuario", idUsuario);
+		Object[] _resultado = null;
+		List <Object[]> _resultados = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createNativeQuery(jpql);
+		query.setParameter(1, idAvaliacao);
+		query.setParameter(2, idUsuario);
 
 		try {
-			resultados = (List<Resultado>) query.getResultList();
+			_resultados = (List<Object[]>) query.getResultList();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenciaUtil.closeEntityManager();
+		}
+
+		Iterator <Object[]> resultadosLista = _resultados.iterator();
+
+		while (resultadosLista.hasNext()) {
+			_resultado = resultadosLista.next();
+
+			try {
+				resultados.add(new Resultado((String) _resultado[0], (BigDecimal) _resultado[1]));
+			} catch (Exception e) {
+				log.severe(e.toString());
+			}
 		}
 
 		return resultados;
@@ -44,26 +65,45 @@ public class ResultadoSB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Resultado> getResultado(Integer idAvaliacao) {
-		String jpql = "select new br.com.edipo.ada.entity.Resultado (et.dsEtiqueta, avg(es.vlEscolha) as vlCalculado) "
-			+	"from Escolha es "
-			+	"join es.resolucao re "
-			+	"join es.alternativa al "
-			+	"join al.questao qu "
-			+	"join qu.etiquetas et "
-			+	"where es.blSelecionada = 1 "
-			+	"and re.avaliacao.id = :idAvaliacao "
-			+	"group by et.dsEtiqueta";
-		List <Resultado> resultados = null;
+		String jpql = "select et.dsEtiqueta, avg(ia.vlIndiceAcerto) as vlCalculado "
+		+	"from Etiqueta et "
+		+	"inner join QuestaoEtiqueta qe on qe.idEtiqueta = et.idEtiqueta "
+		+	"inner join ( "
+		+	"select qu.idQuestao, (sum(es.vlEscolha) * (sum(case when es.vlEscolha > 0.00 then 1 else 0 end) / count(es.idEscolha))) as vlIndiceAcerto "
+		+	"from Escolha es "
+		+	"inner join Alternativa al on es.idAlternativa = al.idAlternativa "
+		+	"inner join Questao qu on al.idQuestao = qu.idQuestao "
+		+	"inner join Resolucao re on re.idResolucao = es.idResolucao "
+		+	"where es.blSelecionada = 1 "
+		+	"and re.idAvaliacao = ? "
+		+	"group by qu.idQuestao, re.idUsuario) ia on ia.idQuestao = qe.idQuestao "
+		+	"group by et.dsEtiqueta;";
+		List <Resultado> resultados = new ArrayList<Resultado>();
 
-		Query query = PersistenciaUtil.getEntityManager().createQuery(jpql, Resultado.class);
-		query.setParameter("idAvaliacao", idAvaliacao);
+		Object[] _resultado = null;
+		List <Object[]> _resultados = null;
+
+		Query query = PersistenciaUtil.getEntityManager().createNativeQuery(jpql);
+		query.setParameter(1, idAvaliacao);
 
 		try {
-			resultados = (List<Resultado>) query.getResultList();
+			_resultados = (List<Object[]>) query.getResultList();
 		} catch (Exception e) {
 			log.severe(e.toString());
 		} finally {
 			PersistenciaUtil.closeEntityManager();
+		}
+
+		Iterator <Object[]> resultadosLista = _resultados.iterator();
+
+		while (resultadosLista.hasNext()) {
+			_resultado = resultadosLista.next();
+
+			try {
+				resultados.add(new Resultado((String) _resultado[0], (BigDecimal) _resultado[1]));
+			} catch (Exception e) {
+				log.severe(e.toString());
+			}
 		}
 
 		return resultados;

@@ -1,5 +1,7 @@
 package br.com.edipo.ada.entity;
 
+import java.math.BigDecimal;
+
 /**
  * POJO usado para receber os resultados calculados.
  * 
@@ -9,9 +11,9 @@ public class Resultado {
 
 	private String dsEtiqueta;
 
-	private Double vlCalculado;
+	private BigDecimal vlCalculado;
 
-	public Resultado (String dsEtiqueta, Double vlCalculado) {
+	public Resultado (String dsEtiqueta, BigDecimal vlCalculado) {
 		setDsEtiqueta(dsEtiqueta);
 		setVlCalculado(vlCalculado);
 	}
@@ -24,11 +26,11 @@ public class Resultado {
 		this.dsEtiqueta = dsEtiqueta;
 	}
 
-	public Double getVlCalculado() {
+	public BigDecimal getVlCalculado() {
 		return vlCalculado;
 	}
 
-	public void setVlCalculado(Double vlCalculado) {
+	public void setVlCalculado(BigDecimal vlCalculado) {
 		this.vlCalculado = vlCalculado;
 	}
 
